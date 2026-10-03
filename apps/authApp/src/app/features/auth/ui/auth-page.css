@@ -37,15 +37,12 @@
 
 /* ---------- page & card ---------- */
 
-/* `margin: auto` on the area centres it, yet lets a tall step scroll from the
-   top instead of being clipped. */
+/* The auth layout owns the full-height section, its padding and the centring;
+   the page only fills the width so it never adds height of its own. */
 .auth-page {
   box-sizing: border-box;
   display: flex;
-  min-height: 100vh;
-  min-height: 100dvh;
-  padding: clamp(1rem, 4dvh, 2rem) clamp(1rem, 5vw, 2rem);
-  background: #1e1e1e;
+  width: 100%;
 }
 
 .auth-area {
