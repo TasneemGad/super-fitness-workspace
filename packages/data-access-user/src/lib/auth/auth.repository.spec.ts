@@ -134,6 +134,72 @@ describe('AuthRepository', () => {
     });
   });
 
+  describe('password reset', () => {
+    it('POSTs the email to /auth/forgotPassword', () => {
+      repository.forgotPassword({ email: 'ada@example.com' }).subscribe();
+
+      const request = http.expectOne(`${BASE_URL}/auth/forgotPassword`);
+      expect(request.request.method).toBe('POST');
+      expect(request.request.body).toEqual({ email: 'ada@example.com' });
+      request.flush({ message: 'success' });
+    });
+
+    it('POSTs only the code to /auth/verifyResetCode', () => {
+      repository.verifyResetCode({ resetCode: '123456' }).subscribe();
+
+      const request = http.expectOne(`${BASE_URL}/auth/verifyResetCode`);
+      expect(request.request.method).toBe('POST');
+      expect(request.request.body).toEqual({ resetCode: '123456' });
+      request.flush({ status: 'Success' });
+    });
+
+    it('PUTs the email and new password to /auth/resetPassword', () => {
+      const payload = { email: 'ada@example.com', newPassword: 'N3w-Passw0rd' };
+      repository.resetPassword(payload).subscribe();
+
+      const request = http.expectOne(`${BASE_URL}/auth/resetPassword`);
+      expect(request.request.method).toBe('PUT');
+      expect(request.request.body).toEqual(payload);
+      request.flush({ message: 'success' });
+    });
+
+    it('reports the API wording for an expired code', () => {
+      let error: AuthRequestError | undefined;
+      repository.verifyResetCode({ resetCode: '000000' }).subscribe({
+        error: (e: AuthRequestError) => (error = e),
+      });
+
+      http
+        .expectOne(`${BASE_URL}/auth/verifyResetCode`)
+        .flush(
+          { error: 'Reset code is invalid or has expired' },
+          { status: 400, statusText: 'Bad Request' }
+        );
+
+      expect(error?.status).toBe(400);
+      expect(error?.messages).toEqual(['Reset code is invalid or has expired']);
+    });
+  });
+
+  it('hides the server exception text of a 5xx response', () => {
+    let error: AuthRequestError | undefined;
+    repository.verifyResetCode({ resetCode: '' }).subscribe({
+      error: (e: AuthRequestError) => (error = e),
+    });
+
+    http
+      .expectOne(`${BASE_URL}/auth/verifyResetCode`)
+      .flush(
+        { error: 'TypeError [ERR_INVALID_ARG_TYPE]: The "data" argument must be of type string' },
+        { status: 500, statusText: 'Internal Server Error' }
+      );
+
+    expect(error?.status).toBe(500);
+    expect(error?.messages).toEqual([
+      'Something went wrong on our side. Please try again later.',
+    ]);
+  });
+
   it('reports a reachability problem when the request never lands', () => {
     let error: AuthRequestError | undefined;
     repository.signin(signinPayload).subscribe({

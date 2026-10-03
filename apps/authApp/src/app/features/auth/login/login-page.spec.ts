@@ -113,16 +113,12 @@ describe('LoginPage', () => {
     expect(TestBed.inject(AuthSession).isAuthenticated()).toBe(false);
   });
 
-  it('says plainly which extras are not connected yet', async () => {
-    expect(fixture.nativeElement.querySelector('.auth-notice')).toBeNull();
-
-    fixture.nativeElement
-      .querySelector('.auth-row-end .auth-link')
-      .dispatchEvent(new Event('click'));
-    await fixture.whenStable();
-
-    expect(fixture.nativeElement.querySelector('.auth-notice').textContent).toContain(
-      'Password recovery is not connected yet'
+  it('links "Forget Password ?" to the reset flow', () => {
+    const link: HTMLAnchorElement = fixture.nativeElement.querySelector(
+      '.auth-row-end a.auth-link'
     );
+
+    expect(link.textContent?.trim()).toBe('Forget Password ?');
+    expect(link.getAttribute('href')).toBe('/forgot-password');
   });
 });

@@ -78,6 +78,48 @@ export const LOGIN_FIELDS: FieldConfig[] = [
   },
 ];
 
+/** Step 1 of the forgot-password flow: where to send the reset code. */
+export const FORGOT_PASSWORD_FIELDS: FieldConfig[] = [
+  {
+    key: 'email',
+    type: 'email',
+    label: 'Email',
+    placeholder: 'Email',
+    icon: 'email',
+    autocomplete: 'email',
+    hideLabel: true,
+    required: true,
+    validate: emailRule,
+  },
+];
+
+/** Last step of the forgot-password flow: the new password, typed twice. */
+export const RESET_PASSWORD_FIELDS: FieldConfig[] = [
+  {
+    key: 'password',
+    type: 'password',
+    label: 'Password',
+    placeholder: 'Password',
+    icon: 'lock',
+    autocomplete: 'new-password',
+    hideLabel: true,
+    required: true,
+    validate: passwordRule,
+  },
+  {
+    key: 'rePassword',
+    type: 'password',
+    label: 'Re-password',
+    placeholder: 'Re-password',
+    icon: 'lock',
+    autocomplete: 'new-password',
+    hideLabel: true,
+    required: true,
+    validate: (value, model) =>
+      value === model['password'] ? null : 'Passwords do not match.',
+  },
+];
+
 /*
  * Registration is a multi-step flow (see register/register-steps.ts). Each
  * array below is the field set of one step; together, plus the `rePassword`

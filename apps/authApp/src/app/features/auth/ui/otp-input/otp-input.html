@@ -1,0 +1,19 @@
+<div class="otp" role="group" [attr.aria-label]="label()">
+  @for (digit of cells(); track $index) {
+    <input
+      #cell
+      class="otp-cell"
+      [class.is-filled]="!!digit"
+      [value]="digit"
+      [disabled]="disabled()"
+      [attr.aria-label]="'Digit ' + ($index + 1) + ' of ' + length()"
+      [attr.aria-invalid]="invalid() || null"
+      [attr.autocomplete]="$index === 0 ? 'one-time-code' : 'off'"
+      inputmode="numeric"
+      (input)="onInput($index, $event)"
+      (keydown)="onKeydown($index, $event)"
+      (paste)="onPaste($index, $event)"
+      (focus)="select($index)"
+    />
+  }
+</div>

@@ -3,6 +3,9 @@
  *
  * - POST /api/v1/auth/signup
  * - POST /api/v1/auth/signin
+ * - POST /api/v1/auth/forgotPassword
+ * - POST /api/v1/auth/verifyResetCode
+ * - PUT  /api/v1/auth/resetPassword
  */
 
 export type Gender = 'male' | 'female';
@@ -47,6 +50,38 @@ export interface AuthResponse {
 
 /** @deprecated Kept for callers written against the signup-only name. */
 export type SignupResponse = AuthResponse;
+
+/*
+ * Password reset. The backend keeps the "code verified" state on the account
+ * itself, so no token travels between the three calls: the code is checked on
+ * its own, and the reset is keyed by email.
+ */
+
+/** Emails a reset code to the account. Calling it again resends a fresh code. */
+export interface ForgotPasswordRequest {
+  email: string;
+}
+
+/** The code from the email, on its own: the backend looks the account up by it. */
+export interface VerifyResetCodeRequest {
+  resetCode: string;
+}
+
+/** Only accepted once a code for this email has been verified. */
+export interface ResetPasswordRequest {
+  email: string;
+  newPassword: string;
+}
+
+/**
+ * The reset endpoints answer with a short acknowledgement. Its exact fields are
+ * not documented, so nothing in the flow depends on them beyond the 2xx status.
+ */
+export interface PasswordResetResponse {
+  message?: string;
+  status?: string;
+  token?: string;
+}
 
 /**
  * The API returns problems as a single comma-joined string under `error`,

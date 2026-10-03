@@ -6,8 +6,12 @@ import {
   AuthErrorBody,
   AuthResponse,
   AuthenticatedUser,
+  ForgotPasswordRequest,
+  PasswordResetResponse,
+  ResetPasswordRequest,
   SigninRequest,
   SignupRequest,
+  VerifyResetCodeRequest,
   parseAuthError,
 } from './auth.models';
 
@@ -36,13 +40,38 @@ export class AuthRepository extends ApiClient<AuthenticatedUser> {
     return this.post$('signin', payload);
   }
 
+  /** POST {baseUrl}/auth/forgotPassword */
+  forgotPassword(payload: ForgotPasswordRequest): Observable<PasswordResetResponse> {
+    return this.withAuthErrors(
+      this.http.post<PasswordResetResponse>(`${this.resourceUrl}/forgotPassword`, payload)
+    );
+  }
+
+  /** POST {baseUrl}/auth/verifyResetCode */
+  verifyResetCode(payload: VerifyResetCodeRequest): Observable<PasswordResetResponse> {
+    return this.withAuthErrors(
+      this.http.post<PasswordResetResponse>(`${this.resourceUrl}/verifyResetCode`, payload)
+    );
+  }
+
+  /** PUT {baseUrl}/auth/resetPassword */
+  resetPassword(payload: ResetPasswordRequest): Observable<PasswordResetResponse> {
+    return this.withAuthErrors(
+      this.http.put<PasswordResetResponse>(`${this.resourceUrl}/resetPassword`, payload)
+    );
+  }
+
   private post$(
     action: 'signup' | 'signin',
     payload: SignupRequest | SigninRequest
   ): Observable<AuthResponse> {
-    return this.http
-      .post<AuthResponse>(`${this.resourceUrl}/${action}`, payload)
-      .pipe(catchError((error) => throwError(() => this.toAuthError(error))));
+    return this.withAuthErrors(
+      this.http.post<AuthResponse>(`${this.resourceUrl}/${action}`, payload)
+    );
+  }
+
+  private withAuthErrors<T>(request: Observable<T>): Observable<T> {
+    return request.pipe(catchError((error) => throwError(() => this.toAuthError(error))));
   }
 
   private toAuthError(error: unknown): AuthRequestError {
@@ -51,6 +80,15 @@ export class AuthRepository extends ApiClient<AuthenticatedUser> {
     }
 
     const messages = parseAuthError(error.error as AuthErrorBody);
+
+    // A 5xx body carries the server's own exception text (e.g. a Node
+    // TypeError), which means nothing to the user.
+    if (messages.length && error.status >= 500) {
+      return new AuthRequestError(
+        ['Something went wrong on our side. Please try again later.'],
+        error.status
+      );
+    }
 
     if (messages.length) {
       return new AuthRequestError(messages, error.status);

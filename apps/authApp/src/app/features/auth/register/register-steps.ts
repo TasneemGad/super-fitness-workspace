@@ -7,7 +7,7 @@ import {
 } from '../data/auth.fields';
 import { RegisterStepDefinition } from './register-stepper';
 import { RegisterAccountStep } from './steps/account-step/register-account-step';
-import { RegisterDetailsStep } from './steps/details-step/register-details-step';
+// import { RegisterDetailsStep } from './steps/details-step/register-details-step';
 
 const keysOf = (fields: FieldConfig[]) => fields.map((f) => f.key);
 
@@ -16,20 +16,20 @@ const keysOf = (fields: FieldConfig[]) => fields.map((f) => f.key);
  * in the flow; replace any of them with a dedicated component when its design
  * lands, without touching the flow or the other steps.
  */
-function detailsStep(
-  id: string,
-  title: string,
-  heading: string,
-  fields: FieldConfig[]
-): RegisterStepDefinition {
-  return {
-    id,
-    title,
-    component: RegisterDetailsStep,
-    inputs: { heading, fields },
-    keys: keysOf(fields),
-  };
-}
+// function detailsStep(
+//   id: string,
+//   title: string,
+//   heading: string,
+//   fields: FieldConfig[]
+// ): RegisterStepDefinition {
+//   return {
+//     id,
+//     title,
+//     component: null,
+//     inputs: { heading, fields },
+//     keys: keysOf(fields),
+//   };
+// }
 
 export const DEFAULT_REGISTER_STEPS: readonly RegisterStepDefinition[] = [
   {
@@ -39,9 +39,9 @@ export const DEFAULT_REGISTER_STEPS: readonly RegisterStepDefinition[] = [
     component: RegisterAccountStep,
     keys: ['firstName', 'lastName', 'email', 'password', 'rePassword'],
   },
-  detailsStep('profile', 'Tell Us About You', 'Your Profile', REGISTER_PROFILE_FIELDS),
-  detailsStep('body', 'Your Measurements', 'Body Stats', REGISTER_BODY_FIELDS),
-  detailsStep('goal', 'Set Your Goal', 'Fitness Goal', REGISTER_GOAL_FIELDS),
+  // detailsStep('profile', 'Tell Us About You', 'Your Profile', REGISTER_PROFILE_FIELDS),
+  // detailsStep('body', 'Your Measurements', 'Body Stats', REGISTER_BODY_FIELDS),
+  // detailsStep('goal', 'Set Your Goal', 'Fitness Goal', REGISTER_GOAL_FIELDS),
 ];
 
 /**

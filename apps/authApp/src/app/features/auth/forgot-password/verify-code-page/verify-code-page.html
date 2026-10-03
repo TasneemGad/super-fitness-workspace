@@ -1,0 +1,43 @@
+<main class="auth-page">
+  <div class="auth-area">
+    <lib-auth-header title="OTP CODE" />
+
+    <section class="auth-card">
+      <h2 class="auth-title">Enter Your OTP Check Your Email</h2>
+
+      <app-auth-feedback [errors]="errors()" [notice]="notice()" />
+
+      <form class="auth-form" (submit)="$event.preventDefault(); submit()" novalidate>
+        <app-otp-input
+          [length]="length"
+          [value]="code()"
+          (valueChange)="onCodeChange($event)"
+          (completed)="submit()"
+          [disabled]="submitting()"
+          [invalid]="invalid()"
+          [label]="'Verification code sent to ' + (email() ?? 'your email')"
+        />
+
+        @if (attempted() && !complete()) {
+          <p class="otp-hint" role="alert">Enter all {{ length }} digits of the code.</p>
+        }
+
+        <button type="submit" class="form-submit" [disabled]="submitting()">
+          {{ submitting() ? 'Verifying...' : 'Confirm' }}
+        </button>
+
+        <p class="auth-footnote">Didn't Receive Verification Code ?</p>
+        <p class="auth-footnote">
+          <button
+            type="button"
+            class="auth-link auth-link--strong"
+            [disabled]="submitting()"
+            (click)="resend()"
+          >
+            Resend Code
+          </button>
+        </p>
+      </form>
+    </section>
+  </div>
+</main>

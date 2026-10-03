@@ -18,13 +18,9 @@
       >
         <div formBeforeSubmit>
           <div class="auth-row-end">
-            <button
-              type="button"
-              class="auth-link"
-              (click)="onUnavailable('Password recovery')"
-            >
+            <a class="auth-link" routerLink="../forgot-password">
               Forget Password ?
-            </button>
+            </a>
           </div>
 
           <app-social-sign-in

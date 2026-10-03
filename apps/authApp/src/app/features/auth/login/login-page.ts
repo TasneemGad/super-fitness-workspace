@@ -54,7 +54,7 @@ export class LoginPage {
     this.facade.signin(model);
   }
 
-  /** Password recovery and the social providers are not connected yet. */
+  /** The social providers are not connected yet. */
   protected onUnavailable(feature: string): void {
     this.notice.set(`${feature} is not connected yet.`);
   }
