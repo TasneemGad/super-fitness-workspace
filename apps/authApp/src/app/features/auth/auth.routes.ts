@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 
+import { AuthLayoutComponent } from './ui/components/auth-layout/auth-layout.component';
 import { ChangePasswordPageComponent } from './ui/pages/change-password/change-password.page.component';
 import { ForgotPasswordPageComponent } from './ui/pages/forgot-password/forgot-password.page.component';
 import { LoginPageComponent } from './ui/pages/login/login.page.component';
@@ -9,30 +10,36 @@ import { VerifyResetCodePageComponent } from './ui/pages/verify-reset-code/verif
 
 export const AUTH_ROUTES: Routes = [
   {
-    path: 'login',
-    component: LoginPageComponent,
+    path: '',
+    component: AuthLayoutComponent,
+    children: [
+      {
+        path: 'login',
+        component: LoginPageComponent,
+      },
+      {
+        path: 'register',
+        component: RegisterPageComponent,
+      },
+      {
+        path: 'forgot-password',
+        component: ForgotPasswordPageComponent,
+      },
+      {
+        path: 'verify-reset-code',
+        component: VerifyResetCodePageComponent,
+      },
+      {
+        path: 'reset-password',
+        component: ResetPasswordPageComponent,
+      },
+      {
+        path: 'change-password',
+        component: ChangePasswordPageComponent,
+      },
+      { path: '', redirectTo: 'login', pathMatch: 'full' },
+    ],
   },
-  {
-    path: 'register',
-    component: RegisterPageComponent,
-  },
-  {
-    path: 'forgot-password',
-    component: ForgotPasswordPageComponent,
-  },
-  {
-    path: 'verify-reset-code',
-    component: VerifyResetCodePageComponent,
-  },
-  {
-    path: 'reset-password',
-    component: ResetPasswordPageComponent,
-  },
-  {
-    path: 'change-password',
-    component: ChangePasswordPageComponent,
-  },
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
 ];
 
 export const authRoutes = AUTH_ROUTES;
