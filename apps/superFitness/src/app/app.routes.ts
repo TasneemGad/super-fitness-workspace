@@ -1,3 +1,4 @@
+// import { authGuard } from './../../../../packages/auth/src/lib/auth.guard';
 import { Route } from '@angular/router';
 import { authGuard } from '@super-fitness/auth';
 
