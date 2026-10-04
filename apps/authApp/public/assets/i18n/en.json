@@ -23,6 +23,12 @@
         "loginPrompt": "Already have an account?",
         "loginLink": "Sign In"
       },
+      "gender": {
+        "title": "What Is Your Gender?",
+        "description": "This Helps Us Personalize Your Fitness Plan",
+        "male": "Male",
+        "female": "Female"
+      },
       "age": {
         "title": "How Old Are You ?",
         "description": "This Helps Us Create Your Personalized Plan",
@@ -59,4 +65,3 @@
     }
   }
 }
-

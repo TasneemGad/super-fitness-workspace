@@ -11,6 +11,12 @@
       "common": {
         "next": "Next"
       },
+      "gender": {
+        "title": "What Is Your Gender?",
+        "description": "This helps us personalize your fitness plan.",
+        "male": "Male",
+        "female": "Female"
+      },
       "age": {
         "title": "How Old Are You?",
         "description": "This helps us create your personalized plan.",

@@ -21,7 +21,7 @@ import { RegistrationFlowService } from '../services/registration-flow.service';
  * Provides `REGISTER_STEPPER` so the shared `RegisterAccountStep` child can
  * inject it without knowing it is now inside a routed page instead of
  * `RegisterPage`.  Saves the account payload in `RegistrationFlowService`
- * and navigates to the Age wheel step.
+ * and navigates to the gender choice step.
  */
 @Component({
   selector: 'app-register-account-page',
@@ -54,7 +54,7 @@ export class RegisterAccountPage implements RegisterStepper {
   next(values: RegistrationDraft): void {
     this.flowService.patch(values);
     this.facade.clearErrors();
-    void this.router.navigate(['../age'], { relativeTo: this.route });
+    void this.router.navigate(['../gender'], { relativeTo: this.route });
   }
 
   back(): void {

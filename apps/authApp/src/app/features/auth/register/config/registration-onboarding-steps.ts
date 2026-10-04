@@ -1,13 +1,13 @@
 /**
- * Centralised configuration for the three numeric onboarding steps.
+ * Centralised configuration for the registration onboarding steps.
  *
- * Every property that could vary per step (title, range, field key,
- * next route) lives here.  The page components read this constant and
- * pass it down to NumericRegistrationStep — they own no logic.
+ * Numeric and choice steps have separate config shapes, so fields specific
+ * to one kind of input (such as a numeric range) are not required for another.
  *
- * Adding a new numeric step: add an entry here, create a one-liner page,
- * and register the route.  Nothing else needs to change.
+ * Adding a new numeric step: add an entry to NUMERIC_ONBOARDING_STEPS.
  */
+
+import type { Gender } from '../../domain/models/user.model';
 
 export interface NumericOnboardingStepConfig {
   /** Stable identifier (used in analytics / tests). */
@@ -38,12 +38,44 @@ export interface NumericOnboardingStepConfig {
   readonly nextRoute: string;
 }
 
+export interface GenderOnboardingStepConfig {
+  readonly id: string;
+  readonly currentStep: number;
+  readonly totalSteps: number;
+  readonly titleKey: string;
+  readonly descriptionKey: string;
+  readonly nextLabelKey: string;
+  readonly field: 'gender';
+  readonly options: readonly {
+    readonly value: Gender;
+    readonly labelKey: string;
+  }[];
+  readonly defaultValue: Gender;
+  readonly nextRoute: string;
+}
+
 export const TOTAL_REGISTER_STEPS = 6 as const;
+
+export const GENDER_ONBOARDING_STEP = {
+  id: 'gender',
+  currentStep: 2,
+  totalSteps: TOTAL_REGISTER_STEPS,
+  titleKey: 'auth.register.gender.title',
+  descriptionKey: 'auth.register.gender.description',
+  nextLabelKey: 'auth.register.common.next',
+  field: 'gender',
+  options: [
+    { value: 'male', labelKey: 'auth.register.gender.male' },
+    { value: 'female', labelKey: 'auth.register.gender.female' },
+  ],
+  defaultValue: 'female',
+  nextRoute: '../age',
+} as const satisfies GenderOnboardingStepConfig;
 
 export const NUMERIC_ONBOARDING_STEPS = {
   age: {
     id: 'age',
-    currentStep: 2,
+    currentStep: 3,
     totalSteps: TOTAL_REGISTER_STEPS,
     titleKey: 'auth.register.age.title',
     descriptionKey: 'auth.register.age.description',
@@ -58,7 +90,7 @@ export const NUMERIC_ONBOARDING_STEPS = {
   },
   weight: {
     id: 'weight',
-    currentStep: 3,
+    currentStep: 4,
     totalSteps: TOTAL_REGISTER_STEPS,
     titleKey: 'auth.register.weight.title',
     descriptionKey: 'auth.register.weight.description',
@@ -73,7 +105,7 @@ export const NUMERIC_ONBOARDING_STEPS = {
   },
   height: {
     id: 'height',
-    currentStep: 4,
+    currentStep: 5,
     totalSteps: TOTAL_REGISTER_STEPS,
     titleKey: 'auth.register.height.title',
     descriptionKey: 'auth.register.height.description',
@@ -84,6 +116,6 @@ export const NUMERIC_ONBOARDING_STEPS = {
     max: 220,
     step: 1,
     defaultValue: 175,
-    nextRoute: '../profile',
+    nextRoute: '../goal',
   },
 } as const satisfies Record<string, NumericOnboardingStepConfig>;

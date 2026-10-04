@@ -32,6 +32,13 @@ export const AUTH_ROUTES: Routes = [
               ).then((m) => m.RegisterAccountPage),
           },
           {
+            path: 'gender',
+            loadComponent: () =>
+              import(
+                './register/pages/register-gender.page'
+              ).then((m) => m.RegisterGenderPage),
+          },
+          {
             path: 'age',
             loadComponent: () =>
               import(
