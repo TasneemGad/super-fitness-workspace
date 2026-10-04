@@ -12,3 +12,6 @@ export * from './lib/ui/dynamic-form/components/select-field/select-field';
 export * from './lib/ui/dynamic-form/components/text-field/text-field';
 export * from './lib/ui/dynamic-form/components/textarea-field/textarea-field';
 export * from './lib/ui/dynamic-form/components/upload-field/upload-field';
+
+export * from './lib/ui/step-progress/step-progress';
+export * from './lib/ui/numeric-wheel-selector/numeric-wheel-selector';
