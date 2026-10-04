@@ -3,9 +3,8 @@
     <!-- Circular arc progress ring: e.g. "2/6" -->
     <lib-step-progress class="nrs-progress" [current]="currentStep()" [total]="totalSteps()" />
 
-    <!-- Question heading and supporting text -->
-    <h2 class="nrs-title">{{ title() }}</h2>
-    <p class="nrs-desc">{{ description() }}</p>
+    <lib-question-title [text]="title()" />
+    <lib-question-description [text]="description()" />
 
     <!-- Horizontal numeric drum-roll wheel -->
     <div class="nrs-wheel">

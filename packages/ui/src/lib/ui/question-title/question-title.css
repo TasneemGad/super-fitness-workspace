@@ -1,0 +1,10 @@
+.question-title {
+  margin: 0;
+  color: #fff;
+  font-size: max(24px, calc(42 * var(--u, 1px)));
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  text-align: center;
+  text-wrap: balance;
+}

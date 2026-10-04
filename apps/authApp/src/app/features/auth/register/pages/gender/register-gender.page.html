@@ -1,38 +1,22 @@
 <div class="gender-page">
   <div class="gender-content">
-    <lib-step-progress
-      class="gender-progress"
-      [current]="STEP.currentStep"
-      [total]="STEP.totalSteps"
-    />
-    <h2 class="gender-title">{{ STEP.titleKey | translate }}</h2>
-    <p class="gender-description">{{ STEP.descriptionKey | translate }}</p>
+    <lib-step-progress class="gender-progress" [current]="STEP.currentStep" [total]="STEP.totalSteps" />
 
-    <div
-      class="gender-options"
-      role="group"
-      [attr.aria-label]="STEP.titleKey | translate"
-    >
+    <lib-question-title [text]="STEP.titleKey | translate" />
+    <lib-question-description [text]="STEP.descriptionKey | translate" />
+
+    <!-- here for you eng Tasneem -->
+    <div class="gender-options" role="group" [attr.aria-label]="STEP.titleKey | translate">
       @for (option of STEP.options; track option.value) {
-        <button
-          type="button"
-          class="gender-option"
-          [class.gender-option--selected]="gender() === option.value"
-          [attr.aria-pressed]="gender() === option.value"
-          (click)="gender.set(option.value)"
-        >
-          {{ option.labelKey | translate }}
-        </button>
+      <button type="button" class="gender-option" [class.gender-option--selected]="gender() === option.value"
+        [attr.aria-pressed]="gender() === option.value" (click)="gender.set(option.value)">
+        {{ option.labelKey | translate }}
+      </button>
       }
     </div>
 
-    <button
-      id="gender-step-next-btn"
-      type="button"
-      class="gender-next"
-      [attr.aria-label]="STEP.nextLabelKey | translate"
-      (click)="onNext(gender())"
-    >
+    <button id="gender-step-next-btn" type="button" class="gender-next"
+      [attr.aria-label]="STEP.nextLabelKey | translate" (click)="onNext(gender())">
       {{ STEP.nextLabelKey | translate }}
     </button>
   </div>

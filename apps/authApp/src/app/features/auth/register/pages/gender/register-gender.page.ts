@@ -1,7 +1,7 @@
 import { Component, inject, signal } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
-import { StepProgress } from '@org/ui';
+import { QuestionDescription, QuestionTitle, StepProgress } from '@org/ui';
 import type { Gender } from '../../../domain/models/user.model';
 import { GENDER_ONBOARDING_STEP } from '../../config/registration-onboarding-steps';
 import { RegistrationFlowService } from '../../services/registration-flow.service';
@@ -10,7 +10,7 @@ const STEP = GENDER_ONBOARDING_STEP;
 
 @Component({
   selector: 'app-register-gender-page',
-  imports: [StepProgress, TranslatePipe],
+  imports: [StepProgress, QuestionTitle, QuestionDescription, TranslatePipe],
   templateUrl: './register-gender.page.html',
   styleUrl: './register-gender.page.css',
 })

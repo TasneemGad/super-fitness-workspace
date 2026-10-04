@@ -8,7 +8,12 @@ import {
   model,
   output,
 } from '@angular/core';
-import { NumericWheelSelector, StepProgress } from '@org/ui';
+import {
+  NumericWheelSelector,
+  QuestionDescription,
+  QuestionTitle,
+  StepProgress,
+} from '@org/ui';
 
 export interface NumericRegistrationSelectorContext {
   readonly value: number;
@@ -51,7 +56,13 @@ export interface NumericRegistrationSelectorContext {
   templateUrl: './numeric-registration-step.html',
   styleUrl: './numeric-registration-step.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [NgTemplateOutlet, StepProgress, NumericWheelSelector],
+  imports: [
+    NgTemplateOutlet,
+    StepProgress,
+    NumericWheelSelector,
+    QuestionTitle,
+    QuestionDescription,
+  ],
 })
 export class NumericRegistrationStep {
   /** 1-based step position, e.g. 2 for the Age step. */
