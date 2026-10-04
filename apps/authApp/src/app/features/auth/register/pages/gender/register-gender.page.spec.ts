@@ -1,8 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideRouter, Router } from '@angular/router';
 import { provideTranslateService } from '@ngx-translate/core';
+import { RegistrationFlowService } from '../../services/registration-flow.service';
 import { RegisterGenderPage } from './register-gender.page';
-import { RegistrationFlowService } from '../services/registration-flow.service';
 
 describe('RegisterGenderPage', () => {
   let fixture: ComponentFixture<RegisterGenderPage>;
@@ -25,11 +25,11 @@ describe('RegisterGenderPage', () => {
 
   it('stores the selected gender string and navigates to the age step', () => {
     const root: HTMLElement = fixture.nativeElement;
-    const options = root.querySelectorAll<HTMLButtonElement>('.gender-option');
+    const options = root.querySelectorAll('.gender-option') as NodeListOf<HTMLButtonElement>;
 
     expect(options).toHaveLength(2);
     options[0].click();
-    root.querySelector<HTMLButtonElement>('#gender-step-next-btn')?.click();
+    (root.querySelector('#gender-step-next-btn') as HTMLButtonElement | null)?.click();
 
     expect(flowService.draft()['gender']).toBe('male');
     expect(navigate).toHaveBeenCalledWith(['../age'], {
@@ -44,9 +44,9 @@ describe('RegisterGenderPage', () => {
     fixture = TestBed.createComponent(RegisterGenderPage);
     fixture.detectChanges();
 
-    const selectedOption = fixture.nativeElement.querySelector<HTMLButtonElement>(
+    const selectedOption = fixture.nativeElement.querySelector(
       '.gender-option--selected',
-    );
+    ) as HTMLButtonElement | null;
     expect(selectedOption?.getAttribute('aria-pressed')).toBe('true');
   });
 });

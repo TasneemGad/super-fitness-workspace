@@ -1,32 +1,24 @@
 import { Component, computed, forwardRef, inject, signal } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { AuthFacade } from '../../auth.facade';
-import { REGISTER_GOAL_FIELDS } from '../../data/auth.fields';
+import { AuthFacade } from '../../../auth.facade';
+import { REGISTER_GOAL_FIELDS } from '../../../data/auth.fields';
 import {
   REGISTER_STEPPER,
   RegisterStepper,
   RegistrationDraft,
-} from '../register-stepper';
-import { RegistrationFlowService } from '../services/registration-flow.service';
-import { RegisterDetailsStep } from '../steps/details-step/register-details-step';
+} from '../../register-stepper';
+import { RegistrationFlowService } from '../../services/registration-flow.service';
+import { RegisterDetailsStep } from '../../steps/details-step/register-details-step';
 
 @Component({
   selector: 'app-register-goal-page',
   imports: [RegisterDetailsStep, RouterLink],
-  template: `
-    @if (user(); as registered) {
-      <div class="auth-success">
-        <h2>Welcome, {{ registered.firstName }}!</h2>
-        <p>Your Super Fitness account is ready.</p>
-        <a class="auth-link auth-link--strong" routerLink="/auth/login">
-          Go to login
-        </a>
-      </div>
-    } @else {
-      <app-register-details-step [heading]="'Set Your Goal'" [fields]="fields" />
-    }
-  `,
-  styleUrls: ['../../ui/auth-form.css', '../../ui/auth-page.css'],
+  templateUrl: './register-goal.page.html',
+  styleUrls: [
+    './register-goal.page.css',
+    '../../../ui/auth-form.css',
+    '../../../ui/auth-page.css',
+  ],
   providers: [
     AuthFacade,
     {
@@ -58,6 +50,6 @@ export class RegisterGoalPage implements RegisterStepper {
 
   back(): void {
     this.facade.clearErrors();
-    void this.router.navigate(['../profile'], { relativeTo: this.route });
+    void this.router.navigate(['../height'], { relativeTo: this.route });
   }
 }

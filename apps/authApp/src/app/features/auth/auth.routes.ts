@@ -28,35 +28,35 @@ export const AUTH_ROUTES: Routes = [
             path: 'account',
             loadComponent: () =>
               import(
-                './register/pages/register-account.page'
+                './register/pages/account/register-account.page'
               ).then((m) => m.RegisterAccountPage),
           },
           {
             path: 'gender',
             loadComponent: () =>
               import(
-                './register/pages/register-gender.page'
+                './register/pages/gender/register-gender.page'
               ).then((m) => m.RegisterGenderPage),
           },
           {
             path: 'age',
             loadComponent: () =>
               import(
-                './register/pages/register-age.page'
+                './register/pages/age/register-age.page'
               ).then((m) => m.RegisterAgePage),
           },
           {
             path: 'weight',
             loadComponent: () =>
               import(
-                './register/pages/register-weight.page'
+                './register/pages/weight/register-weight.page'
               ).then((m) => m.RegisterWeightPage),
           },
           {
             path: 'height',
             loadComponent: () =>
               import(
-                './register/pages/register-height.page'
+                './register/pages/height/register-height.page'
               ).then((m) => m.RegisterHeightPage),
           },
 
@@ -64,7 +64,7 @@ export const AUTH_ROUTES: Routes = [
             path: 'goal',
             loadComponent: () =>
               import(
-                './register/pages/register-goal.page'
+                './register/pages/goal/register-goal.page'
               ).then((m) => m.RegisterGoalPage),
           },
         ],

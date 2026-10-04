@@ -6,14 +6,14 @@ import {
   signal,
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthFacade } from '../../auth.facade';
+import { AuthFacade } from '../../../auth.facade';
 import {
   REGISTER_STEPPER,
   RegisterStepper,
   RegistrationDraft,
-} from '../register-stepper';
-import { RegisterAccountStep } from '../steps/account-step/register-account-step';
-import { RegistrationFlowService } from '../services/registration-flow.service';
+} from '../../register-stepper';
+import { RegisterAccountStep } from '../../steps/account-step/register-account-step';
+import { RegistrationFlowService } from '../../services/registration-flow.service';
 
 /**
  * Step 1 / 6 — Account creation.
@@ -26,7 +26,12 @@ import { RegistrationFlowService } from '../services/registration-flow.service';
 @Component({
   selector: 'app-register-account-page',
   imports: [RegisterAccountStep],
-  template: `<app-register-account-step />`,
+  templateUrl: './register-account.page.html',
+  styleUrls: [
+    './register-account.page.css',
+    '../../../ui/auth-form.css',
+    '../../../ui/auth-page.css',
+  ],
   providers: [
     AuthFacade,
     {

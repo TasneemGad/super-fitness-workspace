@@ -1,14 +1,14 @@
 import { Component, inject, signal } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
-import { NumericRegistrationStep } from '../components/numeric-registration-step/numeric-registration-step';
-import { NUMERIC_ONBOARDING_STEPS } from '../config/registration-onboarding-steps';
-import { RegistrationFlowService } from '../services/registration-flow.service';
+import { NumericRegistrationStep } from '../../components/numeric-registration-step/numeric-registration-step';
+import { NUMERIC_ONBOARDING_STEPS } from '../../config/registration-onboarding-steps';
+import { RegistrationFlowService } from '../../services/registration-flow.service';
 
 const STEP = NUMERIC_ONBOARDING_STEPS.age;
 
 /**
- * Step 2 / 6 — Age selection.
+ * Step 3 / 6 — Age selection.
  *
  * A one-file container: reads / writes age through RegistrationFlowService
  * and passes all configuration to the shared NumericRegistrationStep UI.
@@ -17,21 +17,8 @@ const STEP = NUMERIC_ONBOARDING_STEPS.age;
 @Component({
   selector: 'app-register-age-page',
   imports: [NumericRegistrationStep, TranslatePipe],
-  template: `
-    <app-numeric-registration-step
-      [currentStep]="STEP.currentStep"
-      [totalSteps]="STEP.totalSteps"
-      [title]="STEP.titleKey | translate"
-      [description]="STEP.descriptionKey | translate"
-      [min]="STEP.min"
-      [max]="STEP.max"
-      [step]="STEP.step"
-      [unit]="STEP.unitKey | translate"
-      [nextLabel]="STEP.nextLabelKey | translate"
-      [(value)]="age"
-      (next)="onNext($event)"
-    />
-  `,
+  templateUrl: './register-age.page.html',
+  styleUrl: './register-age.page.css',
 })
 export class RegisterAgePage {
   protected readonly STEP = STEP;

@@ -1,14 +1,14 @@
 import { Component, inject, signal } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
-import { NumericRegistrationStep } from '../components/numeric-registration-step/numeric-registration-step';
-import { NUMERIC_ONBOARDING_STEPS } from '../config/registration-onboarding-steps';
-import { RegistrationFlowService } from '../services/registration-flow.service';
+import { NumericRegistrationStep } from '../../components/numeric-registration-step/numeric-registration-step';
+import { NUMERIC_ONBOARDING_STEPS } from '../../config/registration-onboarding-steps';
+import { RegistrationFlowService } from '../../services/registration-flow.service';
 
 const STEP = NUMERIC_ONBOARDING_STEPS.weight;
 
 /**
- * Step 3 / 6 — Weight selection.
+ * Step 4 / 6 — Weight selection.
  *
  * Identical pattern to RegisterAgePage; only STEP changes.
  * No UI code is duplicated.
@@ -16,21 +16,8 @@ const STEP = NUMERIC_ONBOARDING_STEPS.weight;
 @Component({
   selector: 'app-register-weight-page',
   imports: [NumericRegistrationStep, TranslatePipe],
-  template: `
-    <app-numeric-registration-step
-      [currentStep]="STEP.currentStep"
-      [totalSteps]="STEP.totalSteps"
-      [title]="STEP.titleKey | translate"
-      [description]="STEP.descriptionKey | translate"
-      [min]="STEP.min"
-      [max]="STEP.max"
-      [step]="STEP.step"
-      [unit]="STEP.unitKey | translate"
-      [nextLabel]="STEP.nextLabelKey | translate"
-      [(value)]="weight"
-      (next)="onNext($event)"
-    />
-  `,
+  templateUrl: './register-weight.page.html',
+  styleUrl: './register-weight.page.css',
 })
 export class RegisterWeightPage {
   protected readonly STEP = STEP;

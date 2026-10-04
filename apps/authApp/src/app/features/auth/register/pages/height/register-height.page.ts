@@ -1,14 +1,14 @@
 import { Component, inject, signal } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
-import { NumericRegistrationStep } from '../components/numeric-registration-step/numeric-registration-step';
-import { NUMERIC_ONBOARDING_STEPS } from '../config/registration-onboarding-steps';
-import { RegistrationFlowService } from '../services/registration-flow.service';
+import { NumericRegistrationStep } from '../../components/numeric-registration-step/numeric-registration-step';
+import { NUMERIC_ONBOARDING_STEPS } from '../../config/registration-onboarding-steps';
+import { RegistrationFlowService } from '../../services/registration-flow.service';
 
 const STEP = NUMERIC_ONBOARDING_STEPS.height;
 
 /**
- * Step 4 / 6 — Height selection.
+ * Step 5 / 6 — Height selection.
  *
  * Identical pattern to RegisterAgePage and RegisterWeightPage; only STEP changes.
  * No UI code is duplicated.
@@ -16,21 +16,8 @@ const STEP = NUMERIC_ONBOARDING_STEPS.height;
 @Component({
   selector: 'app-register-height-page',
   imports: [NumericRegistrationStep, TranslatePipe],
-  template: `
-    <app-numeric-registration-step
-      [currentStep]="STEP.currentStep"
-      [totalSteps]="STEP.totalSteps"
-      [title]="STEP.titleKey | translate"
-      [description]="STEP.descriptionKey | translate"
-      [min]="STEP.min"
-      [max]="STEP.max"
-      [step]="STEP.step"
-      [unit]="STEP.unitKey | translate"
-      [nextLabel]="STEP.nextLabelKey | translate"
-      [(value)]="height"
-      (next)="onNext($event)"
-    />
-  `,
+  templateUrl: './register-height.page.html',
+  styleUrl: './register-height.page.css',
 })
 export class RegisterHeightPage {
   protected readonly STEP = STEP;
