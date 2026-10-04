@@ -58,7 +58,7 @@ export const TOTAL_REGISTER_STEPS = 6 as const;
 
 export const GENDER_ONBOARDING_STEP = {
   id: 'gender',
-  currentStep: 2,
+  currentStep: 1,
   totalSteps: TOTAL_REGISTER_STEPS,
   titleKey: 'auth.register.gender.title',
   descriptionKey: 'auth.register.gender.description',
