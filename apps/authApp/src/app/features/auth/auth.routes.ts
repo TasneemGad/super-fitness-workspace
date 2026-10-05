@@ -17,10 +17,6 @@ export const AUTH_ROUTES: Routes = [
           import('./login/login-page').then((m) => m.LoginPage),
       },
       {
-        /**
-         * /auth/register  →  child router-outlet renders the step pages.
-         * Navigating to /auth/register alone redirects to /auth/register/account.
-         */
         path: 'register',
         children: [
           { path: '', redirectTo: 'account', pathMatch: 'full' },
