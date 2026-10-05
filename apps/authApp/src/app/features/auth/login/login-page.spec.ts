@@ -1,10 +1,11 @@
+import '@angular/compiler';
 import { provideHttpClient } from '@angular/common/http';
 import {
   HttpTestingController,
   provideHttpClientTesting,
 } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { provideRouter } from '@angular/router';
+import { provideRouter, Router } from '@angular/router';
 import { API_BASE_URL, AuthSession } from '@super-fitness/data-access-user';
 import { DynamicForm } from '@org/ui';
 import { LoginPage } from './login-page';
@@ -43,6 +44,7 @@ describe('LoginPage', () => {
 
     fixture = TestBed.createComponent(LoginPage);
     http = TestBed.inject(HttpTestingController);
+    fixture.detectChanges();
     await fixture.whenStable();
   });
 
@@ -89,6 +91,7 @@ describe('LoginPage', () => {
       user: { firstName: 'Ada', lastName: 'Lovelace', email: credentials.email },
     });
     await fixture.whenStable();
+    fixture.detectChanges();
 
     expect(TestBed.inject(AuthSession).token()).toBe('a-token');
   });
@@ -104,6 +107,7 @@ describe('LoginPage', () => {
         { status: 401, statusText: 'Unauthorized' }
       );
     await fixture.whenStable();
+    fixture.detectChanges();
 
     const errors = Array.from<HTMLElement>(
       fixture.nativeElement.querySelectorAll('.auth-errors li')
@@ -115,14 +119,18 @@ describe('LoginPage', () => {
 
   it('says plainly which extras are not connected yet', async () => {
     expect(fixture.nativeElement.querySelector('.auth-notice')).toBeNull();
+    const router = TestBed.inject(Router);
+    const initialUrl = router.url;
 
     fixture.nativeElement
       .querySelector('.auth-row-end .auth-link')
       .dispatchEvent(new Event('click'));
     await fixture.whenStable();
+    fixture.detectChanges();
 
     expect(fixture.nativeElement.querySelector('.auth-notice').textContent).toContain(
       'Password recovery is not connected yet'
     );
+    expect(router.url).toBe(initialUrl);
   });
 });
