@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { provideAuth } from './auth.providers';
 
 import { AuthLayoutComponent } from './ui/components/auth-layout/auth-layout.component';
 import { ChangePasswordPageComponent } from './ui/pages/change-password/change-password.page.component';
@@ -10,6 +11,7 @@ export const AUTH_ROUTES: Routes = [
   {
     path: '',
     component: AuthLayoutComponent,
+    providers: [provideAuth()],
     children: [
       {
         path: 'login',

@@ -16,8 +16,9 @@ import { TokenStorageService } from './services/token-storage.service';
 
 export function provideAuth(): EnvironmentProviders {
   return makeEnvironmentProviders([
-    { provide: AuthRepository, useExisting: AuthHttpRepository },
-    { provide: AUTH_REPOSITORY, useExisting: AuthRepository },
+    { provide: AUTH_REPOSITORY, useClass: AuthHttpRepository },
+    { provide: AuthRepository, useExisting: AUTH_REPOSITORY },
+    { provide: AuthHttpRepository, useExisting: AUTH_REPOSITORY },
     { provide: TokenStorage, useExisting: TokenStorageService },
     AuthStore,
     SignInUseCase,
