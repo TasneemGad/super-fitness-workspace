@@ -7,10 +7,12 @@ import { TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { Router, provideRouter } from '@angular/router';
 import { RouterTestingHarness } from '@angular/router/testing';
+import { TranslateService, provideTranslateService } from '@ngx-translate/core';
 import { DynamicForm } from '@org/ui';
 import { API_BASE_URL } from '@super-fitness/data-access-user';
 import { remoteRoutes } from '../../../remote-entry/entry.routes';
 import { PasswordResetState } from './password-reset.state';
+import en from '../../../../../public/assets/i18n/en.json';
 
 const BASE_URL = 'https://fitness.elevateegy.com/api/v1';
 const EMAIL = 'ada@example.com';
@@ -29,9 +31,11 @@ describe('Forgot password flow', () => {
         provideHttpClient(),
         provideHttpClientTesting(),
         { provide: API_BASE_URL, useValue: BASE_URL },
+        provideTranslateService({ fallbackLang: 'en', lang: 'en' }),
       ],
     });
 
+    TestBed.inject(TranslateService).setTranslation('en', en);
     http = TestBed.inject(HttpTestingController);
     router = TestBed.inject(Router);
     harness = await RouterTestingHarness.create();

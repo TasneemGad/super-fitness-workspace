@@ -1,22 +1,18 @@
 import { Injectable, inject, signal } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
 import { AuthRepository, AuthRequestError } from '@super-fitness/data-access-user';
 import { PasswordResetState } from './password-reset.state';
 
-const GENERIC_ERROR = 'Something went wrong. Please try again.';
+const GENERIC_ERROR = 'auth.errors.generic';
+const NO_ACCOUNT = 'auth.errors.noAccount';
+const BAD_CODE = 'auth.errors.badCode';
 
-/**
- * Wording for the statuses each reset call is known to answer with. Anything
- * not listed (network, 5xx, validation) keeps the repository's message.
- */
-const NO_ACCOUNT = 'There is no account with this email address.';
-const BAD_CODE = 'This code is invalid or has expired. Check your email or resend the code.';
-
-/** Owns the request state for one page of the reset flow. Provided per component. */
 @Injectable()
 export class PasswordResetFacade {
   private readonly repository = inject(AuthRepository);
   private readonly state = inject(PasswordResetState);
+  private readonly translate = inject(TranslateService);
 
   private readonly _submitting = signal(false);
   private readonly _errors = signal<string[]>([]);
@@ -25,7 +21,6 @@ export class PasswordResetFacade {
   readonly errors = this._errors.asReadonly();
   readonly email = this.state.email;
 
-  /** Sends (or resends) the code. @returns whether the request was started. */
   sendCode(email: string, onSent: () => void): boolean {
     return this.run(
       () => this.repository.forgotPassword({ email }),
@@ -51,7 +46,7 @@ export class PasswordResetFacade {
   resetPassword(newPassword: string, onReset: () => void): boolean {
     const email = this.state.email();
     if (!email || !this.state.canReset()) {
-      this._errors.set(['Your reset session has expired. Please request a new code.']);
+      this._errors.set([this.translate.instant('auth.errors.sessionExpired')]);
       return false;
     }
 
@@ -69,10 +64,6 @@ export class PasswordResetFacade {
     this._errors.set([]);
   }
 
-  /**
-   * Takes a factory rather than an observable so nothing is built for a
-   * submit that the in-flight guard turns away.
-   */
   private run(
     request: () => Observable<unknown>,
     wording: Partial<Record<number, string>>,
@@ -98,9 +89,9 @@ export class PasswordResetFacade {
   }
 
   private toMessages(error: unknown, wording: Partial<Record<number, string>>): string[] {
-    if (!(error instanceof AuthRequestError)) return [GENERIC_ERROR];
+    if (!(error instanceof AuthRequestError)) return [this.translate.instant(GENERIC_ERROR)];
 
     const known = wording[error.status];
-    return known ? [known] : error.messages;
+    return known ? [this.translate.instant(known)] : error.messages;
   }
 }

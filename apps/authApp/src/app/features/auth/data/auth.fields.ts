@@ -1,13 +1,11 @@
 import { FieldConfig, SelectOption } from '@org/ui';
 import { PASSWORD_PATTERN } from '@super-fitness/data-access-user';
 
-/** Mirrors the backend enum: "gender" must be one of [male, female]. */
 export const GENDER_OPTIONS: SelectOption[] = [
   { label: 'Male', value: 'male' },
   { label: 'Female', value: 'female' },
 ];
 
-/** Mirrors the backend enum: "activityLevel" must be one of [level1..level5]. */
 export const ACTIVITY_LEVEL_OPTIONS: SelectOption[] = [
   { label: 'Level 1 — Little or no exercise', value: 'level1' },
   { label: 'Level 2 — Light, 1-3 days a week', value: 'level2' },
@@ -16,7 +14,6 @@ export const ACTIVITY_LEVEL_OPTIONS: SelectOption[] = [
   { label: 'Level 5 — Athlete, twice a day', value: 'level5' },
 ];
 
-/** `goal` is a free string server-side; these are the common presets. */
 export const GOAL_OPTIONS: SelectOption[] = [
   { label: 'Gain weight', value: 'gain weight' },
   { label: 'Lose weight', value: 'lose weight' },
@@ -50,10 +47,6 @@ function minLengthRule(min: number) {
     String(value).trim().length >= min ? null : `Must be at least ${min} characters.`;
 }
 
-/**
- * The sign-in form. Placeholder-only to match the design, so every label is
- * kept for screen readers and hidden visually.
- */
 export const LOGIN_FIELDS: FieldConfig[] = [
   {
     key: 'email',
@@ -78,55 +71,47 @@ export const LOGIN_FIELDS: FieldConfig[] = [
   },
 ];
 
-/** Step 1 of the forgot-password flow: where to send the reset code. */
 export const FORGOT_PASSWORD_FIELDS: FieldConfig[] = [
   {
     key: 'email',
     type: 'email',
-    label: 'Email',
-    placeholder: 'Email',
+    label: 'auth.fields.email',
+    placeholder: 'auth.fields.email',
     icon: 'email',
     autocomplete: 'email',
     hideLabel: true,
     required: true,
-    validate: emailRule,
+    validate: (value) => emailRule(value) && 'auth.validation.email',
   },
 ];
 
-/** Last step of the forgot-password flow: the new password, typed twice. */
 export const RESET_PASSWORD_FIELDS: FieldConfig[] = [
   {
     key: 'password',
     type: 'password',
-    label: 'Password',
-    placeholder: 'Password',
+    label: 'auth.fields.password',
+    placeholder: 'auth.fields.password',
     icon: 'lock',
     autocomplete: 'new-password',
     hideLabel: true,
     required: true,
-    validate: passwordRule,
+    validate: (value) => passwordRule(value) && 'auth.validation.password',
   },
   {
     key: 'rePassword',
     type: 'password',
-    label: 'Re-password',
-    placeholder: 'Re-password',
+    label: 'auth.fields.rePassword',
+    placeholder: 'auth.fields.rePassword',
     icon: 'lock',
     autocomplete: 'new-password',
     hideLabel: true,
     required: true,
     validate: (value, model) =>
-      value === model['password'] ? null : 'Passwords do not match.',
+      value === model['password'] ? null : 'auth.validation.passwordMismatch',
   },
 ];
 
-/*
- * Registration is a multi-step flow (see register/register-steps.ts). Each
- * array below is the field set of one step; together, plus the `rePassword`
- * the account step derives, they make up the POST /api/v1/auth/signup payload.
- */
 
-/** Step 1, exactly as in the design: one field per row, in this order. */
 export const REGISTER_ACCOUNT_FIELDS: FieldConfig[] = [
   {
     key: 'firstName',

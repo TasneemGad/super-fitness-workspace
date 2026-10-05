@@ -10,32 +10,23 @@ import {
   untracked,
   viewChildren,
 } from '@angular/core';
+import { TranslatePipe } from '@ngx-translate/core';
 
 const NON_DIGITS = /\D/g;
 
-/**
- * A one-time code typed into one box per digit, e.g.
- *
- *   <app-otp-input [length]="4" [(value)]="code" (completed)="submit()" />
- *
- * Typing moves to the next box, Backspace on an empty box steps back, the
- * arrow keys move freely, and pasting (or OS autofill of) the whole code
- * spreads it across the boxes.
- */
 @Component({
   selector: 'app-otp-input',
   templateUrl: './otp-input.html',
-  styleUrl: './otp-input.css',
+  imports: [TranslatePipe],
+  host: { class: 'block' },
 })
 export class OtpInput {
   length = input(4);
-  label = input('Verification code');
+  label = input('');
   disabled = input(false);
   invalid = input(false);
 
-  /** The digits entered so far, in order. */
   value = model('');
-  /** Fires with the full code once every box is filled. */
   completed = output<string>();
 
   private readonly inputs = viewChildren<ElementRef<HTMLInputElement>>('cell');
@@ -46,7 +37,6 @@ export class OtpInput {
   );
 
   constructor() {
-    // Follow a value set from outside (e.g. the page clearing a rejected code).
     effect(() => {
       const value = this.value();
       if (value !== untracked(() => this.digits().join(''))) {
@@ -55,7 +45,6 @@ export class OtpInput {
     });
   }
 
-  /** Puts the caret in the first empty box. */
   focus(): void {
     const firstEmpty = this.cells().findIndex((d) => !d);
     this.focusAt(firstEmpty === -1 ? this.length() - 1 : firstEmpty);
@@ -65,7 +54,6 @@ export class OtpInput {
     const target = event.target as HTMLInputElement;
     const typed = target.value.replace(NON_DIGITS, '');
 
-    // Autofill and some mobile keyboards drop the whole code into one box.
     if (typed.length > 1) {
       this.fillFrom(index, typed);
       return;
@@ -100,7 +88,6 @@ export class OtpInput {
     event.preventDefault();
     if (!pasted) return;
 
-    // A full code always lands from the first box, wherever the caret was.
     this.fillFrom(pasted.length >= this.length() ? 0 : index, pasted);
   }
 

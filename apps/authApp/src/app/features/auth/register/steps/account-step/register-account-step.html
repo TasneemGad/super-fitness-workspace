@@ -4,7 +4,7 @@
 
 <lib-dynamic-form
   class="auth-form"
-  [fields]="fields"
+  [fields]="fields()"
   [initialData]="stepper.draft()"
   [submitting]="stepper.submitting()"
   [disableSubmitWhenInvalid]="false"

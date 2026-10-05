@@ -1,37 +1,37 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { AuthHeader } from '@org/ui';
 import { AuthFeedback } from '../../ui/auth-feedback/auth-feedback';
 import { OtpInput } from '../../ui/otp-input/otp-input';
 import { PasswordResetFacade } from '../password-reset.facade';
 
-/** Digits in the code the backend emails, one input box each. */
 export const RESET_CODE_LENGTH = 4;
 
-/** Step 2: check the emailed code. Reachable only once a code was sent. */
 @Component({
   selector: 'app-verify-code-page',
-  imports: [AuthHeader, AuthFeedback, OtpInput],
+  imports: [AuthHeader, AuthFeedback, OtpInput, TranslatePipe],
   providers: [PasswordResetFacade],
+  host: { class: 'block' },
   templateUrl: './verify-code-page.html',
-  styleUrls: ['../../ui/auth-form.css', '../../ui/auth-page.css', './verify-code-page.css'],
+  styleUrls: ['../../ui/auth-form.css', '../../ui/auth-page.css'],
 })
 export class VerifyCodePage {
   private readonly facade = inject(PasswordResetFacade);
   private readonly router = inject(Router);
   private readonly route = inject(ActivatedRoute);
+  private readonly translate = inject(TranslateService);
 
-  protected readonly length = RESET_CODE_LENGTH;
+  protected readonly length = signal(RESET_CODE_LENGTH);
   protected readonly submitting = this.facade.submitting;
   protected readonly errors = this.facade.errors;
   protected readonly email = this.facade.email;
 
   protected readonly code = signal('');
-  /** Set after an explicit submit, so a half-typed code is not flagged early. */
   protected readonly attempted = signal(false);
   protected readonly notice = signal<string | null>(null);
 
-  protected readonly complete = computed(() => this.code().length === RESET_CODE_LENGTH);
+  protected readonly complete = computed(() => this.code().length === this.length());
   protected readonly invalid = computed(
     () => (this.attempted() && !this.complete()) || this.errors().length > 0
   );
@@ -59,7 +59,7 @@ export class VerifyCodePage {
     this.facade.sendCode(email, () => {
       this.code.set('');
       this.attempted.set(false);
-      this.notice.set(`A new code was sent to ${email}.`);
+      this.notice.set(this.translate.instant('auth.verifyCode.resent', { email }));
     });
   }
 }
