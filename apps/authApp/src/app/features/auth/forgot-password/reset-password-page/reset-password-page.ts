@@ -38,6 +38,6 @@ export class ResetPasswordPage {
   }
 
   private goToLogin(): void {
-    void this.router.navigate(['../../login'], { relativeTo: this.route });
+    void this.router.navigate(['/auth/login'], { relativeTo: this.route });
   }
 }

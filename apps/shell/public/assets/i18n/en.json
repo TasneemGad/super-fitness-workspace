@@ -5,5 +5,57 @@
   "form": {
     "requiredMessage": "{{label}} is required",
     "selectPlaceholder": "Select"
+  },
+  "auth": {
+    "fields": {
+      "email": "Email",
+      "password": "Password",
+      "rePassword": "Re-password"
+    },
+    "validation": {
+      "email": "Enter a valid email address.",
+      "password": "At least 8 characters, with an uppercase, a lowercase, a number and a symbol.",
+      "passwordMismatch": "Passwords do not match."
+    },
+    "errors": {
+      "generic": "Something went wrong. Please try again.",
+      "noAccount": "There is no account with this email address.",
+      "badCode": "This code is invalid or has expired. Check your email or resend the code.",
+      "sessionExpired": "Your reset session has expired. Please request a new code."
+    },
+    "forgotPassword": {
+      "header": "Forget Password",
+      "title": "Enter Your Email",
+      "submit": "Send OTP",
+      "submitting": "Sending...",
+      "remember": "Remember Your Password ?",
+      "login": "Login"
+    },
+    "verifyCode": {
+      "header": "OTP CODE",
+      "title": "Enter Your OTP Check Your Email",
+      "label": "Verification code sent to {{email}}",
+      "yourEmail": "your email",
+      "incomplete": "Enter all {{length}} digits of the code.",
+      "submit": "Confirm",
+      "submitting": "Verifying...",
+      "notReceived": "Didn't Receive Verification Code ?",
+      "resend": "Resend Code",
+      "resent": "A new code was sent to {{email}}."
+    },
+    "resetPassword": {
+      "header": "Create New Password",
+      "headerDone": "Password Updated",
+      "title": "Make Sure Its 8 Characters Or More",
+      "submit": "Done",
+      "submitting": "Saving...",
+      "successTitle": "Your password has been reset",
+      "successText": "Taking you back to login so you can sign in with it.",
+      "goToLogin": "Go to login"
+    },
+    "otp": {
+      "label": "Verification code",
+      "digit": "Digit {{index}} of {{length}}"
+    }
   }
 }
