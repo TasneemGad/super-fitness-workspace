@@ -12,7 +12,7 @@ const STEP = GENDER_ONBOARDING_STEP;
   selector: 'app-register-gender-page',
   imports: [StepProgress, QuestionTitle, QuestionDescription, TranslatePipe],
   templateUrl: './register-gender.page.html',
-  styleUrl: './register-gender.page.css',
+  styleUrls: ['../../ui/register-step.css', './register-gender.page.css'],
 })
 export class RegisterGenderPage {
   protected readonly STEP = STEP;
@@ -21,15 +21,19 @@ export class RegisterGenderPage {
   private readonly router = inject(Router);
   private readonly route = inject(ActivatedRoute);
 
-  protected readonly gender = signal(this.savedGender());
+  /** null until the user picks an option — keeps "Next" disabled. */
+  protected readonly gender = signal<Gender | null>(this.savedGender());
 
-  protected onNext(value: Gender): void {
+  protected onNext(): void {
+    const value = this.gender();
+    if (value === null) return;
+
     this.flowService.patch({ [STEP.field]: value });
     void this.router.navigate([STEP.nextRoute], { relativeTo: this.route });
   }
 
-  private savedGender(): Gender {
+  private savedGender(): Gender | null {
     const value = this.flowService.draft()[STEP.field];
-    return value === 'male' || value === 'female' ? value : STEP.defaultValue;
+    return value === 'male' || value === 'female' ? value : null;
   }
 }

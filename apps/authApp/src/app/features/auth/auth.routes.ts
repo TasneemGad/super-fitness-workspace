@@ -69,6 +69,13 @@ export const AUTH_ROUTES: Routes = [
                 './register/pages/goal/register-goal.page'
               ).then((m) => m.RegisterGoalPage),
           },
+           {
+            path: 'activity',
+            loadComponent: () =>
+              import(
+                './register/pages/register-physical-activity.page/register-physical-activity.page'
+              ).then((m) => m.RegisterPhysicalActivityPage),
+          },
         ],
       },
       {

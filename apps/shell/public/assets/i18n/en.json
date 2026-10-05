@@ -62,26 +62,64 @@
         "next": "Next"
       },
       "gender": {
-        "title": "What Is Your Gender?",
-        "description": "This helps us personalize your fitness plan.",
+        "title": "Tell Us About Yourself!",
+        "description": "We Need To Know Your Gender",
         "male": "Male",
         "female": "Female"
       },
       "age": {
-        "title": "How Old Are You?",
-        "description": "This helps us create your personalized plan.",
+        "title": "How Old Are You ?",
+        "description": "This Helps Us Create Your Personalized Plan",
         "unit": "Years"
       },
       "weight": {
-        "title": "What Is Your Weight?",
-        "description": "We use this to calculate your ideal calorie intake.",
+        "title": "What Is Your Weight ?",
+        "description": "We Use This To Calculate Your Ideal Calorie Intake",
         "unit": "KG",
         "next": "Next"
       },
       "height": {
-        "title": "How Tall Are You?",
-        "description": "Height helps us estimate your basal metabolic rate.",
+        "title": "How Tall Are You ?",
+        "description": "Height Helps Us Estimate Your Basal Metabolic Rate",
         "unit": "CM"
+      },
+      "account": {
+        "eyebrow": "Hey There",
+        "title": "Create An Account",
+        "firstName": "First Name",
+        "lastName": "Last Name",
+        "email": "Email",
+        "password": "Password",
+        "confirmPassword": "Confirm Password",
+        "submit": "Create Account",
+        "loginPrompt": "Already have an account?",
+        "loginLink": "Sign In"
+      },
+      "profile": {
+        "title": "Tell Us About You",
+        "description": "A Few More Details To Complete Your Profile"
+      },
+      "goal": {
+        "title": "What Is Your Goal ?",
+        "description": "This Helps Us Create Your Personalized Plan",
+        "options": {
+          "gainWeight": "Gain Weight",
+          "loseWeight": "Lose Weight",
+          "getFitter": "Get Fitter",
+          "gainFlexible": "Gain More Flexible",
+          "learnBasics": "Learn The Basic"
+        }
+      },
+      "activity": {
+        "title": "Your Regular Physical Activity Level ?",
+        "description": "This Helps Us Create Your Personalized Plan",
+        "options": {
+          "rookie": "Rookie",
+          "beginner": "Beginner",
+          "intermediate": "Intermediate",
+          "advance": "Advance",
+          "trueBeast": "True Beast"
+        }
       }
     }
   }

@@ -1,30 +1,34 @@
 import { Component, inject, signal } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
+import { AuthFacade } from '../../../auth.facade';
 import { ChoiceRegistrationStep } from '../../components/choice-registration-step/choice-registration-step';
 import { CHOICE_ONBOARDING_STEPS } from '../../config/registration-onboarding-steps';
 import { RegistrationFlowService } from '../../services/registration-flow.service';
 
-const STEP = CHOICE_ONBOARDING_STEPS.goal;
+const STEP = CHOICE_ONBOARDING_STEPS.activity;
 
-/** Step 5 / 6 — Fitness goal selection. */
+/** Step 6 / 6 — Physical activity level. Submits the whole registration draft. */
 @Component({
-  selector: 'app-register-goal-page',
-  imports: [ChoiceRegistrationStep, TranslatePipe],
-  templateUrl: './register-goal.page.html',
+  selector: 'app-register-physical-activity-page',
+  imports: [ChoiceRegistrationStep, RouterLink, TranslatePipe],
+  templateUrl: './register-physical-activity.page.html',
+  providers: [AuthFacade],
 })
-export class RegisterGoalPage {
+export class RegisterPhysicalActivityPage {
   protected readonly STEP = STEP;
 
   private readonly flowService = inject(RegistrationFlowService);
-  private readonly router = inject(Router);
-  private readonly route = inject(ActivatedRoute);
+  private readonly facade = inject(AuthFacade);
 
-  protected readonly goal = signal(this.savedValue());
+  protected readonly activityLevel = signal(this.savedValue());
+  protected readonly submitting = this.facade.submitting;
+  protected readonly errors = this.facade.errors;
+  protected readonly user = this.facade.user;
 
   protected onNext(value: string): void {
     this.flowService.patch({ [STEP.field]: value });
-    void this.router.navigate([STEP.nextRoute], { relativeTo: this.route });
+    this.facade.signup(this.flowService.draft());
   }
 
   private savedValue(): string | null {

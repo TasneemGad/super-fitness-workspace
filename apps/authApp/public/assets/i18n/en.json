@@ -74,8 +74,8 @@
         "loginLink": "Sign In"
       },
       "gender": {
-        "title": "What Is Your Gender?",
-        "description": "This Helps Us Personalize Your Fitness Plan",
+        "title": "Tell Us About Yourself!",
+        "description": "We Need To Know Your Gender",
         "male": "Male",
         "female": "Female"
       },
@@ -100,8 +100,26 @@
         "description": "A Few More Details To Complete Your Profile"
       },
       "goal": {
-        "title": "Set Your Goal",
-        "description": "Choose The Fitness Outcome You Are Working Towards"
+        "title": "What Is Your Goal ?",
+        "description": "This Helps Us Create Your Personalized Plan",
+        "options": {
+          "gainWeight": "Gain Weight",
+          "loseWeight": "Lose Weight",
+          "getFitter": "Get Fitter",
+          "gainFlexible": "Gain More Flexible",
+          "learnBasics": "Learn The Basic"
+        }
+      },
+      "activity": {
+        "title": "Your Regular Physical Activity Level ?",
+        "description": "This Helps Us Create Your Personalized Plan",
+        "options": {
+          "rookie": "Rookie",
+          "beginner": "Beginner",
+          "intermediate": "Intermediate",
+          "advance": "Advance",
+          "trueBeast": "True Beast"
+        }
       }
     },
     "login": {

@@ -23,12 +23,22 @@ describe('RegisterGenderPage', () => {
     fixture.detectChanges();
   });
 
+  it('keeps Next disabled until a gender is picked', () => {
+    const next = fixture.nativeElement.querySelector('#gender-step-next-btn') as HTMLButtonElement;
+    expect(next.disabled).toBe(true);
+
+    (fixture.nativeElement.querySelector('.gender-option') as HTMLButtonElement).click();
+    fixture.detectChanges();
+    expect(next.disabled).toBe(false);
+  });
+
   it('stores the selected gender string and navigates to the age step', () => {
     const root: HTMLElement = fixture.nativeElement;
     const options = root.querySelectorAll('.gender-option') as NodeListOf<HTMLButtonElement>;
 
     expect(options).toHaveLength(2);
     options[0].click();
+    fixture.detectChanges();
     (root.querySelector('#gender-step-next-btn') as HTMLButtonElement | null)?.click();
 
     expect(flowService.draft()['gender']).toBe('male');

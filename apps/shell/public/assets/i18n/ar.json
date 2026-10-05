@@ -56,6 +56,71 @@
     "otp": {
       "label": "رمز التحقق",
       "digit": "الرقم {{index}} من {{length}}"
+    },
+    "register": {
+      "common": {
+        "next": "التالي"
+      },
+      "account": {
+        "eyebrow": "مرحباً",
+        "title": "إنشاء حساب",
+        "firstName": "الاسم الأول",
+        "lastName": "الاسم الأخير",
+        "email": "البريد الإلكتروني",
+        "password": "كلمة المرور",
+        "confirmPassword": "تأكيد كلمة المرور",
+        "submit": "إنشاء الحساب",
+        "loginPrompt": "هل لديك حساب بالفعل؟",
+        "loginLink": "تسجيل الدخول"
+      },
+      "gender": {
+        "title": "أخبرنا عن نفسك!",
+        "description": "نحتاج إلى معرفة جنسك",
+        "male": "ذكر",
+        "female": "أنثى"
+      },
+      "age": {
+        "title": "كم عمرك ؟",
+        "description": "يساعدنا هذا في إنشاء خطتك المخصصة",
+        "unit": "سنة"
+      },
+      "weight": {
+        "title": "ما هو وزنك ؟",
+        "description": "نستخدم هذا لحساب احتياجاتك من السعرات الحرارية",
+        "unit": "كجم",
+        "next": "التالي"
+      },
+      "height": {
+        "title": "كم طولك ؟",
+        "description": "يساعدنا الطول في تقدير معدل الأيض الأساسي",
+        "unit": "سم"
+      },
+      "profile": {
+        "title": "أخبرنا عنك",
+        "description": "بعض التفاصيل الإضافية لإكمال ملفك الشخصي"
+      },
+      "goal": {
+        "title": "ما هو هدفك ؟",
+        "description": "يساعدنا هذا في إنشاء خطتك المخصصة",
+        "options": {
+          "gainWeight": "زيادة الوزن",
+          "loseWeight": "إنقاص الوزن",
+          "getFitter": "لياقة أفضل",
+          "gainFlexible": "مرونة أكثر",
+          "learnBasics": "تعلم الأساسيات"
+        }
+      },
+      "activity": {
+        "title": "ما مستوى نشاطك البدني المعتاد ؟",
+        "description": "يساعدنا هذا في إنشاء خطتك المخصصة",
+        "options": {
+          "rookie": "مبتدئ تماماً",
+          "beginner": "مبتدئ",
+          "intermediate": "متوسط",
+          "advance": "متقدم",
+          "trueBeast": "وحش حقيقي"
+        }
+      }
     }
   }
 }

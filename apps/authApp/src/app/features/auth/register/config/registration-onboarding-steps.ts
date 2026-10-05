@@ -50,7 +50,6 @@ export interface GenderOnboardingStepConfig {
     readonly value: Gender;
     readonly labelKey: string;
   }[];
-  readonly defaultValue: Gender;
   readonly nextRoute: string;
 }
 
@@ -68,7 +67,6 @@ export const GENDER_ONBOARDING_STEP = {
     { value: 'male', labelKey: 'auth.register.gender.male' },
     { value: 'female', labelKey: 'auth.register.gender.female' },
   ],
-  defaultValue: 'female',
   nextRoute: '../age',
 } as const satisfies GenderOnboardingStepConfig;
 
@@ -119,3 +117,58 @@ export const NUMERIC_ONBOARDING_STEPS = {
     nextRoute: '../goal',
   },
 } as const satisfies Record<string, NumericOnboardingStepConfig>;
+
+export interface ChoiceOnboardingOption {
+  readonly value: string;
+  readonly labelKey: string;
+}
+
+export interface ChoiceOnboardingStepConfig {
+  readonly id: string;
+  readonly currentStep: number;
+  readonly totalSteps: number;
+  readonly titleKey: string;
+  readonly descriptionKey: string;
+  readonly nextLabelKey: string;
+  /** The key used to persist the value in RegistrationFlowService. */
+  readonly field: string;
+  readonly options: readonly ChoiceOnboardingOption[];
+  /** Relative router path to navigate to when "Next" is tapped (omit on the last step). */
+  readonly nextRoute?: string;
+}
+
+export const CHOICE_ONBOARDING_STEPS = {
+  goal: {
+    id: 'goal',
+    currentStep: 5,
+    totalSteps: TOTAL_REGISTER_STEPS,
+    titleKey: 'auth.register.goal.title',
+    descriptionKey: 'auth.register.goal.description',
+    nextLabelKey: 'auth.register.common.next',
+    field: 'goal',
+    options: [
+      { value: 'gain weight', labelKey: 'auth.register.goal.options.gainWeight' },
+      { value: 'lose weight', labelKey: 'auth.register.goal.options.loseWeight' },
+      { value: 'get fitter', labelKey: 'auth.register.goal.options.getFitter' },
+      { value: 'gain more flexible', labelKey: 'auth.register.goal.options.gainFlexible' },
+      { value: 'learn the basics', labelKey: 'auth.register.goal.options.learnBasics' },
+    ],
+    nextRoute: '../activity',
+  },
+  activity: {
+    id: 'activity',
+    currentStep: 6,
+    totalSteps: TOTAL_REGISTER_STEPS,
+    titleKey: 'auth.register.activity.title',
+    descriptionKey: 'auth.register.activity.description',
+    nextLabelKey: 'auth.register.common.next',
+    field: 'activityLevel',
+    options: [
+      { value: 'level1', labelKey: 'auth.register.activity.options.rookie' },
+      { value: 'level2', labelKey: 'auth.register.activity.options.beginner' },
+      { value: 'level3', labelKey: 'auth.register.activity.options.intermediate' },
+      { value: 'level4', labelKey: 'auth.register.activity.options.advance' },
+      { value: 'level5', labelKey: 'auth.register.activity.options.trueBeast' },
+    ],
+  },
+} as const satisfies Record<string, ChoiceOnboardingStepConfig>;

@@ -28,7 +28,7 @@
           }
         ],
         "styles": [
-          "apps/authApp/src/styles.scss"
+          "apps/authApp/src/styles.css"
         ],
         "customWebpackConfig": {
           "path": "apps/authApp/webpack.config.ts"
