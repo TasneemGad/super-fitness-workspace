@@ -22,6 +22,4 @@ export class RegisterAccountStep {
     this.notice.set(null);
     this.stepper.next({ ...values, rePassword: values['password'] });
   }
-
-
 }

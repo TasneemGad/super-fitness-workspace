@@ -91,7 +91,7 @@ describe('DynamicForm', () => {
       firstName: 'Ada',
       lastName: 'Lovelace',
       email: 'ada@example.com',
-      // number fields are coerced out of their string form
+
       age: 36,
     });
   });

@@ -1,18 +1,3 @@
-/*
- * Shared styles for every native dynamic-form control.
- *
- * Everything visual is read from a --lib-field-* custom property with a
- * neutral light default, so a host app themes the controls by setting those
- * properties on any ancestor instead of reaching into the markup:
- *
- *   --lib-field-height        --lib-field-radius      --lib-field-font-size
- *   --lib-field-pad-inline    --lib-field-bg          --lib-field-color
- *   --lib-field-border        --lib-field-border-hover
- *   --lib-field-placeholder   --lib-field-icon        --lib-field-label
- *   --lib-field-accent        --lib-field-ring        --lib-field-error
- *   --lib-field-color-scheme  (light | dark: native popups, date picker, …)
- */
-
 :host {
   display: block;
 }
@@ -73,12 +58,9 @@ textarea.field-input {
   box-shadow: 0 0 0 3px var(--lib-field-ring, rgb(37 99 235 / 20%));
 }
 
-/* Only set once the field has been touched, so pristine forms stay calm. */
 .field-input[aria-invalid='true'] {
   border-color: var(--lib-field-error, #dc2626);
 }
-
-/* ---------- leading icon & trailing affordance ---------- */
 
 .field-icon,
 .field-trailing {
@@ -120,8 +102,6 @@ textarea.field-input {
   outline: 2px solid var(--lib-field-accent, #2563eb);
 }
 
-/* ---------- select ---------- */
-
 select.field-input {
   appearance: none;
   cursor: pointer;
@@ -139,8 +119,6 @@ select.field-input option {
   pointer-events: none;
 }
 
-/* ---------- checkbox ---------- */
-
 .field-check {
   display: inline-flex;
   align-items: center;
@@ -156,8 +134,6 @@ select.field-input option {
   margin: 0;
   accent-color: var(--lib-field-accent, #2563eb);
 }
-
-/* ---------- messages ---------- */
 
 .field-error {
   color: var(--lib-field-error, #dc2626);

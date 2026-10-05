@@ -30,7 +30,7 @@ describe('RegisterPage (registration flow)', () => {
   let http: HttpTestingController;
 
   const el = () => fixture.nativeElement as HTMLElement;
-  /** querySelector that fails the test with a clear message instead of returning null. */
+
   function must<T extends Element = HTMLElement>(selector: string): T {
     const found = el().querySelector<T>(selector);
     if (!found) throw new Error('Expected to find ' + selector);
@@ -40,7 +40,6 @@ describe('RegisterPage (registration flow)', () => {
   const eyebrow = () =>
     el().querySelector('lib-auth-header .auth-header__eyebrow')?.textContent?.trim();
 
-  /** The dynamic form of whichever step is on screen. */
   function currentForm(): DynamicForm {
     return fixture.debugElement.query(
       (node) => node.nativeElement?.nodeName?.toLowerCase() === 'lib-dynamic-form'
@@ -89,8 +88,8 @@ describe('RegisterPage (registration flow)', () => {
       ]);
     });
 
-    it('offers the design extras: forgot password, three socials, a login link', () => {
-      expect(el().textContent).toContain('Forget Password ?');
+    it('offers the design extras: three socials and a login link', () => {
+      expect(el().textContent).not.toContain('Forget Password');
       expect(el().querySelectorAll('app-social-sign-in .social-button').length).toBe(3);
       expect(el().querySelector('.auth-footnote')?.textContent).toContain('Login');
       expect(el().querySelector('.form-submit')?.textContent?.trim()).toBe('Register');
@@ -113,7 +112,7 @@ describe('RegisterPage (registration flow)', () => {
 
       expect(eyebrow()).toBe('Step 2 of 4');
       expect(el().querySelector('app-register-details-step')).toBeTruthy();
-      // Nothing is sent until the last step.
+
       http.expectNone(SIGNUP_URL);
     });
 

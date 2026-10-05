@@ -33,11 +33,11 @@ describe('PASSWORD_PATTERN', () => {
     ['Passw0rd!', true],
     ['Str0ng#Pass', true],
     ['short1!A', true],
-    ['alllowercase1!', false], // no uppercase
-    ['ALLUPPERCASE1!', false], // no lowercase
-    ['NoDigitsHere!', false], // no number
-    ['NoSymbol123', false], // no symbol
-    ['Ab1!', false], // under 8 characters
+    ['alllowercase1!', false],
+    ['ALLUPPERCASE1!', false],
+    ['NoDigitsHere!', false],
+    ['NoSymbol123', false],
+    ['Ab1!', false],
   ])('%s -> %s', (password, expected) => {
     expect(PASSWORD_PATTERN.test(password)).toBe(expected);
   });

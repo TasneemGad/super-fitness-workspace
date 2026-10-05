@@ -11,7 +11,6 @@ export class TokenStorageService extends TokenStorage {
       this.clear();
       storage.setItem(this.storageKey, token);
     } catch {
-      // Storage may be unavailable in some environments.
     }
   }
 
@@ -37,7 +36,6 @@ export class TokenStorageService extends TokenStorage {
       window.localStorage.removeItem(this.storageKey);
       window.sessionStorage.removeItem(this.storageKey);
     } catch {
-      // Ignore storage errors.
     }
   }
 }

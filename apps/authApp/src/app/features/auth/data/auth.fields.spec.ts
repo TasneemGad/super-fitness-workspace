@@ -63,7 +63,6 @@ describe('REGISTER_ACCOUNT_FIELDS (step 1)', () => {
 });
 
 describe('register step fields together', () => {
-  /** Exactly the keys POST /api/v1/auth/signup reports as required. */
   const REQUIRED_BY_API = [
     'firstName',
     'lastName',

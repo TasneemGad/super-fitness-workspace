@@ -92,7 +92,7 @@ describe('AuthRepository', () => {
         '"email" must be a valid email',
         '"age" is required',
       ]);
-      // The Error's own message surfaces the first problem.
+
       expect(error?.message).toBe('"email" must be a valid email');
     });
   });

@@ -1,11 +1,6 @@
 import { Component, computed, input } from '@angular/core';
 import { FieldIconName } from '../../models/field-types';
 
-/**
- * Inline stroke-only SVG glyphs for form controls. Kept inline (rather than an
- * icon font) so the lib stays dependency-free and the glyph inherits
- * `currentColor` from whatever theme the host page applies.
- */
 const PATHS: Record<FieldIconName, string> = {
   email: 'M3 7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2zM3 7l9 6 9-6',
   lock: 'M6 11V8a6 6 0 1 1 12 0v3M5 11h14a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-8a1 1 0 0 1 1-1z',

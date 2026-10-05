@@ -21,13 +21,6 @@ import { REGISTER_STEPS } from './register-steps';
 
 const NO_INPUTS: Record<string, unknown> = {};
 
-/**
- * The registration flow. It owns the draft and the step position, renders the
- * current step (from `REGISTER_STEPS`) inside the auth card, and submits the
- * merged draft through the existing `AuthFacade.signup` after the last step.
- *
- * Steps talk to it through `REGISTER_STEPPER`, which this component provides.
- */
 @Component({
   selector: 'app-register-page',
   imports: [AuthHeader, NgComponentOutlet, RouterLink],
@@ -66,8 +59,6 @@ export class RegisterPage implements RegisterStepper {
   );
 
   constructor() {
-    // When the API rejects a field from an earlier step (e.g. "email" is
-    // taken), take the user back to the step where they can fix it.
     effect(() => {
       const keys = keysInErrors(this.facade.errors());
       if (!keys.length) return;

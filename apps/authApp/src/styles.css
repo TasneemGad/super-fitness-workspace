@@ -1,5 +1,3 @@
-/* Standalone dev server only: when authApp runs inside the shell, this file is
-   not loaded — the shell's stylesheet is. Keep the two in sync. */
 @import "tailwindcss";
 
 @source "../src";

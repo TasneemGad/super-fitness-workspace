@@ -4,7 +4,6 @@ import { AuthResponse, AuthenticatedUser } from './auth.models';
 const TOKEN_KEY = 'super-fitness.token';
 const USER_KEY = 'super-fitness.user';
 
-/** Reads/writes are wrapped because storage throws in private-mode browsers. */
 function read(key: string): string | null {
   try {
     return localStorage.getItem(key);
@@ -18,11 +17,9 @@ function write(key: string, value: string | null): void {
     if (value === null) localStorage.removeItem(key);
     else localStorage.setItem(key, value);
   } catch {
-    // Storage unavailable: the session still works for this page load.
   }
 }
 
-/** Holds the signed-in user for the lifetime of the app, surviving reloads. */
 @Injectable({ providedIn: 'root' })
 export class AuthSession {
   private readonly _token = signal<string | null>(read(TOKEN_KEY));

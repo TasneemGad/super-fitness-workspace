@@ -12,13 +12,6 @@ import {
   SignupRequest,
 } from '@super-fitness/data-access-user';
 
-/**
- * Narrows the dynamic form's untyped model into the signup payload.
- *
- * The form's field keys are declared to match the API one-for-one
- * (see `auth.fields.ts`), so this is a cast with coercion rather than a
- * rename: `p-inputnumber` can still hand back a string for empty-ish input.
- */
 export function toSignupRequest(model: Record<string, unknown>): SignupRequest {
   return {
     firstName: String(model['firstName'] ?? '').trim(),
@@ -42,7 +35,6 @@ export function toSigninRequest(model: Record<string, unknown>): SigninRequest {
   };
 }
 
-/** Owns the request state for one auth page. Provided per component. */
 @Injectable()
 export class AuthFacade {
   private readonly repository = inject(AuthRepository);
@@ -54,10 +46,9 @@ export class AuthFacade {
 
   readonly submitting = this._submitting.asReadonly();
   readonly errors = this._errors.asReadonly();
-  /** The user returned by the last successful request, if any. */
+
   readonly user = this._user.asReadonly();
 
-  /** @returns whether the request was started (false if one is already running). */
   signup(model: Record<string, unknown>): boolean {
     return this.run(() => this.repository.signup(toSignupRequest(model)));
   }
@@ -70,10 +61,6 @@ export class AuthFacade {
     this._errors.set([]);
   }
 
-  /**
-   * Takes a factory rather than an observable so nothing is built — and no
-   * payload mapped — for a submit that the in-flight guard turns away.
-   */
   private run(request: () => Observable<AuthResponse>): boolean {
     if (this._submitting()) return false;
 

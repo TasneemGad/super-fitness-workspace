@@ -41,7 +41,7 @@ describe('SelectField', () => {
     ).toBe('Gender *');
     const select: HTMLSelectElement = fixture.nativeElement.querySelector('select');
     expect(select.id).toBe('gender');
-    // A disabled placeholder option, then one option per configured choice.
+
     expect(Array.from(select.options).map((o) => o.value)).toEqual(['', 'male', 'female']);
   });
 

@@ -13,10 +13,6 @@ import {
 } from '@angular/core';
 import { FieldIcon } from '../../../../icon/field-icon';
 
-/**
- * A modal carousel over a set of image URLs, built on the native <dialog>
- * element so focus trapping, Esc to close and the backdrop come for free.
- */
 @Component({
   selector: 'lib-image-gallery-modal',
   imports: [FieldIcon],
@@ -26,7 +22,7 @@ import { FieldIcon } from '../../../../icon/field-icon';
 export class ImageGalleryModal {
   images = input.required<string[]>();
   open = model.required<boolean>();
-  /** Describes the set being shown, e.g. the field's label. */
+
   alt = input<string>('Uploaded image');
 
   private readonly dialog =
@@ -38,9 +34,6 @@ export class ImageGalleryModal {
   );
 
   constructor() {
-    // Light dismiss: a click that lands on the <dialog> itself (not its
-    // content) is a click on the backdrop. Esc is handled natively. Bound in
-    // code because it is a pointer-only shortcut, not a control of its own.
     const destroyRef = inject(DestroyRef);
     afterNextRender(() => {
       const el = this.dialog().nativeElement;
@@ -55,7 +48,7 @@ export class ImageGalleryModal {
       const el = this.dialog().nativeElement;
       if (this.open() && !el.open) {
         this.index.set(0);
-        // showModal is missing in some test DOMs; fall back to the attribute.
+
         if (typeof el.showModal === 'function') el.showModal();
         else el.setAttribute('open', '');
       } else if (!this.open() && el.open) {
@@ -65,13 +58,11 @@ export class ImageGalleryModal {
     });
   }
 
-  /** Wraps around in both directions, like the old circular galleria. */
   step(delta: number) {
     const count = this.images().length;
     if (count) this.index.update((i) => (i + delta + count) % count);
   }
 
-  /** Native close (Esc, or the dialog closing itself) must update the model. */
   onClose() {
     this.open.set(false);
   }

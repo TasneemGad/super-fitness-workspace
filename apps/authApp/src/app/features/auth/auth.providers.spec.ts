@@ -1,4 +1,3 @@
-// @vitest-environment jsdom
 import '../../../test-setup';
 import { provideHttpClient } from '@angular/common/http';
 import {

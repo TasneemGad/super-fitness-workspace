@@ -23,7 +23,6 @@ describe('Forgot password flow', () => {
   let http: HttpTestingController;
   let router: Router;
 
-  /** Mounted under /auth, exactly as the shell mounts the remote. */
   beforeEach(async () => {
     TestBed.configureTestingModule({
       providers: [
@@ -117,7 +116,7 @@ describe('Forgot password flow', () => {
     expect(harness.routeNativeElement!.querySelector('.auth-errors')?.textContent).toContain(
       'invalid or has expired'
     );
-    // Still locked: a rejected code does not open the password step.
+
     await harness.navigateByUrl('/auth/forgot-password/reset-password');
     expect(router.url).toBe('/auth/forgot-password/otp');
   });

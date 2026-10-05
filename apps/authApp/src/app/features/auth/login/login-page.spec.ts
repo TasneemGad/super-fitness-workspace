@@ -14,7 +14,6 @@ const SIGNIN_URL = `${BASE_URL}/auth/signin`;
 
 const credentials = { email: 'ada@example.com', password: 'Passw0rd!' };
 
-/** Reaches the projected `lib-dynamic-form` instance inside the page. */
 function findDynamicForm(fixture: ComponentFixture<LoginPage>): DynamicForm {
   const debugEl = fixture.debugElement.query(
     (node) => node.nativeElement?.nodeName?.toLowerCase() === 'lib-dynamic-form'

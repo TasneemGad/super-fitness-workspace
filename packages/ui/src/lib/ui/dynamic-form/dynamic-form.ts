@@ -33,7 +33,7 @@ type FieldInputs = { field: FieldConfig; control: FieldTree<unknown> };
 })
 export class DynamicForm {
   private injector = inject(Injector);
-  /** Optional: the form falls back to an English message when no i18n is set up. */
+
   private translate = inject(TranslateService, { optional: true });
 
   private modelInitialized = signal(false);
@@ -47,21 +47,16 @@ export class DynamicForm {
   uploadFn = input<FileUploadFn>();
   submitLabel = input<string>('Add');
   loadingLabel = input<string>('Submitting...');
-  /** Extra classes for the submit button, so a host page can theme it. */
+
   submitClass = input<string>('');
-  /** Lets a page keep the button busy while its own request is in flight. */
+
   submitting = input<boolean>(false);
-  /**
-   * Disable the submit button while the form is invalid (the default). Pass
-   * false to keep it clickable instead: an invalid submit then touches every
-   * field so each one shows what is missing.
-   */
+
   disableSubmitWhenInvalid = input<boolean>(true);
 
   formSubmit = output<Record<string, unknown>>();
   valueChanges = output<Record<string, unknown>>();
 
-  /** True while this component is uploading files, before formSubmit fires. */
   private uploading = signal(false);
   busy = computed(() => this.uploading() || this.submitting());
 
@@ -122,10 +117,6 @@ export class DynamicForm {
     return Object.fromEntries(fields.map((f) => [f.key, this.emptyValue(f)]));
   }
 
-  /**
-   * Number fields start as `null`, not `''`: `p-inputnumber` coerces an empty
-   * string to 0 and would render a literal zero over its own placeholder.
-   */
   private emptyValue(field: FieldConfig): unknown {
     if (field.type === 'checkbox') return false;
     if (field.type === 'number') return null;
@@ -156,8 +147,6 @@ export class DynamicForm {
         return this.userFormInstance;
       }
 
-      // The field set changed, so every cached { field, control } pair now
-      // points at a stale FieldTree.
       this.inputsCache.clear();
 
       this.userFormInstance = runInInjectionContext(this.injector, () =>
@@ -175,7 +164,7 @@ export class DynamicForm {
 
             validate(path[field.key], (ctx) => {
               const value = ctx.value();
-              // `required` already reports empty values; don't double up.
+
               if (value === '' || value === null || value === undefined) {
                 return null;
               }
@@ -206,10 +195,6 @@ export class DynamicForm {
     );
   }
 
-  /**
-   * NgComponentOutlet re-applies inputs whenever this object identity changes,
-   * so the pair is cached per field and only rebuilt when the form is rebuilt.
-   */
   getInputs(field: FieldConfig): FieldInputs {
     const cached = this.inputsCache.get(field.key);
     if (cached && cached.field === field) return cached;
@@ -278,7 +263,6 @@ export class DynamicForm {
     });
   }
 
-  /** Current values, minus fields flagged excludeFromSubmit, numbers coerced. */
   private buildPayload(): Record<string, unknown> {
     const value = this.modelSignal();
     const model: Record<string, unknown> = {};
@@ -299,7 +283,6 @@ export class DynamicForm {
     return model;
   }
 
-  /** Clears every field back to its empty value. Useful after a successful submit. */
   reset() {
     this.modelSignal.set(this.defaultsFor(this.fields()));
   }

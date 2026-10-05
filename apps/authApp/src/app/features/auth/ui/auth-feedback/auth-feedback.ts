@@ -1,9 +1,5 @@
 import { Component, input } from '@angular/core';
 
-/**
- * The request feedback shown at the top of an auth card: API errors as an
- * alert list, and an optional neutral notice. Renders nothing when empty.
- */
 @Component({
   selector: 'app-auth-feedback',
   template: `
