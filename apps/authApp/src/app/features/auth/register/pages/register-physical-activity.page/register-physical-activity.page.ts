@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, effect, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 import { AuthFacade } from '../../../auth.facade';
@@ -25,6 +25,13 @@ export class RegisterPhysicalActivityPage {
   protected readonly submitting = this.facade.submitting;
   protected readonly errors = this.facade.errors;
   protected readonly user = this.facade.user;
+
+  constructor() {
+    // Drop the collected data (including the password) once sign-up succeeds.
+    effect(() => {
+      if (this.user()) this.flowService.clear();
+    });
+  }
 
   protected onNext(value: string): void {
     this.flowService.patch({ [STEP.field]: value });

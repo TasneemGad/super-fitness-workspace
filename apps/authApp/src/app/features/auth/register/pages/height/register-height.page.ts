@@ -8,7 +8,7 @@ import { RegistrationFlowService } from '../../services/registration-flow.servic
 const STEP = NUMERIC_ONBOARDING_STEPS.height;
 
 /**
- * Step 5 / 6 — Height selection.
+ * Step 4 / 6 — Height selection.
  *
  * Identical pattern to RegisterAgePage and RegisterWeightPage; only STEP changes.
  * No UI code is duplicated.

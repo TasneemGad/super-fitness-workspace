@@ -6,6 +6,7 @@ import {
   signal,
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthHeader } from '@org/ui';
 import { AuthFacade } from '../../../auth.facade';
 import {
   REGISTER_STEPPER,
@@ -16,7 +17,7 @@ import { RegisterAccountStep } from '../../steps/account-step/register-account-s
 import { RegistrationFlowService } from '../../services/registration-flow.service';
 
 /**
- * Step 1 / 6 — Account creation.
+ * Account — before the 6 profile steps creation.
  *
  * Provides `REGISTER_STEPPER` so the shared `RegisterAccountStep` child can
  * inject it without knowing it is now inside a routed page instead of
@@ -25,7 +26,7 @@ import { RegistrationFlowService } from '../../services/registration-flow.servic
  */
 @Component({
   selector: 'app-register-account-page',
-  imports: [RegisterAccountStep],
+  imports: [AuthHeader, RegisterAccountStep],
   templateUrl: './register-account.page.html',
   styleUrls: [
     './register-account.page.css',

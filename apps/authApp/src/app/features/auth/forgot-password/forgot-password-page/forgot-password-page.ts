@@ -1,5 +1,5 @@
 import { Component, inject, signal } from '@angular/core';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 import { AuthHeader, DynamicForm } from '@org/ui';
 import { FORGOT_PASSWORD_FIELDS } from '../../data/auth.fields';
@@ -10,7 +10,7 @@ import { PasswordResetState } from '../password-reset.state';
 
 @Component({
   selector: 'app-forgot-password-page',
-  imports: [AuthHeader, AuthFeedback, DynamicForm, RouterLink, TranslatePipe],
+  imports: [AuthHeader, AuthFeedback, DynamicForm, TranslatePipe],
   providers: [PasswordResetFacade],
   host: { class: 'block' },
   templateUrl: './forgot-password-page.html',

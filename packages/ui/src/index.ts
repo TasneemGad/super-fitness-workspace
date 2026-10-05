@@ -6,7 +6,6 @@ export * from './lib/ui/icon/field-icon';
 export * from './lib/ui/auth-header/auth-header';
 export * from './lib/ui/dynamic-form/dynamic-form';
 export * from './lib/ui/dynamic-form/components/checkbox-field/checkbox-field';
-export * from './lib/ui/dynamic-form/components/form-page/form-page';
 export * from './lib/ui/dynamic-form/components/password-field/password-field';
 export * from './lib/ui/dynamic-form/components/select-field/select-field';
 export * from './lib/ui/dynamic-form/components/text-field/text-field';

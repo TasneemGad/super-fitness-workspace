@@ -22,4 +22,8 @@ export class RegisterAccountStep {
     this.notice.set(null);
     this.stepper.next({ ...values, rePassword: values['password'] });
   }
+
+  protected onUnavailable(provider: string): void {
+    this.notice.set(`${provider} sign-in is not connected yet.`);
+  }
 }

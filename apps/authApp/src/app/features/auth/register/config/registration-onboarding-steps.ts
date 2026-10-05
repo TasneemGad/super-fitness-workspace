@@ -73,7 +73,7 @@ export const GENDER_ONBOARDING_STEP = {
 export const NUMERIC_ONBOARDING_STEPS = {
   age: {
     id: 'age',
-    currentStep: 3,
+    currentStep: 2,
     totalSteps: TOTAL_REGISTER_STEPS,
     titleKey: 'auth.register.age.title',
     descriptionKey: 'auth.register.age.description',
@@ -88,7 +88,7 @@ export const NUMERIC_ONBOARDING_STEPS = {
   },
   weight: {
     id: 'weight',
-    currentStep: 4,
+    currentStep: 3,
     totalSteps: TOTAL_REGISTER_STEPS,
     titleKey: 'auth.register.weight.title',
     descriptionKey: 'auth.register.weight.description',
@@ -103,7 +103,7 @@ export const NUMERIC_ONBOARDING_STEPS = {
   },
   height: {
     id: 'height',
-    currentStep: 5,
+    currentStep: 4,
     totalSteps: TOTAL_REGISTER_STEPS,
     titleKey: 'auth.register.height.title',
     descriptionKey: 'auth.register.height.description',

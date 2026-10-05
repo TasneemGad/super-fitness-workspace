@@ -8,7 +8,7 @@ import { RegistrationFlowService } from '../../services/registration-flow.servic
 const STEP = NUMERIC_ONBOARDING_STEPS.age;
 
 /**
- * Step 3 / 6 — Age selection.
+ * Step 2 / 6 — Age selection.
  *
  * A one-file container: reads / writes age through RegistrationFlowService
  * and passes all configuration to the shared NumericRegistrationStep UI.

@@ -12,11 +12,17 @@
   (formSubmit)="onSubmit($event)"
 >
   <div formBeforeSubmit>
-    <app-social-sign-in />
+    <div class="auth-row-end">
+      <a class="auth-link auth-link--strong" routerLink="/auth/forgot-password">
+        Forget Password ?
+      </a>
+    </div>
+
+    <app-social-sign-in (providerSelected)="onUnavailable($event)" />
   </div>
 
   <p formAfterSubmit class="auth-footnote">
     Already Have An Account ?
-    <a class="auth-link auth-link--strong" routerLink="../login">Login</a>
+    <a class="auth-link auth-link--strong" routerLink="/auth/login">Login</a>
   </p>
 </lib-dynamic-form>
