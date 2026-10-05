@@ -8,11 +8,11 @@ import {
   RegistrationDraft,
 } from '../../register-stepper';
 import { RegistrationFlowService } from '../../services/registration-flow.service';
-// import { RegisterDetailsStep } from '../../steps/details-step/register-details-step';
+import { RegisterDetailsStep } from '../../steps/details-step/register-details-step';
 
 @Component({
   selector: 'app-register-goal-page',
-  imports: [ RouterLink],
+  imports: [RegisterDetailsStep, RouterLink],
   templateUrl: './register-goal.page.html',
   styleUrls: [
     './register-goal.page.css',
