@@ -1,8 +1,0 @@
-.question-description {
-  max-width: 32ch;
-  margin: 0;
-  color: rgb(255 255 255 / 72%);
-  font-size: max(13px, calc(15.5 * var(--u, 1px)));
-  line-height: 1.55;
-  text-align: center;
-}

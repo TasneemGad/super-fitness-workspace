@@ -9,28 +9,7 @@ import {
   model,
 } from '@angular/core';
 
-/**
- * Horizontal numeric wheel / drum-roll picker.
- *
- * The selected value sits at the centre: large, bold, and coloured with
- * the accent.  Values on each side shrink and fade progressively.
- *
- * Interactions: click any visible item · drag horizontally ·
- * mouse-wheel · Arrow keys (← / → or ↑ / ↓).
- *
- * Inputs
- *   min, max  – inclusive range
- *   step      – increment between adjacent values (default 1)
- *   unit      – optional label shown in orange above the selected value
- *   value     – two-way model signal
- *
- * CSS custom properties
- *   --nws-accent    selected-value and unit colour (default: var(--auth-accent, #ff4100))
- *
- * Usage:
- *   <lib-numeric-wheel-selector
- *     [min]="10" [max]="100" unit="Years" [(value)]="age" />
- */
+
 @Component({
   selector: 'lib-numeric-wheel-selector',
   templateUrl: './numeric-wheel-selector.html',
