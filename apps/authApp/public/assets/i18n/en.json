@@ -5,5 +5,63 @@
   "form": {
     "requiredMessage": "{{label}} is required",
     "selectPlaceholder": "Select"
+  },
+  "auth": {
+    "register": {
+      "common": {
+        "next": "Next"
+      },
+      "account": {
+        "eyebrow": "Hey There",
+        "title": "Create An Account",
+        "firstName": "First Name",
+        "lastName": "Last Name",
+        "email": "Email",
+        "password": "Password",
+        "confirmPassword": "Confirm Password",
+        "submit": "Create Account",
+        "loginPrompt": "Already have an account?",
+        "loginLink": "Sign In"
+      },
+      "gender": {
+        "title": "What Is Your Gender?",
+        "description": "This Helps Us Personalize Your Fitness Plan",
+        "male": "Male",
+        "female": "Female"
+      },
+      "age": {
+        "title": "How Old Are You ?",
+        "description": "This Helps Us Create Your Personalized Plan",
+        "unit": "Years"
+      },
+      "weight": {
+        "title": "What Is Your Weight ?",
+        "description": "We Use This To Calculate Your Ideal Calorie Intake",
+        "unit": "KG",
+        "next": "Next"
+      },
+      "height": {
+        "title": "How Tall Are You ?",
+        "description": "Height Helps Us Estimate Your Basal Metabolic Rate",
+        "unit": "CM"
+      },
+      "profile": {
+        "title": "Tell Us About You",
+        "description": "A Few More Details To Complete Your Profile"
+      },
+      "goal": {
+        "title": "Set Your Goal",
+        "description": "Choose The Fitness Outcome You Are Working Towards"
+      }
+    },
+    "login": {
+      "title": "Welcome Back",
+      "email": "Email",
+      "password": "Password",
+      "submit": "Sign In",
+      "forgotPassword": "Forgot Password?",
+      "registerPrompt": "Don't have an account?",
+      "registerLink": "Sign Up"
+    }
   }
 }

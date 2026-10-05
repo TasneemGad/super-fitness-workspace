@@ -5,5 +5,34 @@
   "form": {
     "requiredMessage": "{{label}} is required",
     "selectPlaceholder": "Select"
+  },
+  "auth": {
+    "register": {
+      "common": {
+        "next": "Next"
+      },
+      "gender": {
+        "title": "What Is Your Gender?",
+        "description": "This helps us personalize your fitness plan.",
+        "male": "Male",
+        "female": "Female"
+      },
+      "age": {
+        "title": "How Old Are You?",
+        "description": "This helps us create your personalized plan.",
+        "unit": "Years"
+      },
+      "weight": {
+        "title": "What Is Your Weight?",
+        "description": "We use this to calculate your ideal calorie intake.",
+        "unit": "KG",
+        "next": "Next"
+      },
+      "height": {
+        "title": "How Tall Are You?",
+        "description": "Height helps us estimate your basal metabolic rate.",
+        "unit": "CM"
+      }
+    }
   }
 }

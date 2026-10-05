@@ -1,0 +1,11 @@
+@if (user(); as registered) {
+  <div class="auth-success">
+    <h2>Welcome, {{ registered.firstName }}!</h2>
+    <p>Your Super Fitness account is ready.</p>
+    <a class="auth-link auth-link--strong" routerLink="/auth/login">
+      Go to login
+    </a>
+  </div>
+} @else {
+  <app-register-details-step [heading]="'Set Your Goal'" [fields]="fields" />
+}

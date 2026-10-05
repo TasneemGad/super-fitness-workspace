@@ -5,32 +5,19 @@
     <section class="auth-card ">
       <h2 class="auth-title">Login</h2>
 
-      <!-- <app-auth-feedback [errors]="errors()" [notice]="notice()" /> -->
+      <app-auth-feedback [errors]="errors()" [notice]="notice()" />
 
-      <lib-dynamic-form
-        class="auth-form"
-        [fields]="fields"
-        [submitting]="submitting()"
-        [disableSubmitWhenInvalid]="false"
-        submitLabel="Login"
-        loadingLabel="Signing in..."
-        (formSubmit)="onSubmit($event)"
-      >
+      <lib-dynamic-form class="auth-form" [fields]="fields" [submitting]="submitting()"
+        [disableSubmitWhenInvalid]="false" submitLabel="Login" loadingLabel="Signing in..."
+        (formSubmit)="onSubmit($event)">
         <div formBeforeSubmit>
           <div class="auth-row-end">
-            <button
-              type="button"
-              class="auth-link"
-              [routerLink]="'/auth/forgot-password'"
-              (click)="onUnavailable('Password recovery')"
-            >
+            <button type="button" class="auth-link" (click)="onUnavailable('Password recovery')">
               Forget Password ?
             </button>
           </div>
 
-          <app-social-sign-in
-            (providerSelected)="onUnavailable('')"
-          />
+          <app-social-sign-in (providerSelected)="onUnavailable('')" />
         </div>
 
         <p formAfterSubmit class="auth-footnote">
