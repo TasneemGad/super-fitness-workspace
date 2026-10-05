@@ -10,8 +10,6 @@
       <span class="field-icon"><lib-field-icon [name]="field().icon!" /></span>
     }
 
-    <!-- One static `type` per branch: [formField] picks its value parser
-         (string, number, Date) from the element's type when it binds. -->
     @switch (field().type) {
       @case ('number') {
         <input

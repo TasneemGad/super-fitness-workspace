@@ -1,4 +1,3 @@
-/* Sized in the auth layout's design unit --u (falls back to 1px). */
 :host {
   display: block;
 }

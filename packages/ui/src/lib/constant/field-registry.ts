@@ -7,11 +7,6 @@ import { TextField } from '../ui/dynamic-form/components/text-field/text-field';
 import { TextareaField } from '../ui/dynamic-form/components/textarea-field/textarea-field';
 import { UploadField } from '../ui/dynamic-form/components/upload-field/upload-field';
 
-/**
- * Maps a `FieldConfig.type` onto the component `DynamicForm` renders for it
- * through `NgComponentOutlet`. Every entry must accept `field` and `control`
- * inputs, since that is all the form passes down.
- */
 export const FIELD_COMPONENTS: Record<FieldType, Type<unknown>> = {
   text: TextField,
   email: TextField,

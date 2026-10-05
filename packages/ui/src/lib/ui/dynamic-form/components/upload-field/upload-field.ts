@@ -4,7 +4,6 @@ import { UploadFieldConfig } from '../../../../models/field-types';
 import { FieldIcon } from '../../../icon/field-icon';
 import { ImageGalleryModal } from './lib-image-gallery-modal/image-gallery-modal';
 
-/** The per-file limit when the config sets none (the old PrimeNG default). */
 const DEFAULT_MAX_FILE_SIZE = 5_000_000;
 
 @Component({
@@ -18,7 +17,7 @@ export class UploadField {
   control = input.required<FieldTree<File | File[] | string | string[] | null>>();
 
   fileNames = signal<string[]>([]);
-  /** Names of picked files that were dropped for exceeding the size limit. */
+
   rejected = signal<string[]>([]);
 
   galleryOpen = signal(false);
@@ -48,7 +47,6 @@ export class UploadField {
     );
     this.control()().markAsTouched();
 
-    // Clear the native input so picking the same file again still fires.
     inputEl.value = '';
   }
 }

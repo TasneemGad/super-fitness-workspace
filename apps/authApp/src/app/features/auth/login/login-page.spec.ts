@@ -15,7 +15,6 @@ const SIGNIN_URL = `${BASE_URL}/auth/signin`;
 
 const credentials = { email: 'ada@example.com', password: 'Passw0rd!' };
 
-/** Reaches the projected `lib-dynamic-form` instance inside the page. */
 function findDynamicForm(fixture: ComponentFixture<LoginPage>): DynamicForm {
   const debugEl = fixture.debugElement.query(
     (node) => node.nativeElement?.nodeName?.toLowerCase() === 'lib-dynamic-form'
@@ -117,20 +116,13 @@ describe('LoginPage', () => {
     expect(TestBed.inject(AuthSession).isAuthenticated()).toBe(false);
   });
 
-  it('says plainly which extras are not connected yet', async () => {
-    expect(fixture.nativeElement.querySelector('.auth-notice')).toBeNull();
-    const router = TestBed.inject(Router);
-    const initialUrl = router.url;
 
-    fixture.nativeElement
-      .querySelector('.auth-row-end .auth-link')
-      .dispatchEvent(new Event('click'));
-    await fixture.whenStable();
-    fixture.detectChanges();
-
-    expect(fixture.nativeElement.querySelector('.auth-notice').textContent).toContain(
-      'Password recovery is not connected yet'
+    it('links "Forget Password ?" to the reset flow', () => {
+    const link: HTMLAnchorElement = fixture.nativeElement.querySelector(
+      '.auth-row-end a.auth-link'
     );
-    expect(router.url).toBe(initialUrl);
+
+    expect(link.textContent?.trim()).toBe('Forget Password ?');
+    expect(link.getAttribute('href')).toBe('/forgot-password');
   });
 });

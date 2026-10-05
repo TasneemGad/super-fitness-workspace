@@ -12,7 +12,6 @@ export class WebTokenStorage extends TokenStorage {
       const storage = remember ? window.localStorage : window.sessionStorage;
       storage.setItem(TOKEN_KEY, token);
     } catch {
-      // storage blocked/full: session just won't persist
     }
   }
 
@@ -33,7 +32,6 @@ export class WebTokenStorage extends TokenStorage {
       window.localStorage.removeItem(TOKEN_KEY);
       window.sessionStorage.removeItem(TOKEN_KEY);
     } catch {
-      // ignore
     }
   }
 }

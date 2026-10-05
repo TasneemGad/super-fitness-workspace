@@ -55,7 +55,6 @@ export class PasswordField {
   field = input.required<PasswordFieldConfig>();
   control = input.required<FieldTree<string>>();
 
-  /** Whether the value is shown in clear text. */
   protected readonly visible = signal(false);
 
   protected readonly errorId = computed(() => `${this.field().key}-error`);

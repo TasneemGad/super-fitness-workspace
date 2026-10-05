@@ -48,21 +48,16 @@ import { FieldIcon } from '../../../icon/field-icon';
   styleUrl: '../field.css',
 })
 export class SelectField {
-  /** Optional so the lib renders without an i18n setup in the host app. */
   private translate = inject(TranslateService, { optional: true });
 
   field = input.required<SelectFieldConfig>();
-  /**
-   * A native select always reports its value as a string, so option values
-   * should be strings (they are for every select in this workspace).
-   */
+
   control = input.required<FieldTree<string>>();
 
   protected readonly dir = computed(() =>
     this.translate?.currentLang() === 'ar' ? 'rtl' : 'ltr'
   );
 
-  /** An explicit placeholder wins; otherwise fall back to the translated default. */
   protected readonly placeholder = computed(
     () =>
       this.field().placeholder ??

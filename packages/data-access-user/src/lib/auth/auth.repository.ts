@@ -6,12 +6,15 @@ import {
   AuthErrorBody,
   AuthResponse,
   AuthenticatedUser,
+  ForgotPasswordRequest,
+  PasswordResetResponse,
+  ResetPasswordRequest,
   SigninRequest,
   SignupRequest,
+  VerifyResetCodeRequest,
   parseAuthError,
 } from './auth.models';
 
-/** Thrown for any non-2xx auth response, with the messages already parsed. */
 export class AuthRequestError extends Error {
   constructor(
     readonly messages: string[],
@@ -26,23 +29,43 @@ export class AuthRequestError extends Error {
 export class AuthRepository extends ApiClient<AuthenticatedUser> {
   protected readonly endpoint = 'auth';
 
-  /** POST {baseUrl}/auth/signup */
   signup(payload: SignupRequest): Observable<AuthResponse> {
     return this.post$('signup', payload);
   }
 
-  /** POST {baseUrl}/auth/signin */
   signin(payload: SigninRequest): Observable<AuthResponse> {
     return this.post$('signin', payload);
+  }
+
+  forgotPassword(payload: ForgotPasswordRequest): Observable<PasswordResetResponse> {
+    return this.withAuthErrors(
+      this.http.post<PasswordResetResponse>(`${this.resourceUrl}/forgotPassword`, payload)
+    );
+  }
+
+  verifyResetCode(payload: VerifyResetCodeRequest): Observable<PasswordResetResponse> {
+    return this.withAuthErrors(
+      this.http.post<PasswordResetResponse>(`${this.resourceUrl}/verifyResetCode`, payload)
+    );
+  }
+
+  resetPassword(payload: ResetPasswordRequest): Observable<PasswordResetResponse> {
+    return this.withAuthErrors(
+      this.http.put<PasswordResetResponse>(`${this.resourceUrl}/resetPassword`, payload)
+    );
   }
 
   private post$(
     action: 'signup' | 'signin',
     payload: SignupRequest | SigninRequest
   ): Observable<AuthResponse> {
-    return this.http
-      .post<AuthResponse>(`${this.resourceUrl}/${action}`, payload)
-      .pipe(catchError((error) => throwError(() => this.toAuthError(error))));
+    return this.withAuthErrors(
+      this.http.post<AuthResponse>(`${this.resourceUrl}/${action}`, payload)
+    );
+  }
+
+  private withAuthErrors<T>(request: Observable<T>): Observable<T> {
+    return request.pipe(catchError((error) => throwError(() => this.toAuthError(error))));
   }
 
   private toAuthError(error: unknown): AuthRequestError {
@@ -52,11 +75,17 @@ export class AuthRepository extends ApiClient<AuthenticatedUser> {
 
     const messages = parseAuthError(error.error as AuthErrorBody);
 
+    if (messages.length && error.status >= 500) {
+      return new AuthRequestError(
+        ['Something went wrong on our side. Please try again later.'],
+        error.status
+      );
+    }
+
     if (messages.length) {
       return new AuthRequestError(messages, error.status);
     }
 
-    // Network failures and gateway errors arrive with no parseable body.
     return new AuthRequestError(
       [
         error.status === 0

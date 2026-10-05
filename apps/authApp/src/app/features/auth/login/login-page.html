@@ -7,14 +7,20 @@
 
       <app-auth-feedback [errors]="errors()" [notice]="notice()" />
 
-      <lib-dynamic-form class="auth-form" [fields]="fields" [submitting]="submitting()"
-        [disableSubmitWhenInvalid]="false" submitLabel="Login" loadingLabel="Signing in..."
-        (formSubmit)="onSubmit($event)">
+      <lib-dynamic-form
+        class="auth-form"
+        [fields]="fields()"
+        [submitting]="submitting()"
+        [disableSubmitWhenInvalid]="false"
+        submitLabel="Login"
+        loadingLabel="Signing in..."
+        (formSubmit)="onSubmit($event)"
+      >
         <div formBeforeSubmit>
           <div class="auth-row-end">
-            <button type="button" class="auth-link" (click)="onUnavailable('Password recovery')">
+            <a class="auth-link"  [routerLink]="'/auth/forgot-password'">
               Forget Password ?
-            </button>
+            </a>
           </div>
 
           <app-social-sign-in (providerSelected)="onUnavailable('')" />

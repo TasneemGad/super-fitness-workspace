@@ -3,7 +3,7 @@ import { authGuard } from '@super-fitness/auth';
 import { loadRemote } from '@module-federation/enhanced/runtime';
 
 export const appRoutes: Route[] = [
-  // Auth is the landing experience: "/" drops straight into the login screen.
+
   { path: '', pathMatch: 'full', redirectTo: 'auth' },
   {
     path: 'superFitness',
