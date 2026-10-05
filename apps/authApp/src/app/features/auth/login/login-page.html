@@ -5,6 +5,8 @@
     <section class="auth-card ">
       <h2 class="auth-title">Login</h2>
 
+      <app-auth-feedback [errors]="errors()" [notice]="notice()" />
+
       <lib-dynamic-form
         class="auth-form"
         [fields]="fields()"
@@ -21,9 +23,7 @@
             </a>
           </div>
 
-          <app-social-sign-in
-            (providerSelected)="onUnavailable('')"
-          />
+          <app-social-sign-in (providerSelected)="onUnavailable('')" />
         </div>
 
         <p formAfterSubmit class="auth-footnote">

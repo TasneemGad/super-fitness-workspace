@@ -1,5 +1,5 @@
 <main
-  class="relative isolate grid min-h-svh text-white scheme-dark md:grid-cols-2"
+  class="relative isolate grid h-svh grid-rows-[auto_minmax(0,1fr)] overflow-hidden text-white scheme-dark md:grid-cols-2 md:grid-rows-1"
 >
   <div
     class="pointer-events-none absolute inset-0 -z-10 overflow-hidden"
@@ -13,7 +13,7 @@
     <div class="absolute inset-0 bg-[#17191d]/75"></div>
   </div>
   <aside
-    class="relative flex h-24 items-center justify-center overflow-hidden border-b border-orange-500/20 md:h-auto md:min-h-svh md:border-r md:border-b-0"
+    class="relative flex h-24 items-center justify-center overflow-hidden border-b border-orange-500/20 md:h-auto md:border-r md:border-b-0"
   >
     <img
       src="assets/auth/hero.png"
@@ -31,10 +31,10 @@
     />
   </aside>
   <section
-    class="flex min-h-[calc(100svh-6rem)] min-w-0 items-center justify-center px-6 py-10 sm:px-10 md:min-h-svh lg:px-16"
+    class="flex min-h-0 min-w-0 overflow-y-auto px-4 py-6 [scrollbar-width:none] sm:px-8 md:py-8 lg:px-12 [&::-webkit-scrollbar]:hidden"
     aria-label="Authentication"
   >
-    <div class="flex w-full min-w-0 justify-center ">
+    <div class="m-auto flex w-full min-w-0 justify-center">
       <router-outlet />
     </div>
   </section>

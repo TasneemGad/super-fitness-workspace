@@ -1,10 +1,11 @@
+import '@angular/compiler';
 import { provideHttpClient } from '@angular/common/http';
 import {
   HttpTestingController,
   provideHttpClientTesting,
 } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { provideRouter } from '@angular/router';
+import { provideRouter, Router } from '@angular/router';
 import { API_BASE_URL, AuthSession } from '@super-fitness/data-access-user';
 import { DynamicForm } from '@org/ui';
 import { LoginPage } from './login-page';
@@ -42,6 +43,7 @@ describe('LoginPage', () => {
 
     fixture = TestBed.createComponent(LoginPage);
     http = TestBed.inject(HttpTestingController);
+    fixture.detectChanges();
     await fixture.whenStable();
   });
 
@@ -88,6 +90,7 @@ describe('LoginPage', () => {
       user: { firstName: 'Ada', lastName: 'Lovelace', email: credentials.email },
     });
     await fixture.whenStable();
+    fixture.detectChanges();
 
     expect(TestBed.inject(AuthSession).token()).toBe('a-token');
   });
@@ -103,6 +106,7 @@ describe('LoginPage', () => {
         { status: 401, statusText: 'Unauthorized' }
       );
     await fixture.whenStable();
+    fixture.detectChanges();
 
     const errors = Array.from<HTMLElement>(
       fixture.nativeElement.querySelectorAll('.auth-errors li')
@@ -112,7 +116,8 @@ describe('LoginPage', () => {
     expect(TestBed.inject(AuthSession).isAuthenticated()).toBe(false);
   });
 
-  it('links "Forget Password ?" to the reset flow', () => {
+
+    it('links "Forget Password ?" to the reset flow', () => {
     const link: HTMLAnchorElement = fixture.nativeElement.querySelector(
       '.auth-row-end a.auth-link'
     );

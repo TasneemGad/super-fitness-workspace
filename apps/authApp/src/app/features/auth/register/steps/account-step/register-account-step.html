@@ -1,5 +1,7 @@
 <h2 class="auth-title">Register</h2>
 
+<app-auth-feedback [errors]="stepper.errors()" [notice]="notice()" />
+
 <lib-dynamic-form
   class="auth-form"
   [fields]="fields()"

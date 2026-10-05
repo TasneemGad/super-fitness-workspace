@@ -51,6 +51,7 @@ export class LoginPage {
   }
 
   protected onUnavailable(feature: string): void {
+    
     this.notice.set(`${feature} is not connected yet.`);
   }
 

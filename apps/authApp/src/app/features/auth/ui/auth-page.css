@@ -30,10 +30,7 @@
 .auth-page {
   box-sizing: border-box;
   display: flex;
-  min-height: 100vh;
-  min-height: 100dvh;
-  padding: clamp(1rem, 4dvh, 2rem) clamp(1rem, 5vw, 2rem);
-  background: #1e1e1e;
+  width: 100%;
 }
 
 .auth-area {
