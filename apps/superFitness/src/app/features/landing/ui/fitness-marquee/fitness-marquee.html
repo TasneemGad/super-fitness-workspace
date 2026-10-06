@@ -1,0 +1,11 @@
+<div class="overflow-hidden bg-[#ff4100] text-white" aria-label="Fitness classes and services">
+  <div class="flex w-max animate-[marquee-scroll_32s_linear_infinite] motion-reduce:animate-none" aria-hidden="true">
+    @for (copy of [0, 1]; track copy) {
+      <div class="flex shrink-0 items-center gap-[18px] whitespace-nowrap px-[10px] py-[15px]">
+        @for (item of items; track item) {
+          <span class="text-[15px] font-bold uppercase">{{ item }}</span><b class="text-lg">✦</b>
+        }
+      </div>
+    }
+  </div>
+</div>
