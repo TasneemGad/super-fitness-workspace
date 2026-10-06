@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { LandingPage } from '../features/landing/landing-page';
 
 @Component({
-  imports: [RouterModule],
+  imports: [RouterModule, LandingPage],
   selector: 'app-super-fitness-entry',
-  template: `<router-outlet/>`,
+  template: `<app-landing-page />`,
 })
 export class RemoteEntry {}

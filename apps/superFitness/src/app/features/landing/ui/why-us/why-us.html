@@ -1,0 +1,19 @@
+<section class="mx-auto grid w-[min(1180px,calc(100%_-_64px))] grid-cols-[minmax(0,1fr)_minmax(420px,0.98fr)] items-center gap-[clamp(40px,6vw,86px)] bg-[#f1f3f4] py-[78px] pb-[86px] max-[800px]:w-[min(100%_-_36px,620px)] max-[800px]:grid-cols-1 max-[800px]:gap-[38px] max-[800px]:py-[54px]" aria-labelledby="why-title">
+  <div class="relative">
+    <div class="relative z-10 inline-flex items-center gap-2 text-[13px] font-bold text-[#ff4100]"><span aria-hidden="true" class="text-[22px] leading-none">⌁</span> Why Us</div>
+    <p class="pointer-events-none absolute -top-[23px] left-0 m-0 text-[clamp(43px,5vw,68px)] font-black tracking-[-0.05em] text-transparent [-webkit-text-stroke:1px_#dfe2e3]" aria-hidden="true">WHY US</p>
+    <h2 id="why-title" class="relative my-[26px] mb-[18px] max-w-[570px] text-[clamp(28px,3vw,39px)] leading-[1.2] font-extrabold uppercase">Elevate fitness with the <span class="text-[#ff4100]">best way</span> possible</h2>
+    <p class="m-0 max-w-[620px] text-[15px] leading-[1.8] text-[#505254]">We offer a fitness journey that's tailored to your goals, supported by professional trainers and a welcoming community. Whether it's weight loss, strength building, or overall wellness, our proven methods help you thrive.</p>
+    <ol class="mt-8 grid list-none gap-5 p-0">
+      @for (reason of reasons; track reason.number) {
+        <li class="grid grid-cols-[42px_1fr] items-center gap-4"><span class="grid size-[42px] place-items-center rounded-full bg-[#ff4100] text-[11px] font-extrabold text-white">{{ reason.number }}</span><div><h3 class="mb-[5px] text-sm font-bold">{{ reason.title }}</h3><p class="m-0 text-[13px] leading-[1.65] text-[#505254]">{{ reason.body }}</p></div></li>
+      }
+    </ol>
+  </div>
+  <div class="grid h-[500px] grid-cols-2 grid-rows-2 gap-[9px] max-[800px]:h-[min(112vw,500px)]" aria-label="Training and fitness facilities">
+    <img class="block h-[90%] w-full rounded-[13px] object-cover" src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=700&q=85" alt="Athlete training in a modern gym" />
+    <img class="block h-[83%] w-full self-end rounded-[13px] object-cover" src="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?auto=format&fit=crop&w=700&q=85" alt="Strength workout with free weights" />
+    <img class="block h-[90%] w-full rounded-[13px] object-cover" src="https://images.unsplash.com/photo-1571902943202-507ec2618e8f?auto=format&fit=crop&w=700&q=85" alt="Personal training session" />
+    <img class="block h-[94%] w-full self-start rounded-[13px] object-cover" src="https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?auto=format&fit=crop&w=700&q=85" alt="Member stretching after a workout" />
+  </div>
+</section>

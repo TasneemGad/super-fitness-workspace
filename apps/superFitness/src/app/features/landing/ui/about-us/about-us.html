@@ -1,0 +1,24 @@
+<section class="mx-auto grid w-[min(1180px,calc(100%_-_64px))] grid-cols-[minmax(320px,0.92fr)_minmax(0,1.08fr)] items-center gap-[clamp(42px,6vw,86px)] py-[76px] pb-[84px] max-[800px]:w-[min(100%_-_36px,620px)] max-[800px]:grid-cols-1 max-[800px]:gap-9 max-[800px]:py-12" aria-labelledby="about-title">
+  <div class="relative min-h-[500px] max-[800px]:min-h-[min(115vw,480px)]" aria-label="Personal training at the gym">
+    <img class="absolute inset-[0_auto_25%_0] block h-3/4 w-[62%] rounded-[13px] object-cover shadow-[0_18px_40px_rgb(24_31_35_/_10%)]" src="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?auto=format&fit=crop&w=900&q=85" alt="Athlete training with a kettlebell" />
+    <img class="absolute inset-[11%_0_auto_auto] block h-[28%] w-[40%] rounded-[13px] object-cover shadow-[0_18px_40px_rgb(24_31_35_/_10%)]" src="https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?auto=format&fit=crop&w=600&q=85" alt="Strength training in a modern gym" />
+    <img class="absolute inset-[auto_0_0_34%] block h-[61%] w-[63%] rounded-[13px] object-cover shadow-[0_18px_40px_rgb(24_31_35_/_10%)]" src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=800&q=85" alt="Bright, fully equipped fitness studio" />
+  </div>
+  <div class="relative">
+    <div class="relative z-10 inline-flex items-center gap-2 text-[13px] font-bold text-[#ff4100]"><span aria-hidden="true" class="text-[22px] leading-none">⌁</span> About Us</div>
+    <p class="pointer-events-none absolute -top-[19px] left-0 m-0 text-[clamp(42px,5vw,66px)] font-black tracking-[-0.05em] text-transparent [-webkit-text-stroke:1px_#e2e4e4]" aria-hidden="true">WORKOUTS</p>
+    <h1 id="about-title" class="relative my-[28px] mb-[18px] max-w-[610px] text-[clamp(28px,3vw,39px)] leading-[1.18] font-extrabold uppercase">Empowering you to achieve <span class="text-[#ff4100]">your fitness</span> goals</h1>
+    <p class="m-0 max-w-[640px] text-[15px] leading-[1.8] text-[#505254]">We believe fitness is more than just a workout—it's a lifestyle. With top-of-the-line facilities, certified trainers, and a supportive community, we're here to inspire and guide you every step of the way.</p>
+    <div class="my-[26px] mb-[25px] grid grid-cols-2 max-[480px]:grid-cols-1">
+      @for (benefit of benefits; track benefit.title) {
+        <article class="flex gap-[13px] border-b border-[#e5e6e6] py-[18px] pr-[14px] pb-[17px] odd:pr-[22px] even:pl-4 max-[480px]:even:pl-0">
+          <svg class="size-[35px] shrink-0" width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><g [attr.clip-path]="'url(#benefit-arrow-clip-' + $index + ')' "><path fill-rule="evenodd" clip-rule="evenodd" d="M22.6872 11.1455C20.9633 12.8694 17.8844 12.9329 16.2287 11.2772L15.5499 10.5984L14.1357 12.0126L14.8145 12.6914C16.0188 13.8957 17.6984 14.4751 19.3914 14.4413L10.6664 23.1663L12.024 24.5239L20.749 15.7989C20.7152 17.4918 21.2946 19.1715 22.4988 20.3757L23.1777 21.0546L24.5919 19.6404L23.9131 18.9615C22.2574 17.3059 22.3209 14.227 24.0449 12.5031L24.752 11.796L23.3943 10.4383L22.6872 11.1455Z" fill="#FF4100" /></g><defs><clipPath [attr.id]="'benefit-arrow-clip-' + $index"><rect width="25" height="24" fill="white" transform="translate(0 17.6776) rotate(-45)" /></clipPath></defs></svg>
+          <div><h2 class="mb-[7px] text-sm font-bold">{{ benefit.title }}</h2><p class="m-0 text-[13px] leading-[1.6] text-[#57595a]">{{ benefit.body }}</p></div>
+        </article>
+      }
+    </div>
+    <lib-site-button type="main" [useIcon]="true" padding="10px 26px">
+      Get Started <svg siteButtonIcon width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M12.0206 0.707124C10.2967 2.43105 7.155 2.43175 5.43036 0.707116L4.72326 9.63389e-06L3.30904 1.41422L4.01615 2.12133C5.27056 3.37574 6.99731 4.00223 8.72478 4.00295L-0.000209446 12.7279L1.414 14.1422L10.139 5.41716C10.1397 7.14462 10.7662 8.87138 12.0206 10.1258L12.7277 10.8329L14.1419 9.41868L13.4348 8.71157C11.7102 6.98694 11.7109 3.84526 13.4348 2.12134L14.1419 1.41423L12.7277 1.70517e-05L12.0206 0.707124Z" fill="#F3F3F4" /></svg>
+    </lib-site-button>
+  </div>
+</section>
