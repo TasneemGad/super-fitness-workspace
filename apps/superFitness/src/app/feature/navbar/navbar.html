@@ -1,0 +1,51 @@
+<header class="navbar" [class.scrolled]="scrolled()">
+  <a class="logo-link" routerLink="/superFitness" fragment="home"
+    aria-label="Go to home">
+    <img class="logo" src="assets/auth/hero.png" alt="Super Fitness" />
+  </a>
+
+  <ul class="links">
+    @for (link of links; track link.label) {
+    <li>
+      <a class="link" routerLink="/superFitness" [fragment]="link.fragment">{{
+        link.label }}</a>
+    </li>
+    }
+  </ul>
+
+  <div class="actions">
+    <a class="btn" aria-label="Account">
+      <lib-field-icon name="user" [size]="20" />
+    </a>
+    <button type="button" class="btn menu-btn" aria-label="Open menu"
+      (click)="toggleMenu()">
+      <lib-field-icon name="menu" [size]="22" />
+    </button>
+  </div>
+</header>
+
+@if (menuOpen()) {
+<button type="button" class="backdrop" aria-label="Close menu"
+  (click)="closeMenu()"></button>
+
+<nav class="drawer">
+  <div class="drawer-head">
+    <a class="logo-link" routerLink="/superFitness" fragment="home"
+      (click)="closeMenu()">
+      <img class="logo" src="assets/auth/hero.png" alt="Super Fitness" />
+    </a>
+
+  </div>
+
+  <ul class="drawer-links">
+    @for (link of links; track link.label) {
+    <li>
+      <a class="link" routerLink="/superFitness" [fragment]="link.fragment"
+        (click)="closeMenu()">
+        {{ link.label }}
+      </a>
+    </li>
+    }
+  </ul>
+</nav>
+}

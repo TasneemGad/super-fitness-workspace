@@ -4,7 +4,7 @@ import {
   provideBrowserGlobalErrorListeners,
 } from '@angular/core';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
-import { provideRouter } from '@angular/router';
+import { provideRouter, withInMemoryScrolling } from '@angular/router';
 import {
   API_BASE_URL,
   DEV_API_CONFIG,
@@ -16,7 +16,10 @@ import { appRoutes } from './app.routes';
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
-    provideRouter(appRoutes),
+    provideRouter(
+      appRoutes,
+      withInMemoryScrolling({ anchorScrolling: 'enabled', scrollPositionRestoration: 'enabled' }),
+    ),
     provideHttpClient(withInterceptors([authInterceptor])),
     {
       provide: API_BASE_URL,
