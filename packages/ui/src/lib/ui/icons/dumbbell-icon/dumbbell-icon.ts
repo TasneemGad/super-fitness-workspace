@@ -1,9 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
-/**
- * Brand dumbbell mark. 1em tall (width follows the artwork's ratio) and
- * coloured by `currentColor`, so it scales cleanly wherever it is dropped.
- */
 @Component({
   selector: 'lib-dumbbell-icon',
   changeDetection: ChangeDetectionStrategy.OnPush,
