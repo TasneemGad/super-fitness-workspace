@@ -1,23 +1,22 @@
 <header class="navbar" [class.scrolled]="scrolled()">
   <a class="logo-link" routerLink="/superFitness" fragment="home"
-    aria-label="Go to home">
-    <img class="logo" src="assets/auth/hero.png" alt="Super Fitness" />
+    [attr.aria-label]="'navbar.home' | translate">
+    <img class="logo" src="assets/auth/hero.png" [alt]="'app.name' | translate" />
   </a>
 
   <ul class="links">
-    @for (link of links; track link.label) {
+    @for (link of links(); track link.label) {
     <li>
-      <a class="link" routerLink="/superFitness" [fragment]="link.fragment">{{
-        link.label }}</a>
+      <a class="link" routerLink="/superFitness" [fragment]="link.fragment">{{ link.label | translate }}</a>
     </li>
     }
   </ul>
 
   <div class="actions">
-    <a class="btn" aria-label="Account">
+    <a class="btn" [attr.aria-label]="'navbar.account' | translate">
       <lib-field-icon name="user" [size]="20" />
     </a>
-    <button type="button" class="btn menu-btn" aria-label="Open menu"
+    <button type="button" class="btn menu-btn" [attr.aria-label]="'navbar.openMenu' | translate"
       (click)="toggleMenu()">
       <lib-field-icon name="menu" [size]="22" />
     </button>
@@ -25,24 +24,24 @@
 </header>
 
 @if (menuOpen()) {
-<button type="button" class="backdrop" aria-label="Close menu"
+<button type="button" class="backdrop" [attr.aria-label]="'navbar.closeMenu' | translate"
   (click)="closeMenu()"></button>
 
 <nav class="drawer">
   <div class="drawer-head">
     <a class="logo-link" routerLink="/superFitness" fragment="home"
       (click)="closeMenu()">
-      <img class="logo" src="assets/auth/hero.png" alt="Super Fitness" />
+      <img class="logo" src="assets/auth/hero.png" [alt]="'app.name' | translate" />
     </a>
 
   </div>
 
   <ul class="drawer-links">
-    @for (link of links; track link.label) {
+    @for (link of links(); track link.label) {
     <li>
       <a class="link" routerLink="/superFitness" [fragment]="link.fragment"
         (click)="closeMenu()">
-        {{ link.label }}
+        {{ link.label | translate }}
       </a>
     </li>
     }
