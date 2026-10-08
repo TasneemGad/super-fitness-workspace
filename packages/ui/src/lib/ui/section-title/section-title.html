@@ -12,9 +12,11 @@
   <div
     class="col-start-1 row-start-1 inline-flex translate-y-[0.153em] items-center gap-[0.19em] self-end text-[var(--auth-accent,#ff4100)]"
     [class]="labelAlignClass()">
-    <span class="inline-flex text-[0.364em] leading-none" aria-hidden="true">
-      <ng-container [ngComponentOutlet]="icon()" />
-    </span>
+    @if (showIcon()) {
+      <span class="inline-flex text-[0.364em] leading-none" aria-hidden="true">
+        <ng-container [ngComponentOutlet]="icon()" />
+      </span>
+    }
 
     @if (secondaryText()) {
       <p class="m-0 whitespace-nowrap font-['Ubuntu',sans-serif] text-[0.244em] font-bold leading-none">

@@ -45,6 +45,13 @@ describe('SectionTitle', () => {
     expect(el.querySelector('lib-dumbbell-icon')).toBeNull();
   });
 
+  it('hides the icon when showIcon is false', async () => {
+    const el = await render({ primaryText: 'Workouts', showIcon: false });
+
+    expect(el.querySelector('lib-dumbbell-icon')).toBeNull();
+    expect(el.querySelector('span[aria-hidden]')).toBeNull();
+  });
+
   it('only renders the secondary text when it is given', async () => {
     const bare = await render({ primaryText: 'Workouts' });
     expect(bare.querySelector('p')).toBeNull();

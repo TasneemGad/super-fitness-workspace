@@ -1,5 +1,6 @@
 import { NgComponentOutlet } from '@angular/common';
 import {
+  booleanAttribute,
   ChangeDetectionStrategy,
   Component,
   computed,
@@ -30,6 +31,7 @@ const LABEL_ALIGN: Record<SectionTitleLabelAlign, string> = {
  *
  * The icon defaults to the brand dumbbell. Any standalone component can replace
  * it; it is sized by `font-size` (1em tall) and coloured by `currentColor`.
+ * Set `showIcon` to false to hide it.
  *
  * `labelAlign` puts the icon + label at the word's start (default) or centre.
  * `padding` / `margin` take any CSS value and override the default spacing.
@@ -50,6 +52,7 @@ export class SectionTitle {
   primaryText = input.required<string>();
   secondaryText = input<string>();
   icon = input<Type<unknown>>(DumbbellIcon);
+  showIcon = input(true, { transform: booleanAttribute });
   size = input<SectionTitleSize>('md');
   labelAlign = input<SectionTitleLabelAlign>('start');
   padding = input<string>();
