@@ -27,7 +27,7 @@
           }
         ],
         "styles": [
-          "apps/superFitness/src/styles.scss"
+          "apps/superFitness/src/styles.css"
         ],
         "customWebpackConfig": {
           "path": "apps/superFitness/webpack.config.ts"
