@@ -2,6 +2,15 @@
   "app": {
     "name": "سوبر فيتنس"
   },
+  "navbar": {
+    "home": "الرئيسية",
+    "about": "من نحن",
+    "classes": "الحصص",
+    "healthy": "صحي",
+    "account": "الحساب",
+    "openMenu": "فتح القائمة",
+    "closeMenu": "إغلاق القائمة"
+  },
   "form": {
     "requiredMessage": "{{label}} مطلوب",
     "selectPlaceholder": "اختر"
