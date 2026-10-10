@@ -13,7 +13,14 @@
     [class]="labelAlignClass()">
     @if (showIcon()) {
       <span class="inline-flex text-[0.364em] leading-none" aria-hidden="true">
-        <ng-container [ngComponentOutlet]="icon()" />
+        @if (iconSvg()) {
+          <span
+            class="inline-flex h-[1em] leading-none [&>svg]:h-full [&>svg]:w-auto"
+            [innerHTML]="safeIconSvg()">
+          </span>
+        } @else {
+          <ng-container [ngComponentOutlet]="icon()" />
+        }
       </span>
     }
 

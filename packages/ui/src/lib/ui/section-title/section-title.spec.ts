@@ -64,6 +64,16 @@ describe('SectionTitle', () => {
     expect(el.querySelector('lib-dumbbell-icon')).toBeNull();
   });
 
+  it('renders SVG markup passed by the parent', async () => {
+    const el = await render({
+      primaryText: 'Workouts',
+      iconSvg: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle></svg>',
+    });
+
+    expect(el.querySelector('svg circle')).not.toBeNull();
+    expect(el.querySelector('lib-dumbbell-icon')).toBeNull();
+  });
+
   it('hides the icon when showIcon is false', async () => {
     const el = await render({ primaryText: 'Workouts', showIcon: false });
 

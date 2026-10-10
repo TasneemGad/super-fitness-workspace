@@ -4,9 +4,11 @@ import {
   ChangeDetectionStrategy,
   Component,
   computed,
+  inject,
   input,
   Type,
 } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { DumbbellIcon } from '../icons/dumbbell-icon/dumbbell-icon';
 
 export type SectionTitleSize = 'sm' | 'md' | 'lg';
@@ -24,7 +26,6 @@ const LABEL_ALIGN: Record<SectionTitleLabelAlign, string> = {
   center: 'justify-self-center',
 };
 
-
 @Component({
   selector: 'lib-section-title',
   imports: [NgComponentOutlet],
@@ -37,9 +38,12 @@ const LABEL_ALIGN: Record<SectionTitleLabelAlign, string> = {
   },
 })
 export class SectionTitle {
+  private readonly sanitizer = inject(DomSanitizer);
+
   primaryText = input.required<string>();
   secondaryText = input<string>();
   icon = input<Type<unknown>>(DumbbellIcon);
+  iconSvg = input<string>();
   showIcon = input(true, { transform: booleanAttribute });
   size = input<SectionTitleSize>('md');
   primaryTextFontSize = input<number>();
@@ -49,6 +53,10 @@ export class SectionTitle {
   margin = input<string>();
 
   protected readonly sizeClass = computed(() => SIZES[this.size()]);
+  protected readonly safeIconSvg = computed(() => {
+    const markup = this.iconSvg();
+    return markup ? this.sanitizer.bypassSecurityTrustHtml(markup) : null;
+  });
   protected readonly labelAlignClass = computed(
     () => LABEL_ALIGN[this.labelAlign()],
   );
