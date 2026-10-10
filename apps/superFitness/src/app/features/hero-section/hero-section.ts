@@ -5,7 +5,9 @@ import { SiteButton } from '@org/ui';
 @Component({
   imports: [TranslatePipe, SiteButton],
   selector: 'app-hero-section',
-  styleUrl: './hero-section.css',
+  host: {
+    class: 'block',
+  },
   templateUrl: './hero-section.html',
 })
 export class HeroSection {}
