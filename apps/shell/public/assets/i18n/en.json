@@ -2,6 +2,15 @@
   "app": {
     "name": "Super Fitness"
   },
+  "navbar": {
+    "home": "Home",
+    "about": "About",
+    "classes": "Classes",
+    "healthy": "Healthy",
+    "account": "Account",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
+  },
   "form": {
     "requiredMessage": "{{label}} is required",
     "selectPlaceholder": "Select"

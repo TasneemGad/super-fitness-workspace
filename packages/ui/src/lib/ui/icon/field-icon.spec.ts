@@ -37,6 +37,7 @@ describe('FieldIcon', () => {
       'upload',
       'image',
       'close',
+      'menu',
     ];
 
     for (const name of names) {

@@ -16,3 +16,6 @@ export * from './lib/ui/step-progress/step-progress';
 export * from './lib/ui/numeric-wheel-selector/numeric-wheel-selector';
 export * from './lib/ui/question-title/question-title';
 export * from './lib/ui/question-description/question-description';
+
+export * from './lib/ui/icons/dumbbell-icon/dumbbell-icon';
+export * from './lib/ui/section-title/section-title';

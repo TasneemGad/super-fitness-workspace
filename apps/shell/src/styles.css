@@ -5,6 +5,24 @@
 @source "../../../packages/ui/src";
 @source "../../authApp/src/app/features/auth/ui/components/auth-layout";
 
+@font-face {
+  font-family: 'Baloo 2';
+  font-weight: 400 700;
+  src: url('/assets/fonts/baloo2.woff2');
+}
+
+@font-face {
+  font-family: 'Nunito';
+  font-weight: 900;
+  src: url('/assets/fonts/nunito.woff2');
+}
+
+@font-face {
+  font-family: 'Ubuntu';
+  font-weight: 700;
+  src: url('/assets/fonts/ubuntu.woff2');
+}
+
 html,
 body {
   margin: 0;

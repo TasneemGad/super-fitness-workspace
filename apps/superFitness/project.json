@@ -24,10 +24,15 @@
           {
             "glob": "**/*",
             "input": "apps/superFitness/public"
+          },
+          {
+            "glob": "hero.png",
+            "input": "apps/authApp/public/assets/auth",
+            "output": "assets/auth"
           }
         ],
         "styles": [
-          "apps/superFitness/src/styles.scss"
+          "apps/superFitness/src/styles.css"
         ],
         "customWebpackConfig": {
           "path": "apps/superFitness/webpack.config.ts"

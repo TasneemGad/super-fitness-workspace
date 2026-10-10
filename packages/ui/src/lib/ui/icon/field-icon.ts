@@ -22,6 +22,7 @@ const PATHS: Record<FieldIconName, string> = {
   image:
     'M5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zM8.5 10a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zM21 15l-5-5L5 21',
   close: 'M18 6 6 18M6 6l12 12',
+  menu: 'M4 7h16M8 12h12M12 17h8',
 };
 
 @Component({

@@ -1,9 +1,13 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { Navbar } from '../feature/navbar/navbar';
 
 @Component({
-  imports: [RouterModule],
+  imports: [RouterModule, Navbar],
   selector: 'app-super-fitness-entry',
-  template: `<router-outlet/>`,
+  template: `
+    <app-navbar />
+    <router-outlet />
+  `,
 })
 export class RemoteEntry {}
