@@ -1,0 +1,47 @@
+<section
+  class="workouts-section relative flex min-h-[48rem] w-full flex-col items-center overflow-hidden px-4 py-16 sm:px-8">
+  
+   <!--  Overlay -->
+  <div
+    class="pointer-events-none absolute left-0 top-[57px] z-0 h-[414px] w-full bg-[#FFFFFF99] backdrop-blur-[86px]"
+  ></div>
+ 
+<!-- Content -->
+  <div class="relative z-10 w-full">
+    @if (isLoading()) {
+    <p class="text-lg text-[#242424]">Loading muscles...</p>
+    } @else {
+    <div class="mb-8 flex w-full gap-3 overflow-x-auto whitespace-nowrap pb-2">
+      @for (group of muscleGroups(); track group._id) {
+      <button type="button" (click)="selectGroup(group._id)"  class="flex h-[40px] items-center justify-center gap-2 rounded-[20px] border border-transparent px-4 py-2 transition-colors duration-200"
+      [class.bg-[#FF4100]]="selectedGroupId() === group._id"
+      [class.text-white]="selectedGroupId() === group._id"
+      [class.bg-transparent]="selectedGroupId() !== group._id"
+      [class.text-[#242424]]="selectedGroupId() !== group._id">
+        {{ group.name }}
+      </button>
+      }
+    </div>
+     @if (muscles().length > 0) {
+        <owl-carousel-o [options]="customOptions">
+          @for (muscle of muscles(); track muscle._id) {
+            <ng-template carouselSlide [id]="muscle._id" [width]="402">
+              <div class="w-full min-w-0 px-2 py-3 ">
+                <app-info-card
+                  [image]="muscle.image"
+                  [title]="muscle.name"
+                />
+              </div>
+            </ng-template>
+          }
+        </owl-carousel-o>
+      } @else {
+        <p class="py-8 text-center text-[#242424]">
+          No muscles found.
+        </p>
+      }
+    }
+    
+  </div>
+ 
+</section>
