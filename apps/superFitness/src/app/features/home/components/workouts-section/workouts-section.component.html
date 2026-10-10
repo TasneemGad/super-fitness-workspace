@@ -1,19 +1,31 @@
 <section
-  class="workouts-section relative flex min-h-[48rem] w-full flex-col items-center overflow-hidden px-4 py-16 sm:px-8">
-  
+  class="workouts-section relative flex min-h-[48rem] w-full flex-col items-center overflow-hidden">
+ 
    <!--  Overlay -->
   <div
     class="pointer-events-none absolute left-0 top-[57px] z-0 h-[414px] w-full bg-[#FFFFFF99] backdrop-blur-[86px]"
-  ></div>
+  >
+  </div>
+  
  
 <!-- Content -->
   <div class="relative z-10 w-full">
+    
     @if (isLoading()) {
     <p class="text-lg text-[#242424]">Loading muscles...</p>
     } @else {
-    <div class="mb-8 flex w-full gap-3 overflow-x-auto whitespace-nowrap pb-2">
+      <div class=" w-[332px] min-h-[77px] mx-auto">
+         <lib-section-title
+      primaryText="Workouts"
+      secondaryText="fitness class"
+       size="sm"
+      class="mb-8"
+    />
+      </div> 
+      
+    <div class="muscle-groups mb-8 flex w-full gap-3 overflow-x-auto whitespace-nowrap pb-2">
       @for (group of muscleGroups(); track group._id) {
-      <button type="button" (click)="selectGroup(group._id)"  class="flex h-[40px] items-center justify-center gap-2 rounded-[20px] border border-transparent px-4 py-2 transition-colors duration-200"
+      <button type="button" (click)="selectGroup(group._id)"  class="flex h-[40px] shrink-0 items-center justify-center gap-2 rounded-[20px] border border-transparent px-4 py-2 transition-colors duration-200"
       [class.bg-[#FF4100]]="selectedGroupId() === group._id"
       [class.text-white]="selectedGroupId() === group._id"
       [class.bg-transparent]="selectedGroupId() !== group._id"

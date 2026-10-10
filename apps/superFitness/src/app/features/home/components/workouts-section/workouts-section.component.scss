@@ -36,3 +36,13 @@
     }
   }
 }
+
+
+.muscle-groups {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.muscle-groups::-webkit-scrollbar {
+  display: none;
+}

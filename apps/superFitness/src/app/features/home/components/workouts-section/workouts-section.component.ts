@@ -5,11 +5,12 @@ import { InfoCardComponent } from '../../../../shared/components/info-card/info-
 import { MuscleGroupModel, MuscleModel } from '../../models/muscles.model';
 import { MusclesService } from '../../services/muscles.service';
 import { CarouselModule ,OwlOptions} from 'ngx-owl-carousel-o';
+import { SectionTitle } from '@org/ui';
 
 @Component({
   selector: 'app-workouts-section',
   standalone: true,
-  imports: [InfoCardComponent, CarouselModule],
+  imports: [InfoCardComponent, CarouselModule,SectionTitle],
   templateUrl: './workouts-section.component.html',
   styleUrl: './workouts-section.component.scss',
 })
