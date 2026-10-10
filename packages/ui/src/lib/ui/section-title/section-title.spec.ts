@@ -32,6 +32,25 @@ describe('SectionTitle', () => {
     expect(el.querySelector('h2')?.textContent?.trim()).toBe('Workouts');
   });
 
+  it('applies custom pixel font sizes to the primary and secondary text', async () => {
+    const el = await render({
+      primaryText: 'Workouts',
+      secondaryText: 'About Us',
+      primaryTextFontSize: 96,
+      secondaryTextFontSize: 24,
+    });
+
+    expect((el.querySelector('h2') as HTMLElement).style.fontSize).toBe('96px');
+    expect((el.querySelector('p') as HTMLElement).style.fontSize).toBe('24px');
+  });
+
+  it('keeps the component background transparent', async () => {
+    const el = await render({ primaryText: 'Workouts' });
+
+    expect(el.className).toContain('[--st-bg:transparent]');
+    expect(el.className).not.toContain('bg-(--st-bg)');
+  });
+
   it('shows the dumbbell icon by default', async () => {
     const el = await render({ primaryText: 'Workouts' });
 
@@ -42,6 +61,16 @@ describe('SectionTitle', () => {
     const el = await render({ primaryText: 'Workouts', icon: TestIcon });
 
     expect(el.querySelector('.test-icon')).not.toBeNull();
+    expect(el.querySelector('lib-dumbbell-icon')).toBeNull();
+  });
+
+  it('renders SVG markup passed by the parent', async () => {
+    const el = await render({
+      primaryText: 'Workouts',
+      iconSvg: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle></svg>',
+    });
+
+    expect(el.querySelector('svg circle')).not.toBeNull();
     expect(el.querySelector('lib-dumbbell-icon')).toBeNull();
   });
 
