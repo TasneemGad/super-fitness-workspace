@@ -1,0 +1,40 @@
+<section class="hero" id="home">
+  <img
+    class="hero__athlete"
+    src="assets/images/Theo-Vance.svg"
+    [alt]="'landing.hero.athleteAlt' | translate"
+    fetchpriority="high"
+  />
+
+  <div class="hero__content">
+    <h1 class="hero__title">
+      <span>{{ 'landing.hero.headlineFirst' | translate }}</span>
+      <span class="hero__accent">{{ 'landing.hero.headlineHighlight' | translate }}</span>
+      <br />
+      <span class="hero__accent">{{ 'landing.hero.headlineSecondHighlight' | translate }}</span>
+      <span>{{ 'landing.hero.headlineSecond' | translate }}</span>
+    </h1>
+
+    <p class="hero__description">{{ 'landing.hero.description' | translate }}</p>
+
+    <div class="hero__stats" id="about">
+      <div class="hero__stat">
+        <strong>120+</strong>
+        <span>{{ 'landing.hero.activeMembers' | translate }}</span>
+      </div>
+      <div class="hero__stat">
+        <strong>12+</strong>
+        <span>{{ 'landing.hero.certifiedTrainers' | translate }}</span>
+      </div>
+      <div class="hero__stat">
+        <strong>20+</strong>
+        <span>{{ 'landing.hero.yearsExperience' | translate }}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero__assistant" role="img" [attr.aria-label]="'landing.hero.assistantPrompt' | translate">
+    <span class="hero__assistant-icon" aria-hidden="true">?</span>
+    <span>{{ 'landing.hero.assistantPrompt' | translate }}</span>
+  </div>
+</section>
