@@ -8,8 +8,26 @@
     "classes": "الحصص",
     "healthy": "صحي",
     "account": "الحساب",
+    "login": "دخول",
+    "register": "حساب جديد",
     "openMenu": "فتح القائمة",
     "closeMenu": "إغلاق القائمة"
+  },
+  "landing": {
+    "hero": {
+      "headlineFirst": "جسمك قادر على",
+      "headlineHighlight": " تحمّل",
+      "headlineSecondHighlight": "أي شيء",
+      "headlineSecond": "",
+      "description": "عقلك هو ما يحتاج إلى الإقناع. تجاوز حدودك، والتزم، وشاهد كيف يتحول جسمك إلى مصدر للقوة والمرونة. ابدأ رحلتك اليوم واكتشف قدراتك الحقيقية.",
+      "activeMembers": "عضو نشط",
+      "certifiedTrainers": "مدرب معتمد",
+      "yearsExperience": "سنة من الخبرة",
+      "getStarted": "ابدأ الآن",
+      "exploreMore": "اكتشف المزيد",
+      "assistantPrompt": "اسألني",
+      "athleteAlt": "رياضي يرتدي قميص تدريب أزرق"
+    }
   },
   "form": {
     "requiredMessage": "{{label}} مطلوب",

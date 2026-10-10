@@ -13,8 +13,8 @@
 }
 
 .navbar.scrolled {
-  background: rgb(26 26 26 / 90%);
-  box-shadow: 0 4px 20px rgb(0 0 0 / 40%);
+  background: rgb(239 241 239 / 92%);
+  box-shadow: 0 4px 20px rgb(35 40 39 / 10%);
   backdrop-filter: blur(10px);
 }
 
@@ -53,26 +53,15 @@ ul {
   position: relative;
   display: inline-block;
   padding: 6px 0;
-  color: #fff;
+  color: #292a2b;
   font-size: 18px;
   font-weight: 600;
   text-decoration: none;
   transition: color 0.2s;
 }
 
-/* Orange underline that grows on hover / active */
-.link::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  height: 2px;
-  border-radius: 2px;
-  background: #ff4100;
-  transform: scaleX(0);
-  transition: transform 0.25s;
-}
+
+
 
 .link:hover,
 .link.active {
@@ -113,9 +102,9 @@ ul {
 .backdrop {
   position: fixed;
   inset: 0;
-  z-index: 60;
+  z-index: 40;
   border: 0;
-  background: rgb(0 0 0 / 55%);
+  background: transparent;
   animation: fade-in 0.25s;
 }
 
@@ -123,12 +112,11 @@ ul {
   position: fixed;
   top: 0;
   left: 0;
-  bottom: 0;
   z-index: 70;
-  width: 280px;
-  padding: 16px;
-  background: #232323;
-  box-shadow: 8px 0 30px rgb(0 0 0 / 50%);
+  width: min(278px, calc(100vw - 48px));
+  padding: 14px 13px 12px;
+  background: #e7e9e7;
+  box-shadow: 8px 8px 28px rgb(32 38 37 / 12%);
   animation: slide-in 0.3s ease-out;
 }
 
@@ -136,7 +124,7 @@ ul {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 24px;
+  margin-bottom: 8px;
 }
 
 .drawer-links {
@@ -146,6 +134,8 @@ ul {
 }
 
 .drawer-links .link {
+  padding: 4px 0;
+  color: #292a2b;
   font-size: 20px;
 }
 
@@ -164,7 +154,6 @@ ul {
 /* Tablet and up: show links in the bar, hide the menu button */
 @media (min-width: 768px) {
   .navbar {
-    height: 88px;
     padding: 0 40px;
   }
 
@@ -180,4 +169,15 @@ ul {
   .menu-btn {
     display: none;
   }
+
+  .drawer,
+  .backdrop {
+    display: none;
+  }
 }
+
+/* @media (max-width: 767px) {
+  .actions > .btn:not(.menu-btn) {
+    display: none;
+  }
+} */

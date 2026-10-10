@@ -29,6 +29,11 @@
             "glob": "*.png",
             "input": "apps/authApp/public/assets/auth",
             "output": "assets/auth"
+          },
+          {
+            "glob": "Theo-Vance.svg",
+            "input": "apps/superFitness/public/assets/images",
+            "output": "assets/images"
           }
         ],
         "styles": [
