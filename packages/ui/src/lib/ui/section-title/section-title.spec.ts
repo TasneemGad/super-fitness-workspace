@@ -32,6 +32,25 @@ describe('SectionTitle', () => {
     expect(el.querySelector('h2')?.textContent?.trim()).toBe('Workouts');
   });
 
+  it('applies custom pixel font sizes to the primary and secondary text', async () => {
+    const el = await render({
+      primaryText: 'Workouts',
+      secondaryText: 'About Us',
+      primaryTextFontSize: 96,
+      secondaryTextFontSize: 24,
+    });
+
+    expect((el.querySelector('h2') as HTMLElement).style.fontSize).toBe('96px');
+    expect((el.querySelector('p') as HTMLElement).style.fontSize).toBe('24px');
+  });
+
+  it('keeps the component background transparent', async () => {
+    const el = await render({ primaryText: 'Workouts' });
+
+    expect(el.className).toContain('[--st-bg:transparent]');
+    expect(el.className).not.toContain('bg-(--st-bg)');
+  });
+
   it('shows the dumbbell icon by default', async () => {
     const el = await render({ primaryText: 'Workouts' });
 

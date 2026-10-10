@@ -31,7 +31,7 @@ const LABEL_ALIGN: Record<SectionTitleLabelAlign, string> = {
   templateUrl: './section-title.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
-    class: 'block overflow-hidden px-3 [--st-bg:#f2f2f3] bg-(--st-bg)',
+    class: 'block overflow-hidden px-3 [--st-bg:transparent]',
     '[style.padding]': 'padding()',
     '[style.margin]': 'margin()',
   },
@@ -42,6 +42,8 @@ export class SectionTitle {
   icon = input<Type<unknown>>(DumbbellIcon);
   showIcon = input(true, { transform: booleanAttribute });
   size = input<SectionTitleSize>('md');
+  primaryTextFontSize = input<number>();
+  secondaryTextFontSize = input<number>();
   labelAlign = input<SectionTitleLabelAlign>('start');
   padding = input<string>();
   margin = input<string>();
