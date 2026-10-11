@@ -18,7 +18,8 @@ export type FieldIconName =
   | 'chevron-right'
   | 'upload'
   | 'image'
-  | 'close';
+  | 'close'
+  | 'menu';
 
 export type FormMode = 'create' | 'update';
 
