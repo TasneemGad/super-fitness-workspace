@@ -5,10 +5,22 @@
     <img class="absolute inset-[auto_0_0_34%] block h-[61%] w-[63%] rounded-[13px] object-cover shadow-[0_18px_40px_rgb(24_31_35_/_10%)]" src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=800&q=85" alt="Bright, fully equipped fitness studio" />
   </div>
   <div class="relative">
-    <div class="relative z-10 inline-flex items-center gap-2 text-[13px] font-bold text-[#ff4100]"><span aria-hidden="true" class="text-[22px] leading-none">⌁</span> About Us</div>
-    <p class="pointer-events-none absolute -top-[19px] left-0 m-0 text-[clamp(42px,5vw,66px)] font-black tracking-[-0.05em] text-transparent [-webkit-text-stroke:1px_#e2e4e4]" aria-hidden="true">WORKOUTS</p>
-    <h1 id="about-title" class="relative my-[28px] mb-[18px] max-w-[610px] text-[clamp(28px,3vw,39px)] leading-[1.18] font-extrabold uppercase">Empowering you to achieve <span class="text-[#ff4100]">your fitness</span> goals</h1>
-    <p class="m-0 max-w-[640px] text-[15px] leading-[1.8] text-[#505254]">We believe fitness is more than just a workout—it's a lifestyle. With top-of-the-line facilities, certified trainers, and a supportive community, we're here to inspire and guide you every step of the way.</p>
+    <lib-section-title
+      primaryText="Workouts"
+      secondaryText="About Us"
+      size="sm"
+      padding="0"
+      class="w-fit"
+    />
+    <lib-paragraph-title
+      id="about-title"
+      [segments]="titleSegments"
+      class="relative my-[28px] mb-[18px] block max-w-[610px] uppercase"
+    />
+    <lib-paragraph-description
+      [text]="description"
+      class="block max-w-[640px]"
+    />
     <div class="my-[26px] mb-[25px] grid grid-cols-2 max-[480px]:grid-cols-1">
       @for (benefit of benefits; track benefit.title) {
         <article class="flex gap-[13px] border-b border-[#e5e6e6] py-[18px] pr-[14px] pb-[17px] odd:pr-[22px] even:pl-4 max-[480px]:even:pl-0">
