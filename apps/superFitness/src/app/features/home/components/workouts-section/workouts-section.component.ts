@@ -6,12 +6,12 @@ import { InfoCardComponent } from '../../../../shared/components/info-card/info-
 import { MuscleGroupModel, MuscleModel } from '../../models/muscles.model';
 import { MusclesService } from '../../services/muscles.service';
 import { CarouselModule ,OwlOptions} from 'ngx-owl-carousel-o';
-import { SectionTitle } from '@org/ui';
+import { ParagraphTitle, SectionTitle } from '@org/ui';
 
 @Component({
   selector: 'app-workouts-section',
   standalone: true,
-  imports: [InfoCardComponent, CarouselModule, SectionTitle, TranslatePipe],
+  imports: [InfoCardComponent, CarouselModule, SectionTitle, ParagraphTitle, TranslatePipe],
   templateUrl: './workouts-section.component.html',
   styleUrl: './workouts-section.component.scss',
 })
@@ -24,6 +24,7 @@ export class WorkoutsSectionComponent implements OnInit {
   readonly selectedGroupId = signal<string | null>(null);
   readonly isLoading = signal(true);
   readonly isLoadingMuscles = signal(false);
+  readonly errorMessage = signal<string | null>(null);
 
   readonly workoutsIconSvg = `
 <svg width="34" height="20" viewBox="0 0 34 20"
@@ -43,7 +44,7 @@ export class WorkoutsSectionComponent implements OnInit {
     navSpeed: 700,
     margin: 16,
     autoWidth: false,
-  autoHeight: false,
+   autoHeight: false,
 
   responsive: {
     0: {
@@ -74,12 +75,14 @@ export class WorkoutsSectionComponent implements OnInit {
       .subscribe({
         next: (response) => {
            this.muscleGroups.set(response.musclesGroup);
+          this.errorMessage.set(null);
           this.isLoading.set(false);
           if (response.musclesGroup.length > 0) {
           this.selectGroup(response.musclesGroup[0]._id);
         }
         },
         error: () => {
+          this.errorMessage.set('home.workouts.error');
           this.isLoading.set(false);
         },
       });
@@ -92,15 +95,17 @@ export class WorkoutsSectionComponent implements OnInit {
    }
     this.selectedGroupId.set(id);
     this.isLoadingMuscles.set(true);
-    
+    this.errorMessage.set(null);
 
     this._musclesService.getGroupById(id).pipe(takeUntilDestroyed(this.destroyRef))
     .subscribe({
       next: (response) => {
         this.muscles.set(response.muscles);
+        this.errorMessage.set(null);
         this.isLoadingMuscles.set(false);
       },
       error: () => {
+        this.errorMessage.set('home.workouts.error');
         this.isLoadingMuscles.set(false);
       },
     });

@@ -17,8 +17,14 @@
       <lib-section-title [primaryText]="'home.workouts.title' | translate"
         [secondaryText]="'home.workouts.subtitle' | translate" size="sm" [primaryTextFontSize]="64"
         [secondaryTextFontSize]="13.1" [iconSvg]="workoutsIconSvg" />
-
     </div>
+
+     <lib-paragraph-title
+         [segments]="[
+    { text: 'Transform Your Body with Our Dynamic ' },
+    { text: 'Upcoming Workouts', highlight: true }
+   ]"
+        align="center" />
 
 
 
@@ -35,7 +41,15 @@
       </button>
       }
     </div>
-    @if (muscles().length > 0) {
+    @if (isLoadingMuscles()) {
+    <p class="py-8 text-center text-[#242424]" role="status">
+      {{ 'home.workouts.loadingWorkouts' | translate }}
+    </p>
+    } @else if (errorMessage()) {
+    <p class="py-8 text-center text-[#242424]" role="alert">
+      {{ errorMessage() | translate }}
+    </p>
+    } @else if (muscles().length > 0) {
     <owl-carousel-o [options]="customOptions">
       @for (muscle of muscles(); track muscle._id) {
       <ng-template carouselSlide [id]="muscle._id">
@@ -45,10 +59,6 @@
       </ng-template>
       }
     </owl-carousel-o>
-    } @else if (isLoadingMuscles()) {
-    <p class="py-8 text-center text-[#242424]">
-      Loading workouts...
-    </p>
     } @else {
     <p class="py-8 text-center text-[#242424]">
       {{ 'home.workouts.empty' | translate }}

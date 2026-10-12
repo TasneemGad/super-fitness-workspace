@@ -16,6 +16,8 @@
       "title": "Workouts",
       "subtitle": "Fitness class",
       "loading": "Loading muscles...",
+      "loadingWorkouts": "Loading workouts...",
+      "error": "Unable to load workouts. Please try again later.",
       "empty": "No muscles found."
     },
     "healthy": {

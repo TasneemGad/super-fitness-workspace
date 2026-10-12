@@ -1,45 +1,46 @@
 <section
-  class="healthy-section relative flex min-h-[48rem] w-full flex-col items-center overflow-hidden bg-[#F3F3F4] px-[clamp(1rem,5.56vw,5rem)]"
-  
->
+  class="healthy-section relative flex min-h-[48rem] w-full flex-col items-center overflow-hidden bg-[#F3F3F4] px-[clamp(1rem,5.56vw,5rem)]">
   <!--  Overlay -->
   <div class="pointer-events-none absolute left-0 top-[57px] z-0 h-[414px] w-full bg-[#FFFFFF99] backdrop-blur-[43px]">
   </div>
 
   <div class="relative z-10 mx-auto w-full ">
-    <lib-section-title
-      [primaryText]="'home.healthy.title' | translate"
-      [secondaryText]="'home.healthy.subtitle' | translate"
-      size="sm"
-      [primaryTextFontSize]="64"
-      [secondaryTextFontSize]="13.1"
-    />
+    <lib-section-title [primaryText]="'home.healthy.title' | translate"
+      [secondaryText]="'home.healthy.subtitle' | translate" size="sm" [primaryTextFontSize]="64"
+      [secondaryTextFontSize]="13.1" />
+
+    <lib-paragraph-title [segments]="[
+    { text: 'Fuel your fitness journey with customized ' },
+    { text: 'meal plans', highlight: true },
+    { text: ' for you' }
+  ]" align="center" />
+
     @if (isLoading()) {
-      <p class="mt-8 text-center text-lg text-[#242424]" role="status">
-        {{ 'home.healthy.loading' | translate }}
-      </p>
+    <p class="mt-8 text-center text-lg text-[#242424]" role="status">
+      {{ 'home.healthy.loading' | translate }}
+    </p>
     } @else if (errorMessage()) {
-      <p class="mt-8 text-center text-lg text-[#242424]" role="alert">
-        {{ errorMessage() | translate }}
-      </p>
+    <p class="mt-8 text-center text-lg text-[#242424]" role="alert">
+      {{ errorMessage() | translate }}
+    </p>
     } @else if (mealCategories().length > 0) {
-      <div class="mt-8 w-full">
-        <owl-carousel-o [options]="customOptions">
+    <div class="mt-8 w-full">
+      <owl-carousel-o [options]="customOptions">
         @for (category of mealCategories(); track category.idCategory) {
-          <ng-template carouselSlide [id]="category.idCategory" [width]="402">
-            <app-info-card
-              [image]="category.strCategoryThumb"
-              [title]="('home.healthy.categories.' + category.strCategory) | translate"
-              [buttonText]="'home.healthy.readMore' | translate"
-            />
-          </ng-template>
+        <ng-template carouselSlide [id]="category.idCategory" [width]="402">
+          <app-info-card [image]="category.strCategoryThumb"
+            [title]="('home.healthy.categories.' + category.strCategory) | translate"
+            [buttonText]="'home.healthy.readMore' | translate" />
+        </ng-template>
         }
-        </owl-carousel-o>
-      </div>
+      </owl-carousel-o>
+    </div>
     } @else {
-      <p class="mt-8 text-center text-lg text-[#242424]">
-        {{ 'home.healthy.empty' | translate }}
-      </p>
+    <p class="mt-8 text-center text-lg text-[#242424]">
+      {{ 'home.healthy.empty' | translate }}
+    </p>
     }
   </div>
+
+  <app-fitness-marquee />
 </section>
