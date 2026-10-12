@@ -14,7 +14,7 @@
     @if (isLoading()) {
     <p class="text-lg text-[#242424]">{{ 'home.workouts.loading' | translate }}</p>
     } @else {
-    <div class=" w-full min-h-[77px] mx-auto">
+    <div class=" w-full min-h-[77px] mx-auto mb-3 sm:mb-5 lg:mb-6">
       <lib-section-title [primaryText]="'home.workouts.title' | translate"
         [secondaryText]="'home.workouts.subtitle' | translate" size="sm" [primaryTextFontSize]="64"
         [secondaryTextFontSize]="13.1" [iconSvg]="workoutsIconSvg" />
