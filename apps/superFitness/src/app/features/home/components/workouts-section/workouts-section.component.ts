@@ -2,16 +2,22 @@ import { Component, OnInit, inject, signal } from '@angular/core';
 import { DestroyRef } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TranslatePipe } from '@ngx-translate/core';
+import { ParagraphTitle, SectionTitle } from '@org/ui';
 import { InfoCardComponent } from '../../../../shared/components/info-card/info-card.component';
+import { OwlCarouselComponent } from '../../../../shared/components/owl-carousel/owl-carousel.component';
 import { MuscleGroupModel, MuscleModel } from '../../models/muscles.model';
 import { MusclesService } from '../../services/muscles.service';
-import { CarouselModule ,OwlOptions} from 'ngx-owl-carousel-o';
-import { ParagraphTitle, SectionTitle } from '@org/ui';
 
 @Component({
   selector: 'app-workouts-section',
   standalone: true,
-  imports: [InfoCardComponent, CarouselModule, SectionTitle, ParagraphTitle, TranslatePipe],
+  imports: [
+    InfoCardComponent,
+    SectionTitle,
+    ParagraphTitle,
+    TranslatePipe,
+    OwlCarouselComponent,
+  ],
   templateUrl: './workouts-section.component.html',
   styleUrl: './workouts-section.component.scss',
 })
@@ -25,7 +31,8 @@ export class WorkoutsSectionComponent implements OnInit {
   readonly isLoading = signal(true);
   readonly isLoadingMuscles = signal(false);
   readonly errorMessage = signal<string | null>(null);
-
+ 
+  readonly getMuscleId = (muscle: MuscleModel): string => muscle._id;
   readonly workoutsIconSvg = `
 <svg width="34" height="20" viewBox="0 0 34 20"
      fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -34,7 +41,7 @@ export class WorkoutsSectionComponent implements OnInit {
     fill="#FF4100"/>
 </svg>`;
   
-  customOptions: OwlOptions = {
+  customOptions = {
     loop: false,
     mouseDrag: true,
     touchDrag: true,

@@ -2,8 +2,8 @@ import { Component, DestroyRef, OnInit, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TranslatePipe } from '@ngx-translate/core';
 import { ParagraphTitle, SectionTitle } from '@org/ui';
-import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 import { InfoCardComponent } from '../../../../shared/components/info-card/info-card.component';
+import { OwlCarouselComponent } from '../../../../shared/components/owl-carousel/owl-carousel.component';
 import { FitnessMarquee } from '../../../landing/ui/fitness-marquee/fitness-marquee';
 import { MealCategoryModel } from '../../models/meal-categories.model';
 import { MealsService } from '../../services/meals.service';
@@ -14,10 +14,10 @@ import { MealsService } from '../../services/meals.service';
   imports: [
     SectionTitle,
     InfoCardComponent,
-    CarouselModule,
     TranslatePipe,
     ParagraphTitle,
     FitnessMarquee,
+    OwlCarouselComponent,
   ],
   templateUrl: './healthy-section.component.html',
   styleUrl: './healthy-section.component.scss',
@@ -30,7 +30,8 @@ export class HealthySectionComponent implements OnInit {
   readonly isLoading = signal(true);
   readonly errorMessage = signal<string | null>(null);
 
-  readonly customOptions: OwlOptions = {
+  readonly getCategoryId = (category: MealCategoryModel): string =>category.idCategory;
+  readonly customOptions = {
     loop: false,
     mouseDrag: true,
     touchDrag: true,

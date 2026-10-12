@@ -25,15 +25,19 @@
     </p>
     } @else if (mealCategories().length > 0) {
     <div class="mt-8 w-full">
-      <owl-carousel-o [options]="customOptions">
-        @for (category of mealCategories(); track category.idCategory) {
-        <ng-template carouselSlide [id]="category.idCategory" [width]="402">
-          <app-info-card [image]="category.strCategoryThumb"
-            [title]="('home.healthy.categories.' + category.strCategory) | translate"
-            [buttonText]="'home.healthy.readMore' | translate" />
-        </ng-template>
-        }
-      </owl-carousel-o>
+       <app-owl-carousel
+    [items]="mealCategories()"
+    [options]="customOptions"
+    [itemId]="getCategoryId"
+  >
+    <ng-template #slide let-category>
+      <app-info-card
+        [image]="category.strCategoryThumb"
+        [title]="('home.healthy.categories.' + category.strCategory) | translate"
+        [buttonText]="'home.healthy.readMore' | translate"
+      />
+    </ng-template>
+  </app-owl-carousel>
     </div>
     } @else {
     <p class="mt-8 text-center text-lg text-[#242424]">
