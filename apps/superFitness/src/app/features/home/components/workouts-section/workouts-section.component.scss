@@ -1,4 +1,5 @@
 .workouts-section {
+   background-color: #f3f3f4;
   background-image: url('/assets/workouts-section.jpg'); 
   background-size: cover;
   background-position: center;
@@ -27,7 +28,7 @@
           &.active span {
             width: 30px; 
             height: 10px;
-            background: #F63C2F; 
+            background: #ff4100;; 
            border-radius: 12px;
            opacity: 1;
           }

@@ -11,6 +11,38 @@
     "openMenu": "Open menu",
     "closeMenu": "Close menu"
   },
+  "home": {
+    "workouts": {
+      "title": "Workouts",
+      "subtitle": "Fitness class",
+      "loading": "Loading muscles...",
+      "empty": "No muscles found."
+    },
+    "healthy": {
+      "title": "Healthy",
+      "subtitle": "Healthy Nutritions",
+      "loading": "Loading meal categories...",
+      "error": "Unable to load meal categories. Please try again later.",
+      "empty": "No meal categories are available.",
+      "readMore": "Read more",
+      "categories": {
+        "Beef": "Beef",
+        "Breakfast": "Breakfast",
+        "Chicken": "Chicken",
+        "Dessert": "Dessert",
+        "Goat": "Goat",
+        "Lamb": "Lamb",
+        "Miscellaneous": "Miscellaneous",
+        "Pasta": "Pasta",
+        "Pork": "Pork",
+        "Seafood": "Seafood",
+        "Side": "Side",
+        "Starter": "Starter",
+        "Vegan": "Vegan",
+        "Vegetarian": "Vegetarian"
+      }
+    }
+  },
   "form": {
     "requiredMessage": "{{label}} is required",
     "selectPlaceholder": "Select"

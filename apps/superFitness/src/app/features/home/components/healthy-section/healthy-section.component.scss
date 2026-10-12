@@ -1,0 +1,40 @@
+.healthy-section {
+  background-color: #f3f3f4;
+  background-image: url('/assets/healty-section.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.healthy-section {
+  ::ng-deep {
+    .owl-carousel {
+      .owl-dots {
+        margin-top: 2rem;
+        display: flex;
+        justify-content: center;
+        gap: 8px;
+
+        .owl-dot {
+          span {
+            width: 10px;
+            height: 10px;
+            background: #242424; 
+            border-radius: 50%;
+            display: block;
+            transition: all 0.3s ease;
+          }
+
+          &.active span {
+            width: 30px; 
+            height: 10px;
+            background: #ff4100;; 
+           border-radius: 12px;
+           opacity: 1;
+          }
+        }
+      }
+    }
+  }
+}
+
