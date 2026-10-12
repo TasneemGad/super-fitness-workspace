@@ -19,3 +19,6 @@ export * from './lib/ui/question-description/question-description';
 
 export * from './lib/ui/icons/dumbbell-icon/dumbbell-icon';
 export * from './lib/ui/section-title/section-title';
+
+export * from './lib/ui/paragraph-title/paragraph-title';
+export * from './lib/ui/paragraph-description/paragraph-description';
