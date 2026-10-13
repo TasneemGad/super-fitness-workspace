@@ -1,4 +1,4 @@
-import { Component, OnInit, inject, signal } from '@angular/core';
+import { Component,  effect, inject, signal } from '@angular/core';
 import { DestroyRef } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TranslatePipe } from '@ngx-translate/core';
@@ -7,6 +7,7 @@ import { InfoCardComponent } from '../../../../shared/components/info-card/info-
 import { OwlCarouselComponent } from '../../../../shared/components/owl-carousel/owl-carousel.component';
 import { MuscleGroupModel, MuscleModel } from '../../models/muscles.model';
 import { MusclesService } from '../../services/muscles.service';
+import { LanguageService } from '@org/i18n';
 
 @Component({
   selector: 'app-workouts-section',
@@ -21,10 +22,11 @@ import { MusclesService } from '../../services/muscles.service';
   templateUrl: './workouts-section.component.html',
   styleUrl: './workouts-section.component.scss',
 })
-export class WorkoutsSectionComponent implements OnInit {
+export class WorkoutsSectionComponent  {
   private readonly _musclesService = inject(MusclesService);
   private readonly destroyRef = inject(DestroyRef);
-
+  private readonly languageService = inject(LanguageService);
+  
   readonly muscles = signal<MuscleModel[]>([]);
   readonly muscleGroups = signal<MuscleGroupModel[]>([]);
   readonly selectedGroupId = signal<string | null>(null);
@@ -71,9 +73,13 @@ export class WorkoutsSectionComponent implements OnInit {
   };
 
 
-  ngOnInit(): void {
+  constructor() {
+  effect(() => {
+    this.languageService.currentLang();
+
     this.getAllMuscleGroups();
-  }
+  });
+ }
 
    getAllMuscleGroups(): void {
     this._musclesService
@@ -81,12 +87,29 @@ export class WorkoutsSectionComponent implements OnInit {
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         next: (response) => {
-           this.muscleGroups.set(response.musclesGroup);
+           const groups = response.musclesGroup;
+
+           this.muscleGroups.set(groups);
           this.errorMessage.set(null);
           this.isLoading.set(false);
-          if (response.musclesGroup.length > 0) {
-          this.selectGroup(response.musclesGroup[0]._id);
-        }
+          if (groups.length === 0) {
+              this.selectedGroupId.set(null);
+              this.muscles.set([]);
+              this.isLoadingMuscles.set(false);
+              return;
+           }
+
+           const currentId = this.selectedGroupId();
+          const selectedGroup = groups.find(
+            (group) => group._id === currentId
+           );
+
+           const groupId = selectedGroup
+              ? selectedGroup._id
+              : groups[0]._id;
+
+            this.selectGroup(groupId, true);
+
         },
         error: () => {
           this.errorMessage.set('home.workouts.error');
@@ -96,8 +119,8 @@ export class WorkoutsSectionComponent implements OnInit {
    }
 
 
-   selectGroup(id: string): void {
-    if (this.selectedGroupId() === id) {
+   selectGroup(id: string , force=false): void {
+    if (this.selectedGroupId() === id && !force) {
     return;
    }
     this.selectedGroupId.set(id);

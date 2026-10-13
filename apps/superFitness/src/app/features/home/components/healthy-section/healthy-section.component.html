@@ -10,9 +10,9 @@
       [secondaryTextFontSize]="13.1" />
 
     <lib-paragraph-title [segments]="[
-    { text: 'Fuel your fitness journey with customized ' },
-    { text: 'meal plans', highlight: true },
-    { text: ' for you' }
+    { text: 'home.healthy.descriptionPrefix' | translate },
+    { text: 'home.healthy.descriptionHighlight' | translate, highlight: true },
+    { text: 'home.healthy.descriptionSuffix' | translate }
   ]" align="center" />
 
     @if (isLoading()) {
@@ -33,8 +33,8 @@
     <ng-template #slide let-category>
       <app-info-card
         [image]="category.strCategoryThumb"
-        [title]="('home.healthy.categories.' + category.strCategory) | translate"
-        [buttonText]="'home.healthy.readMore' | translate"
+        [title]="(category.strCategory) "
+        buttonText="home.healthy.readMore"
       />
     </ng-template>
   </app-owl-carousel>

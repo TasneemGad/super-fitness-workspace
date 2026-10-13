@@ -11,6 +11,8 @@ export class LanguageService {
   readonly currentLang = signal<AppLanguage>(this.defaultLanguage)
 
   init() {
+    
+
     const savedLanguage = localStorage.getItem('lang');
     const language: AppLanguage =savedLanguage === 'ar' ? 'ar' : 'en';
     return this.switchLanguage(language);
@@ -19,11 +21,11 @@ export class LanguageService {
 
   switchLanguage(language: AppLanguage) {
      this.currentLang.set(language);
-
+    this.translateService.use(language);
      localStorage.setItem('lang', language);
      this.setDirection(language);
 
-     return this.translateService.use(language);
+      
      
   }
 
