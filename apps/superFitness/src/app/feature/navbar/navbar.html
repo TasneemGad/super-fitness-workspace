@@ -1,4 +1,4 @@
-<header class="navbar" [class.scrolled]="scrolled()">
+<header class="navbar " [class.scrolled]="scrolled()">
   <a class="logo-link" routerLink="/superFitness" fragment="home"
     [attr.aria-label]="'navbar.home' | translate">
     <img class="logo" src="assets/auth/hero.png" [alt]="'app.name' | translate" />
@@ -13,6 +13,7 @@
   </ul>
 
   <div class="actions">
+    <lib-theme-toggle />
     <a class="btn" [attr.aria-label]="'navbar.account' | translate">
       <lib-field-icon name="user" [size]="20" />
     </a>
