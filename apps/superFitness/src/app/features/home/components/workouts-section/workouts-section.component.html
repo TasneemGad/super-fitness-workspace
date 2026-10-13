@@ -1,0 +1,65 @@
+<section
+  class="workouts-section relative flex min-h-[32rem] sm:min-h-[40rem] lg:min-h-[48rem]
+   w-full  min-w-0  flex-col items-center overflow-hidden bg-[#F3F3F4] px-4 sm:px-6 lg:px-[clamp(1rem,5.56vw,5rem)] pb-8 sm:pb-10">
+
+  <!--  Overlay -->
+  <div
+    class="pointer-events-none absolute inset-x-0 top-[57px] z-0 h-[360px] sm:h-[390px] lg:h-[414px] w-full bg-[#FFFFFFB3] backdrop-blur-[43px]">
+  </div>
+
+
+  <!-- Content -->
+  <div class="relative z-10 mx-auto w-full min-w-0">
+
+    @if (isLoading()) {
+    <p class="text-lg text-[#242424]">{{ 'home.workouts.loading' | translate }}</p>
+    } @else {
+    <div class=" w-full min-h-[77px] mx-auto mb-3 sm:mb-5 lg:mb-6">
+      <lib-section-title [primaryText]="'home.workouts.title' | translate"
+        [secondaryText]="'home.workouts.subtitle' | translate" size="sm" [primaryTextFontSize]="64"
+        [secondaryTextFontSize]="13.1" [iconSvg]="workoutsIconSvg" />
+    </div>
+
+    <lib-paragraph-title [segments]="[
+    { text: 'Transform Your Body with Our Dynamic ' },
+    { text: 'Upcoming Workouts', highlight: true }
+   ]" align="center" />
+
+
+
+    <div
+      class="muscle-groups  my-8 flex mx-auto justify-center  items-center gap-2 sm:gap-4 lg:gap-6 overflow-x-auto whitespace-nowrap w-[80%]  ">
+      @for (group of muscleGroups(); track group._id) {
+      <button type="button" (click)="selectGroup(group._id)" class="flex h-10 shrink-0 items-center justify-center gap-2 rounded-[20px]  font-bold capitalize px-2 sm:h-9 sm:px-4
+             text-sm sm:text-base transition-colors duration-200 cursor-pointer"
+        [class.bg-[#FF4100]]="selectedGroupId() === group._id" [class.text-[#F3F3F4]]="selectedGroupId() === group._id"
+        [class.bg-transparent]="selectedGroupId() !== group._id"
+        [class.text-[#242424]]="selectedGroupId() !== group._id">
+        {{ group.name }}
+      </button>
+      }
+    </div>
+    @if (isLoadingMuscles()) {
+    <p class="py-8 text-center text-[#242424]" role="status">
+      {{ 'home.workouts.loadingWorkouts' | translate }}
+    </p>
+    } @else if (errorMessage()) {
+    <p class="py-8 text-center text-[#242424]" role="alert">
+      {{ errorMessage() | translate }}
+    </p>
+    } @else if (muscles().length > 0) {
+    <app-owl-carousel [items]="muscles()" [options]="customOptions" [itemId]="getMuscleId">
+      <ng-template #slide let-muscle>
+        <app-info-card [image]="muscle.image" [title]="muscle.name" />
+      </ng-template>
+    </app-owl-carousel>
+    } @else {
+    <p class="py-8 text-center text-[#242424]">
+      {{ 'home.workouts.empty' | translate }}
+    </p>
+    }
+    }
+
+  </div>
+
+</section>

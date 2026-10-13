@@ -11,6 +11,23 @@
     "openMenu": "Open menu",
     "closeMenu": "Close menu"
   },
+  "home": {
+    "workouts": {
+      "title": "Workouts",
+      "subtitle": "Fitness class",
+      "loading": "Loading muscles...",
+      "loadingWorkouts": "Loading workouts...",
+      "error": "Unable to load workouts. Please try again later.",
+      "empty": "No muscles found."
+    },
+    "healthy": {
+      "title": "Healthy",
+      "subtitle": "Healthy Nutritions",
+      "loading": "Loading meal categories...",
+      "error": "Unable to load meal categories. Please try again later.",
+      "empty": "No meal categories are available."
+    }
+  },
   "form": {
     "requiredMessage": "{{label}} is required",
     "selectPlaceholder": "Select"
