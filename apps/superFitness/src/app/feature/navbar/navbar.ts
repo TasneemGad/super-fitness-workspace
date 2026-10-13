@@ -1,11 +1,12 @@
 import { Component, HostListener, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
+import { LanguageSwitcher } from '@org/i18n';
 import { FieldIcon, ThemeToggle } from '@org/ui';
 
 @Component({
   selector: 'app-navbar',
-  imports: [RouterLink, FieldIcon, TranslatePipe, ThemeToggle],
+  imports: [RouterLink, FieldIcon, TranslatePipe, ThemeToggle, LanguageSwitcher],
   templateUrl: './navbar.html',
   styleUrl: './navbar.css',
 })
