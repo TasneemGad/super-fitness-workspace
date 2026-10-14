@@ -7,6 +7,7 @@ import { OwlCarouselComponent } from '../../../../shared/components/owl-carousel
 import { FitnessMarquee } from '../../../landing/ui/fitness-marquee/fitness-marquee';
 import { MealCategoryModel } from '../../models/meal-categories.model';
 import { MealsService } from '../../services/meals.service';
+import { SmartCoach } from '../../../smart-coach/smart-coach';
 
 @Component({
   selector: 'app-healthy-section',
@@ -18,6 +19,7 @@ import { MealsService } from '../../services/meals.service';
     ParagraphTitle,
     FitnessMarquee,
     OwlCarouselComponent,
+    SmartCoach
   ],
   templateUrl: './healthy-section.component.html',
   styleUrl: './healthy-section.component.scss',

@@ -35,6 +35,26 @@
       "empty": "No meal categories are available."
     }
   },
+  "footer": {
+    "taglineLine1": "Push harder, go further. Your",
+    "taglineLine2": "Fitness journey starts today!",
+    "contactUs": "CONTACT US",
+    "phone": "+91 123 456 789",
+    "email": "info@gmail.com",
+    "gymTiming": "OUR GYM TIMING",
+    "monFri": "Mon - Fri : 08:00 AM - 10:00 PM",
+    "satSun": "Sat - Sun : 08:00 AM - 09:00 PM",
+    "location": "OUR LOCATION",
+    "addressLine1": "2715 Ash Dr. San Jose, South",
+    "addressLine2": "Dakota 83475"
+  },
+ "chat": {
+    "smartCoach": "Smart Coach",
+    "askPlaceholder": "Ask Me Any Things",
+    "tapToClose": "Tap To Close",
+    "heyAskMe": "Hey Ask Me",
+    "previousConversations": "Previous Conversations"
+  },
   "form": {
     "requiredMessage": "{{label}} is required",
     "selectPlaceholder": "Select"
