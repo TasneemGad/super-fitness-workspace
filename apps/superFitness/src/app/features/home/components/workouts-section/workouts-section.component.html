@@ -4,7 +4,7 @@
 
   <!--  Overlay -->
   <div
-    class="pointer-events-none absolute inset-x-0 top-[57px] z-0 h-[360px] sm:h-[390px] lg:h-[414px] w-full bg-[#FFFFFFB3] backdrop-blur-[43px]">
+    class="pointer-events-none absolute inset-x-0 top-[57px] z-0 h-[360px] sm:h-[390px] lg:h-[414px] w-full bg-[#FFFFFFB3] dark:bg-[#24242499] backdrop-blur-[43px]">
   </div>
 
 
@@ -30,8 +30,8 @@
     <div
       class="muscle-groups  my-8 flex mx-auto justify-center  items-center gap-2 sm:gap-4 lg:gap-6 overflow-x-auto whitespace-nowrap w-[80%]  ">
       @for (group of muscleGroups(); track group._id) {
-      <button type="button" (click)="selectGroup(group._id)" class="flex h-10 shrink-0 items-center justify-center gap-2 rounded-[20px]  font-bold capitalize px-2 sm:h-9 sm:px-4
-             text-sm sm:text-base transition-colors duration-200 cursor-pointer"
+      <button type="button" (click)="selectGroup(group._id)" class="flex h-10  shrink-0 items-center justify-center gap-2 rounded-[20px]  font-bold capitalize  sm:h-9 px-4
+             text-sm sm:text-base transition-colors duration-200 cursor-pointer dark:text-[#D3D3D3]"
         [class.bg-[#FF4100]]="selectedGroupId() === group._id" [class.text-[#F3F3F4]]="selectedGroupId() === group._id"
         [class.bg-transparent]="selectedGroupId() !== group._id"
         [class.text-[#242424]]="selectedGroupId() !== group._id">
@@ -48,11 +48,34 @@
       {{ errorMessage() | translate }}
     </p>
     } @else if (muscles().length > 0) {
-    <app-owl-carousel [items]="muscles()" [options]="customOptions" [itemId]="getMuscleId">
-      <ng-template #slide let-muscle>
+    <div class="w-full">
+      <div class="grid grid-cols-1 gap-4 md:hidden">
+        @for (muscle of muscles().slice(0, 3); track muscle._id) {
+          <div class="w-full">
         <app-info-card [image]="muscle.image" [title]="muscle.name" />
-      </ng-template>
-    </app-owl-carousel>
+        </div>
+      }
+      </div>
+      <div class="hidden md:block">
+        <app-owl-carousel [items]="muscles()" [options]="customOptions" [itemId]="getMuscleId">
+          <ng-template #slide let-muscle>
+            <app-info-card [image]="muscle.image" [title]="muscle.name" />
+          </ng-template>
+        </app-owl-carousel>
+      </div>
+
+      <div class="mt-auto flex justify-end pt-6 pb-4 md:hidden">
+      <a
+        routerLink=""
+        class="rounded-full   py-2
+           font-['Inter'] text-[13.1px] font-semibold
+           leading-[25.6px] capitalize text-[#FF4100]
+      "
+      >
+        {{ 'home.workouts.readMore' | translate }}
+      </a>
+      </div>
+    </div>
     } @else {
     <p class="py-8 text-center text-[#242424]">
       {{ 'home.workouts.empty' | translate }}

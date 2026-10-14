@@ -8,6 +8,8 @@
     "classes": "الحصص",
     "healthy": "صحي",
     "account": "الحساب",
+    "login": "دخول",
+    "register": "حساب جديد",
     "openMenu": "فتح القائمة",
     "closeMenu": "إغلاق القائمة"
   },
@@ -21,7 +23,10 @@
       "descriptionHighlight": "القادمة",
       "error": "تعذر تحميل التمارين. يرجى المحاولة مرة أخرى لاحقًا.",
       "empty": "لم يتم العثور على عضلات.",
-      "explore": "استكشف"
+      "explore": "استكشف",
+      "readMore": "اقرأ المزيد",
+      "more": "المزيد من التمارين",
+      "backToHome": "العودة إلى الرئيسية"
     },
     "healthy": {
       "title": "صحي",
@@ -31,8 +36,26 @@
       "descriptionSuffix": " لك",
       "loading": "جارٍ تحميل فئات الوجبات...",
       "readMore": "اقرأ المزيد",
+      "more": "المزيد من الفئات الصحية",
+      "backToHome": "العودة إلى الرئيسية",
       "error": "تعذر تحميل فئات الوجبات. يرجى المحاولة مرة أخرى لاحقًا.",
       "empty": "لا توجد فئات وجبات متاحة."
+    }
+  },
+  "landing": {
+    "hero": {
+      "headlineFirst": "جسمك قادر على",
+      "headlineHighlight": " تحمّل",
+      "headlineSecondHighlight": "أي شيء",
+      "headlineSecond": "",
+      "description": "عقلك هو ما يحتاج إلى الإقناع. تجاوز حدودك، والتزم، وشاهد كيف يتحول جسمك إلى مصدر للقوة والمرونة. ابدأ رحلتك اليوم واكتشف قدراتك الحقيقية.",
+      "activeMembers": "عضو نشط",
+      "certifiedTrainers": "مدرب معتمد",
+      "yearsExperience": "سنة من الخبرة",
+      "getStarted": "ابدأ الآن",
+      "exploreMore": "اكتشف المزيد",
+      "assistantPrompt": "اسألني",
+      "athleteAlt": "رياضي يرتدي قميص تدريب أزرق"
     }
   },
   "footer": {

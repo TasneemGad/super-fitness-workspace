@@ -23,5 +23,14 @@
       background: #ff4100;
       opacity: 1;
     }
+
+    :host-context(.dark) ::ng-deep .owl-carousel .owl-dots {
+    .owl-dot span {
+      background: #f3f3f4;
+    }
+    .owl-dot.active span {
+      background: #ff4100;
+    }
+     }
   }
 }
