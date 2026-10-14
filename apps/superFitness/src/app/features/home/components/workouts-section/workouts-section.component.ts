@@ -1,4 +1,5 @@
-import { Component,  effect, inject, signal } from '@angular/core';
+import { Component, computed, effect, inject, signal } from '@angular/core';
+import { OwlOptions } from 'ngx-owl-carousel-o';
 import { DestroyRef } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { RouterLink } from '@angular/router';
@@ -45,37 +46,38 @@ export class WorkoutsSectionComponent  {
     fill="#FF4100"/>
 </svg>`;
   
-  get customOptions (){
+  // computed (not a getter) so owl-carousel gets a stable options object and doesn't re-init every change detection
+  readonly customOptions = computed<OwlOptions>(() => {
     const itemCount = this.muscles().length;
-    
-    return {
-    loop: false,
-    mouseDrag: true,
-    touchDrag: true,
-    pullDrag: true,
-    dots: itemCount>3,
-    nav: false,
-    navSpeed: 700,
-    margin: 16,
-    autoWidth: false,
-   autoHeight: false,
 
-  responsive: {
-    0: {
-      items: 1,
-      margin: 12,
-    },
-    640: {
-      items: 2,
+    return {
+      loop: false,
+      mouseDrag: true,
+      touchDrag: true,
+      pullDrag: true,
+      dots: itemCount > 3,
+      nav: false,
+      navSpeed: 700,
       margin: 16,
-    },
-    1024: {
-      items: 3,
-      margin: 16,
-    },
-  },
-  } 
-  };
+      autoWidth: false,
+      autoHeight: false,
+      rtl: this.languageService.isRtl(),
+      responsive: {
+        0: {
+          items: 1,
+          margin: 12,
+        },
+        640: {
+          items: 2,
+          margin: 16,
+        },
+        1024: {
+          items: 3,
+          margin: 16,
+        },
+      },
+    };
+  });
 
 
   constructor() {

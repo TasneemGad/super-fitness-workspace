@@ -20,12 +20,12 @@
           </svg>
         </span>
 
-        <h2>Welcome, {{ registered.firstName }}!</h2>
-        <p>Your Super Fitness account is ready.</p>
+        <h2>{{ 'auth.register.success.welcome' | translate: { name: registered.firstName } }}</h2>
+        <p>{{ 'auth.register.success.ready' | translate }}</p>
 
-        <a class="auth-link auth-link--strong" routerLink="../login"
-          >Go to login</a
-        >
+        <a class="auth-link auth-link--strong" routerLink="../login">{{
+          'auth.register.success.goToLogin' | translate
+        }}</a>
       </div>
       } @else {
       <ng-container

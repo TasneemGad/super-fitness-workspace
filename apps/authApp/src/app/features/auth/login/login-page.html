@@ -1,9 +1,12 @@
 <main class="auth-page">
   <div class="auth-area">
-    <lib-auth-header eyebrow="Hey There" title="Welcome Back" />
+    <lib-auth-header
+      [eyebrow]="'auth.login.eyebrow' | translate"
+      [title]="'auth.login.title' | translate"
+    />
 
     <section class="auth-card ">
-      <h2 class="auth-title">Login</h2>
+      <h2 class="auth-title">{{ 'auth.login.heading' | translate }}</h2>
 
       <app-auth-feedback [errors]="errors()" [notice]="notice()" />
 
@@ -12,23 +15,23 @@
         [fields]="fields()"
         [submitting]="submitting()"
         [disableSubmitWhenInvalid]="false"
-        submitLabel="Login"
-        loadingLabel="Signing in..."
+        [submitLabel]="'auth.login.submit' | translate"
+        [loadingLabel]="'auth.login.submitting' | translate"
         (formSubmit)="onSubmit($event)"
       >
         <div formBeforeSubmit>
           <div class="auth-row-end">
             <a class="auth-link"  [routerLink]="'/auth/forgot-password'">
-              Forget Password ?
+              {{ 'auth.login.forgotPassword' | translate }}
             </a>
           </div>
 
-          <app-social-sign-in (providerSelected)="onUnavailable('')" />
+          <app-social-sign-in (providerSelected)="onUnavailable($event)" />
         </div>
 
         <p formAfterSubmit class="auth-footnote">
-          Dont Have An Account Yet ?
-          <a class="auth-link" routerLink="../register">Register</a>
+          {{ 'auth.login.registerPrompt' | translate }}
+          <a class="auth-link" routerLink="../register">{{ 'auth.login.registerLink' | translate }}</a>
         </p>
       </lib-dynamic-form>
     </section>

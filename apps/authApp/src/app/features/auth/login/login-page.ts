@@ -1,8 +1,10 @@
 import { Component, effect, inject, signal } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { AuthHeader, DynamicForm } from '@org/ui';
 import { AuthFacade } from '../auth.facade';
 import { LOGIN_FIELDS } from '../data/auth.fields';
+import { translateFields } from '../data/translate-fields';
 import { AuthFeedback } from '../ui/auth-feedback/auth-feedback';
 import { SocialSignIn } from '../ui/social-sign-in/social-sign-in';
 
@@ -16,6 +18,7 @@ const HOME_URL = '/superFitness';
     DynamicForm,
     SocialSignIn,
     RouterLink,
+    TranslatePipe,
   ],
   providers: [AuthFacade],
   templateUrl: './login-page.html',
@@ -24,8 +27,9 @@ const HOME_URL = '/superFitness';
 export class LoginPage {
   private readonly facade = inject(AuthFacade);
   private readonly router = inject(Router);
+  private readonly translate = inject(TranslateService);
 
-  protected readonly fields = signal(LOGIN_FIELDS);
+  protected readonly fields = translateFields(LOGIN_FIELDS);
   protected readonly submitting = this.facade.submitting;
   protected readonly errors = this.facade.errors;
   protected readonly user = this.facade.user;
@@ -50,12 +54,12 @@ export class LoginPage {
     this.facade.signin(model);
   }
 
-  protected onUnavailable(feature: string): void {
-    
-    this.notice.set(`${feature} is not connected yet.`);
+  protected onUnavailable(provider: string): void {
+    const name = this.translate.instant(`auth.social.providers.${provider}`);
+    this.notice.set(this.translate.instant('auth.social.unavailable', { provider: name }));
   }
 
   private signedInWithoutHome(): void {
-    this.notice.set(`Signed in. ${HOME_URL} is not available here.`);
+    this.notice.set(this.translate.instant('auth.login.signedInNoHome', { url: HOME_URL }));
   }
 }

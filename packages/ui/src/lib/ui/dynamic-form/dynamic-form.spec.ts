@@ -1,3 +1,4 @@
+import { provideTranslateService } from '@ngx-translate/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { DynamicForm } from './dynamic-form';
 import { FieldConfig } from '../../models/field-types';
@@ -26,6 +27,7 @@ describe('DynamicForm', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [DynamicForm],
+      providers: [provideTranslateService()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(DynamicForm);

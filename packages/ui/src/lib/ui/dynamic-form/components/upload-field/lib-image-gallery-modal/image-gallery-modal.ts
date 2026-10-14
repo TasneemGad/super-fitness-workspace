@@ -11,11 +11,12 @@ import {
   signal,
   viewChild,
 } from '@angular/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { FieldIcon } from '../../../../icon/field-icon';
 
 @Component({
   selector: 'lib-image-gallery-modal',
-  imports: [FieldIcon],
+  imports: [FieldIcon, TranslatePipe],
   templateUrl: './image-gallery-modal.html',
   styleUrl: './image-gallery-modal.css',
 })
@@ -23,7 +24,8 @@ export class ImageGalleryModal {
   images = input.required<string[]>();
   open = model.required<boolean>();
 
-  alt = input<string>('Uploaded image');
+  /** Falls back to the translated `ui.gallery.imageAlt` text when not provided. */
+  alt = input<string>();
 
   private readonly dialog =
     viewChild.required<ElementRef<HTMLDialogElement>>('dialog');

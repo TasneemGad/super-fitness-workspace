@@ -13,11 +13,11 @@
     <div class="absolute inset-0 bg-[#17191d]/75"></div>
   </div>
   <aside
-    class="relative flex h-24 items-center justify-center overflow-hidden border-b border-orange-500/20 md:h-auto md:border-r md:border-b-0"
+    class="relative flex h-24 items-center justify-center overflow-hidden border-b border-orange-500/20 md:h-auto md:border-e md:border-b-0"
   >
     <img
       src="assets/auth/hero.png"
-      alt="Super Fitness"
+      [alt]="'app.name' | translate"
       width="3000"
       height="3000"
       class="relative h-full w-36 object-contain md:absolute md:top-16 md:left-1/2 md:h-auto md:w-1/3 md:max-w-52 md:-translate-x-1/2"
@@ -32,7 +32,7 @@
   </aside>
   <section
     class="flex min-h-0 min-w-0 overflow-y-auto px-4 py-6 [scrollbar-width:none] sm:px-8 md:py-8 lg:px-12 [&::-webkit-scrollbar]:hidden"
-    aria-label="Authentication"
+    [attr.aria-label]="'auth.layout.label' | translate"
   >
     <div class="m-auto flex w-full min-w-0 justify-center">
       <router-outlet />

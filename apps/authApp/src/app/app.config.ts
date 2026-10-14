@@ -1,12 +1,13 @@
 import {
   ApplicationConfig,
+  inject,
   isDevMode,
+  provideAppInitializer,
   provideBrowserGlobalErrorListeners,
 } from '@angular/core';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { provideRouter } from '@angular/router';
-import { provideTranslateService } from '@ngx-translate/core';
-import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
+import { LanguageService, languageInterceptor, provideI18n } from '@org/i18n';
 
 import {
   API_BASE_URL,
@@ -28,9 +29,10 @@ export const appConfig: ApplicationConfig = {
     },
 
     provideBrowserGlobalErrorListeners(),
+    provideAppInitializer(() => inject(LanguageService).init()),
 
     provideHttpClient(
-      withInterceptors([authInterceptor])
+      withInterceptors([authInterceptor, languageInterceptor])
     ),
 
     {
@@ -39,14 +41,7 @@ export const appConfig: ApplicationConfig = {
         (isDevMode() ? DEV_API_CONFIG : PRODUCTION_API_CONFIG).apiBaseUrl,
     },
 
-    provideTranslateService({
-      loader: provideTranslateHttpLoader({
-        prefix: '/assets/i18n/',
-        suffix: '.json',
-      }),
-      fallbackLang: 'en',
-      lang: 'en',
-    }),
+    provideI18n(['shell', 'auth']),
 
     provideRouter(appRoutes),
   ],

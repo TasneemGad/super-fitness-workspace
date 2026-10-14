@@ -1,4 +1,4 @@
-<owl-carousel-o [options]="options()">
+<owl-carousel-o [options]="carouselOptions()">
   @for (item of items(); track itemId()(item)) {
     <ng-template carouselSlide [id]="itemId()(item)">
       <ng-container

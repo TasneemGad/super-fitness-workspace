@@ -57,7 +57,7 @@
       }
       </div>
       <div class="hidden md:block">
-        <app-owl-carousel [items]="muscles()" [options]="customOptions" [itemId]="getMuscleId">
+        <app-owl-carousel [items]="muscles()" [options]="customOptions()" [itemId]="getMuscleId">
           <ng-template #slide let-muscle>
             <app-info-card [image]="muscle.image" [title]="muscle.name" />
           </ng-template>

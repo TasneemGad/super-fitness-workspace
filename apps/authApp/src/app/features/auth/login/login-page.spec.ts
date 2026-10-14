@@ -6,9 +6,22 @@ import {
 } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideRouter, Router } from '@angular/router';
+import { TranslateService, provideTranslateService } from '@ngx-translate/core';
 import { API_BASE_URL, AuthSession } from '@super-fitness/data-access-user';
 import { DynamicForm } from '@org/ui';
 import { LoginPage } from './login-page';
+
+const en = {
+  auth: {
+    login: {
+      eyebrow: 'Hey There',
+      title: 'Welcome Back',
+      heading: 'Login',
+      forgotPassword: 'Forgot Password?',
+      registerLink: 'Sign Up',
+    },
+  },
+};
 
 const BASE_URL = 'https://fitness.elevateegy.com/api/v1';
 const SIGNIN_URL = `${BASE_URL}/auth/signin`;
@@ -36,8 +49,11 @@ describe('LoginPage', () => {
         provideHttpClient(),
         provideHttpClientTesting(),
         { provide: API_BASE_URL, useValue: BASE_URL },
+        provideTranslateService({ fallbackLang: 'en', lang: 'en' }),
       ],
     }).compileComponents();
+
+    TestBed.inject(TranslateService).setTranslation('en', en);
 
     TestBed.inject(AuthSession).clear();
 
@@ -73,7 +89,7 @@ describe('LoginPage', () => {
     const root: HTMLElement = fixture.nativeElement;
 
     expect(root.querySelectorAll('app-social-sign-in .social-button').length).toBe(3);
-    expect(root.querySelector('.auth-footnote')?.textContent).toContain('Register');
+    expect(root.querySelector('.auth-footnote')?.textContent).toContain('Sign Up');
   });
 
   it('POSTs the credentials to the signin endpoint', async () => {
@@ -117,12 +133,12 @@ describe('LoginPage', () => {
   });
 
 
-    it('links "Forget Password ?" to the reset flow', () => {
+    it('links "Forgot Password?" to the reset flow', () => {
     const link: HTMLAnchorElement = fixture.nativeElement.querySelector(
       '.auth-row-end a.auth-link'
     );
 
-    expect(link.textContent?.trim()).toBe('Forget Password ?');
+    expect(link.textContent?.trim()).toBe('Forgot Password?');
     expect(link.getAttribute('href')).toBe('/forgot-password');
   });
 });

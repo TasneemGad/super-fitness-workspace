@@ -11,6 +11,7 @@
       display: block;
       width: 10px;
       height: 10px;
+      margin: 0;
       border-radius: 50%;
       background: #242424;
       transition: all 0.3s ease;
@@ -18,19 +19,13 @@
 
     .owl-dot.active span {
       width: 30px;
-      height: 10px;
       border-radius: 12px;
       background: #ff4100;
       opacity: 1;
     }
-
-    :host-context(.dark) ::ng-deep .owl-carousel .owl-dots {
-    .owl-dot span {
-      background: #f3f3f4;
-    }
-    .owl-dot.active span {
-      background: #ff4100;
-    }
-     }
   }
+}
+
+:host-context(.dark) ::ng-deep .owl-carousel .owl-dots .owl-dot:not(.active) span {
+  background: #f3f3f4;
 }

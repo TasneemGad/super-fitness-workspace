@@ -67,7 +67,8 @@
   width: 100%;
   max-width: calc(330 * var(--u));
   margin: 0;
-  padding: 0.75rem 0.75rem 0.75rem 1.75rem;
+  padding-block: 0.75rem;
+  padding-inline: 1.75rem 0.75rem;
   border: 1px solid rgb(239 68 68 / 30%);
   border-radius: 0.75rem;
   background: rgb(239 68 68 / 10%);

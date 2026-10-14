@@ -6,6 +6,7 @@ import {
   signal,
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { TranslatePipe } from '@ngx-translate/core';
 import { AuthHeader } from '@org/ui';
 import { AuthFacade } from '../../../auth.facade';
 import {
@@ -26,7 +27,7 @@ import { RegistrationFlowService } from '../../services/registration-flow.servic
  */
 @Component({
   selector: 'app-register-account-page',
-  imports: [AuthHeader, RegisterAccountStep],
+  imports: [AuthHeader, RegisterAccountStep, TranslatePipe],
   templateUrl: './register-account.page.html',
   styleUrls: [
     './register-account.page.css',

@@ -1,5 +1,8 @@
 import { HttpErrorResponse } from '@angular/common/http';
 
+/** i18n key — render it through the translate pipe/service. */
+const GENERIC_ERROR_KEY = 'auth.errors.generic';
+
 export function extractError(error: unknown): string {
   if (error instanceof HttpErrorResponse) {
     const payload = error.error as Record<string, unknown> | undefined;
@@ -19,7 +22,7 @@ export function extractError(error: unknown): string {
       return error.message;
     }
 
-    return 'Something went wrong. Please try again.';
+    return GENERIC_ERROR_KEY;
   }
 
   if (typeof error === 'object' && error !== null) {
@@ -41,5 +44,5 @@ export function extractError(error: unknown): string {
     return error.message;
   }
 
-  return 'Something went wrong. Please try again.';
+  return GENERIC_ERROR_KEY;
 }

@@ -1,11 +1,12 @@
 import { Component, computed, input, signal } from '@angular/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { FieldTree, FormField } from '@angular/forms/signals';
 import { PasswordFieldConfig } from '../../../../models/field-types';
 import { FieldIcon } from '../../../icon/field-icon';
 
 @Component({
   selector: 'lib-password-field',
-  imports: [FormField, FieldIcon],
+  imports: [FormField, FieldIcon, TranslatePipe],
   template: `
     <div class="field-control">
       @if (field().label) {
@@ -34,7 +35,7 @@ import { FieldIcon } from '../../../icon/field-icon';
           <button
             type="button"
             class="field-toggle"
-            [attr.aria-label]="visible() ? 'Hide password' : 'Show password'"
+            [attr.aria-label]="(visible() ? 'form.hidePassword' : 'form.showPassword') | translate"
             [attr.aria-pressed]="visible()"
             [attr.aria-controls]="field().key"
             (click)="visible.set(!visible())"

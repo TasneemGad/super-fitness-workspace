@@ -1,4 +1,4 @@
-<h2 class="auth-title">Register</h2>
+<h2 class="auth-title">{{ 'auth.register.account.heading' | translate }}</h2>
 
 <app-auth-feedback [errors]="stepper.errors()" [notice]="notice()" />
 
@@ -8,13 +8,13 @@
   [initialData]="stepper.draft()"
   [submitting]="stepper.submitting()"
   [disableSubmitWhenInvalid]="false"
-  submitLabel="Register"
+  [submitLabel]="'auth.register.account.submit' | translate"
   (formSubmit)="onSubmit($event)"
 >
   <div formBeforeSubmit>
     <div class="auth-row-end">
       <a class="auth-link auth-link--strong" routerLink="/auth/forgot-password">
-        Forget Password ?
+        {{ 'auth.login.forgotPassword' | translate }}
       </a>
     </div>
 
@@ -22,7 +22,9 @@
   </div>
 
   <p formAfterSubmit class="auth-footnote">
-    Already Have An Account ?
-    <a class="auth-link auth-link--strong" routerLink="/auth/login">Login</a>
+    {{ 'auth.register.account.loginPrompt' | translate }}
+    <a class="auth-link auth-link--strong" routerLink="/auth/login">{{
+      'auth.register.account.loginLink' | translate
+    }}</a>
   </p>
 </lib-dynamic-form>

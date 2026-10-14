@@ -1,4 +1,5 @@
 import { TestBed } from '@angular/core/testing';
+import { provideTranslateService } from '@ngx-translate/core';
 import { Subject } from 'rxjs';
 import {
   AuthRepository,
@@ -71,6 +72,7 @@ describe('AuthFacade', () => {
       providers: [
         AuthFacade,
         { provide: AuthRepository, useValue: { signup, signin } },
+        provideTranslateService(),
       ],
     });
 

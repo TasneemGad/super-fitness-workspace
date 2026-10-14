@@ -1,4 +1,5 @@
-import { Component, DestroyRef, OnInit, inject, signal } from '@angular/core';
+import { Component, DestroyRef, OnInit, computed, inject, signal } from '@angular/core';
+import { OwlOptions } from 'ngx-owl-carousel-o';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TranslatePipe } from '@ngx-translate/core';
 import { RouterLink } from '@angular/router';
@@ -9,6 +10,7 @@ import { FitnessMarquee } from '../../../landing/ui/fitness-marquee/fitness-marq
 import { MealCategoryModel } from '../../models/meal-categories.model';
 import { MealsService } from '../../services/meals.service';
 import { SmartCoach } from '../../../smart-coach/smart-coach';
+import { LanguageService } from '@org/i18n';
 
 @Component({
   selector: 'app-healthy-section',
@@ -29,42 +31,36 @@ import { SmartCoach } from '../../../smart-coach/smart-coach';
 export class HealthySectionComponent implements OnInit {
   private readonly mealsService = inject(MealsService);
   private readonly destroyRef = inject(DestroyRef);
+  private readonly languageService = inject(LanguageService);
 
   readonly mealCategories = signal<MealCategoryModel[]>([]);
   readonly isLoading = signal(true);
   readonly errorMessage = signal<string | null>(null);
 
   readonly getCategoryId = (category: MealCategoryModel): string =>category.idCategory;
-  get customOptions () {
-    const itemCount = this.mealCategories().length;
+  // computed (not a getter) so owl-carousel gets a stable options object and doesn't re-init every change detection
+  readonly customOptions = computed<OwlOptions>(() => {
+    const hasMoreThanOnePage = this.mealCategories().length > 3;
     return {
-    loop: false,
-    mouseDrag: true,
-    touchDrag: true,
-    pullDrag: true,
-    dots: itemCount > 3,
-    nav: false,
-    navSpeed: 700,
-    margin: 16,
-    autoWidth: false,
-   autoHeight: false,
-
-  responsive: {
-    0: {
-      items: 1,
-      margin: 12,
-    },
-    640: {
-      items: 2,
+      loop: hasMoreThanOnePage,
+      autoplay: hasMoreThanOnePage,
+      autoplayTimeout: 4000,
+      autoplayHoverPause: true,
+      smartSpeed: 700,
+      mouseDrag: true,
+      touchDrag: true,
+      pullDrag: true,
+      dots: hasMoreThanOnePage,
+      nav: false,
+      rtl: this.languageService.isRtl(),
       margin: 16,
-    },
-    1024: {
-      items: 3,
-      margin: 16,
-    },
-  },
-  }
-  };
+      responsive: {
+        0: { items: 1, margin: 12 },
+        640: { items: 2, margin: 16 },
+        1024: { items: 3, margin: 16 },
+      },
+    };
+  });
 ngOnInit(): void {
   this.loadCategories();
 }

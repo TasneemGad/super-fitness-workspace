@@ -34,6 +34,6 @@ export const appConfig: ApplicationConfig = {
       useFactory: () =>
         (isDevMode() ? DEV_API_CONFIG : PRODUCTION_API_CONFIG).apiBaseUrl,
     },
-    provideI18n(),
+    provideI18n(['shell', 'auth', 'fitness']),
   ],
 };

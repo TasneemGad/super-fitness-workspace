@@ -12,7 +12,7 @@ import { DynamicForm } from '@org/ui';
 import { API_BASE_URL } from '@super-fitness/data-access-user';
 import { remoteRoutes } from '../../../remote-entry/entry.routes';
 import { PasswordResetState } from './password-reset.state';
-import en from '../../../../../public/assets/i18n/en.json';
+import en from '../../../../../public/assets/i18n/auth/en.json';
 
 const BASE_URL = 'https://fitness.elevateegy.com/api/v1';
 const EMAIL = 'ada@example.com';

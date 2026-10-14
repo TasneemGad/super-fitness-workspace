@@ -14,13 +14,13 @@
       (click)="galleryOpen.set(true)"
     >
       <lib-field-icon name="image" [size]="18" />
-      View {{ field().label }}
+      {{ 'form.upload.view' | translate: { label: field().label } }}
     </button>
   } @else {
     <label class="upload-box">
       <span class="upload-action">
         <lib-field-icon name="upload" [size]="18" />
-        Upload file
+        {{ 'form.upload.uploadFile' | translate }}
       </span>
       <input
         type="file"
@@ -43,7 +43,7 @@
 
   @if (rejected().length) {
     <span class="field-error" role="alert">
-      Too large, not added: {{ rejected().join(', ') }}
+      {{ 'form.upload.tooLarge' | translate: { files: rejected().join(', ') } }}
     </span>
   }
 

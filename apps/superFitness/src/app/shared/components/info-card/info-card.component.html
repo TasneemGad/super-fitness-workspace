@@ -11,7 +11,7 @@
   </div>
 
   @if (title()) {
-  <div class="absolute inset-x-0 bottom-0  z-[2]  h-[100px] shrink-0 bottom-0 left-0 right-0 flex flex-col gap-2 items-start bg-white/50  dark:bg-[#24242480]
+  <div class="absolute inset-x-0 bottom-0  z-[2]  h-[100px] shrink-0 flex flex-col gap-2 items-start bg-white/50  dark:bg-[#24242480]
               p-3 sm:p-4 backdrop-blur-[29.1px]">
     <h3
       class="font-['Baloo_Thambi_2'] font-bold  text-base sm:text-lg lg:text-[22.2px]
@@ -25,7 +25,7 @@
         class="font-['Baloo_Thambi_2'] font-medium text-[20px] leading-[18px] tracking-[0px] align-middle capitalize text-[#FF4100]">{{ buttonText() | translate }}</span>
       <!-- Icon -->
       <div
-        class="w-6 h-6 p-[2px] rounded-[63px] bg-[#FF4100] text-[#242424] flex items-center justify-center transition-transform duration-300 group-hover/btn:translate-x-1">
+        class="w-6 h-6 p-[2px] rounded-[63px] bg-[#FF4100] text-[#242424] flex items-center justify-center transition-transform duration-300 group-hover/btn:translate-x-1 rtl:-scale-x-100 rtl:group-hover/btn:-translate-x-1">
         <svg width="7" height="7" viewBox="0 0 7 7" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path fill-rule="evenodd" clip-rule="evenodd"
             d="M5.77016 0.339312C4.94268 1.1668 3.43467 1.16713 2.60685 0.339308L2.26744 -0.000102838L1.58861 0.67872L1.92803 1.01813C2.53014 1.62025 3.35898 1.92097 4.18817 1.92131L0.000172917 6.1093L0.678995 6.78813L4.86699 2.60013C4.86733 3.42931 5.16805 4.25816 5.77017 4.86027L6.10958 5.19968L6.7884 4.52086L6.44899 4.18145C5.62116 3.35362 5.6215 1.84562 6.44899 1.01813L6.7884 0.678723L6.10958 -9.94663e-05L5.77016 0.339312Z"

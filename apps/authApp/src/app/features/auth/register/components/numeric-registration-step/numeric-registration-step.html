@@ -7,7 +7,8 @@
     <lib-question-description [text]="description()" />
 
     <!-- Horizontal numeric drum-roll wheel -->
-    <div class="nrs-wheel">
+    <!-- Numbers scroll left-to-right in every language, so the wheel never mirrors. -->
+    <div class="nrs-wheel" dir="ltr">
       <ng-container [ngTemplateOutlet]="selectorTemplate() ?? defaultSelector"
         [ngTemplateOutletContext]="selectorContext()" />
       <ng-template #defaultSelector>
@@ -16,8 +17,9 @@
     </div>
 
     <!-- Primary CTA -->
-    <button id="numeric-step-next-btn" type="button" class="nrs-btn" (click)="onNext()" [attr.aria-label]="nextLabel()">
-      {{ nextLabel() }}
+    <button id="numeric-step-next-btn" type="button" class="nrs-btn" (click)="onNext()"
+      [attr.aria-label]="nextLabel() || ('auth.register.common.next' | translate)">
+      {{ nextLabel() || ('auth.register.common.next' | translate) }}
     </button>
   </div>
 </div>

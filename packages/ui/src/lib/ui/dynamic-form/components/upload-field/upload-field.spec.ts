@@ -1,3 +1,4 @@
+import { provideTranslateService } from '@ngx-translate/core';
 import { TestBed } from '@angular/core/testing';
 import { UploadField } from './upload-field';
 import { UploadFieldConfig } from '../../../../models/field-types';
@@ -22,6 +23,7 @@ describe('UploadField', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [UploadField],
+      providers: [provideTranslateService()],
     }).compileComponents();
   });
 

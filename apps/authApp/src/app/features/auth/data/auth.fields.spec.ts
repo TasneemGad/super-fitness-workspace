@@ -57,18 +57,18 @@ describe('REGISTER_ACCOUNT_FIELDS validation', () => {
   it('rejects a malformed email', () => {
     const email = byKey(REGISTER_ACCOUNT_FIELDS, 'email');
     expect(check(email, 'ada@example.com')).toBeNull();
-    expect(check(email, 'not-an-email')).toBe('Enter a valid email address.');
+    expect(check(email, 'not-an-email')).toBe('auth.validation.email');
   });
 
   it('enforces the API password pattern', () => {
     const password = byKey(REGISTER_ACCOUNT_FIELDS, 'password');
     expect(check(password, 'Passw0rd!')).toBeNull();
-    expect(check(password, 'weakpass')).toContain('At least 8 characters');
+    expect(check(password, 'weakpass')).toBe('auth.validation.password');
   });
 
   it('requires a real name rather than a single character', () => {
     const firstName = byKey(REGISTER_ACCOUNT_FIELDS, 'firstName');
     expect(check(firstName, 'Ada')).toBeNull();
-    expect(check(firstName, 'A')).toBe('Must be at least 2 characters.');
+    expect(check(firstName, 'A')).toBe('auth.validation.minLength2');
   });
 });

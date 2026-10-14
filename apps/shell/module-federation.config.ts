@@ -3,7 +3,7 @@ import type { ModuleFederationConfig } from '@nx/module-federation';
 const config: ModuleFederationConfig = {
   name: 'shell',
   shared: (name, config) =>
-    name === '@super-fitness/auth' || name === '@org/ui'
+    name === '@super-fitness/auth' || name === '@org/ui' || name === '@org/i18n'
       ? { ...config, singleton: true }
       : config,
   /**

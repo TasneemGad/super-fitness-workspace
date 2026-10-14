@@ -1,6 +1,9 @@
 <main class="auth-page">
   <div class="auth-area">
-    <lib-auth-header eyebrow="Hey There" title="Create An Account" />
+    <lib-auth-header
+      [eyebrow]="'auth.register.account.eyebrow' | translate"
+      [title]="'auth.register.account.title' | translate"
+    />
 
     <section class="auth-card">
       <app-register-account-step />

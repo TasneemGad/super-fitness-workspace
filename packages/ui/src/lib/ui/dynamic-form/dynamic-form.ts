@@ -19,7 +19,7 @@ import {
   FieldTree,
 } from '@angular/forms/signals';
 import { forkJoin, map, of } from 'rxjs';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { FIELD_COMPONENTS } from '../../constant/field-registry';
 import { FieldConfig, FileUploadFn, FormMode } from '../../models/field-types';
 
@@ -27,7 +27,7 @@ type FieldInputs = { field: FieldConfig; control: FieldTree<unknown> };
 
 @Component({
   selector: 'lib-dynamic-form',
-  imports: [NgComponentOutlet],
+  imports: [NgComponentOutlet, TranslatePipe],
   templateUrl: './dynamic-form.html',
   styleUrl: './dynamic-form.css',
 })
@@ -45,8 +45,10 @@ export class DynamicForm {
   mode = input<FormMode>('create');
   initialData = input<Record<string, unknown> | null>(null);
   uploadFn = input<FileUploadFn>();
-  submitLabel = input<string>('Add');
-  loadingLabel = input<string>('Submitting...');
+  /** Falls back to the translated `form.submit` label when not provided. */
+  submitLabel = input<string>();
+  /** Falls back to the translated `form.submitting` label when not provided. */
+  loadingLabel = input<string>();
 
   submitClass = input<string>('');
 

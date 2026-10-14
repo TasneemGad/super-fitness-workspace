@@ -2,10 +2,12 @@ import { Signal, computed, inject } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { TranslateService } from '@ngx-translate/core';
 import { FieldConfig } from '@org/ui';
+import { merge } from 'rxjs';
 
 export function translateFields(fields: FieldConfig[]): Signal<FieldConfig[]> {
   const translate = inject(TranslateService);
-  const refresh = toSignal(translate.onTranslationRefresh);
+  // Re-resolve labels both when the language switches and when its file loads.
+  const refresh = toSignal(merge(translate.onLangChange, translate.onTranslationRefresh));
   const t = (key: string) => translate.instant(key) as string;
 
   return computed(() => {

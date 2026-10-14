@@ -49,7 +49,8 @@ export class ChoiceRegistrationStep {
   /** Two-way binding for the selected option value (null = nothing picked). */
   value = model<string | null>(null);
 
-  nextLabel = input('Next');
+  /** Label for the primary CTA button (defaults to the translated "Next"). */
+  nextLabel = input('');
   /** Shows the CTA as busy and blocks it (e.g. while signing up). */
   submitting = input(false);
   errors = input<readonly string[]>([]);

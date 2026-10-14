@@ -5,7 +5,13 @@ import { AiService } from './service/ai.service';
 interface Message {
   sender: 'bot' | 'user';
   text: string;
+  /** Translation key for app-generated messages; takes precedence over `text` when rendering */
+  i18nKey?: string;
   avatar?: string;
+}
+interface PreviousChat {
+  sender: 'bot' | 'user';
+  text: string;
 }
 @Component({
   imports: [CommonModule, TranslatePipe],
@@ -20,27 +26,27 @@ export class SmartCoach {
   isLoading = signal<boolean>(false);
 
   messages = signal<Message[]>([
-    { sender: 'bot', text: 'Hello How Can I Assist You Today ?' },
+    { sender: 'bot', text: '', i18nKey: 'chat.greeting' },
   ]);
 
-  previousChats = signal<string[]>([]);
+  previousChats = signal<PreviousChat[]>([]);
 
   async sendMessage(input: HTMLInputElement) {
     const text = input.value.trim();
     if (!text || this.isLoading()) return;
     input.value = '';
-    this.previousChats.update((chats) => [...chats, `User: ${text}`]);
+    this.previousChats.update((chats) => [...chats, { sender: 'user', text }]);
     this.messages.update(m => [...m, { sender: 'user', text }]);
     this.isLoading.set(true);
 
     try {
       const reply = await this.aiService.ask(text);
       this.messages.update(m => [...m, { sender: 'bot', text: reply }]);
-      this.previousChats.update((chats) => [...chats, `AI: ${reply}`]);
+      this.previousChats.update((chats) => [...chats, { sender: 'bot', text: reply }]);
     } catch {
       this.messages.update(m => [
         ...m,
-        { sender: 'bot', text: 'Something went wrong, please try again.' },
+        { sender: 'bot', text: '', i18nKey: 'chat.error' },
       ]);
     } finally {
       this.isLoading.set(false);

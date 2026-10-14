@@ -1,4 +1,5 @@
 import { Injectable, inject, signal } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
 import {
   ActivityLevel,
@@ -39,6 +40,7 @@ export function toSigninRequest(model: Record<string, unknown>): SigninRequest {
 export class AuthFacade {
   private readonly repository = inject(AuthRepository);
   private readonly session = inject(AuthSession);
+  private readonly translate = inject(TranslateService);
 
   private readonly _submitting = signal(false);
   private readonly _errors = signal<string[]>([]);
@@ -77,7 +79,7 @@ export class AuthFacade {
         this._errors.set(
           error instanceof AuthRequestError
             ? error.messages
-            : ['Something went wrong. Please try again.']
+            : [this.translate.instant('auth.errors.generic')]
         );
         this._submitting.set(false);
       },

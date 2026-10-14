@@ -1,10 +1,11 @@
 import { Component, inject } from '@angular/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { FieldIcon } from '@org/ui';
 import { AppLanguage, LanguageService } from '../../services/language.service';
 
 @Component({
   selector: 'lib-language-switcher',
-  imports: [FieldIcon],
+  imports: [FieldIcon, TranslatePipe],
   templateUrl: './language-switcher.html',
 })
 export class LanguageSwitcher {

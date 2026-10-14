@@ -28,7 +28,7 @@
 
     <button type="button" class="rs-next choice-next" [disabled]="value() === null || submitting()"
       [attr.aria-busy]="submitting()" (click)="onNext()">
-      {{ nextLabel() }}
+      {{ nextLabel() || ('auth.register.common.next' | translate) }}
     </button>
   </div>
 </div>

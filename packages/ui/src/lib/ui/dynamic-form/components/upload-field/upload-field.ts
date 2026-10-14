@@ -1,4 +1,5 @@
 import { Component, computed, input, signal } from '@angular/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { FieldTree } from '@angular/forms/signals';
 import { UploadFieldConfig } from '../../../../models/field-types';
 import { FieldIcon } from '../../../icon/field-icon';
@@ -8,7 +9,7 @@ const DEFAULT_MAX_FILE_SIZE = 5_000_000;
 
 @Component({
   selector: 'lib-upload-field',
-  imports: [FieldIcon, ImageGalleryModal],
+  imports: [FieldIcon, ImageGalleryModal, TranslatePipe],
   templateUrl: './upload-field.html',
   styleUrls: ['../field.css', './upload-field.css'],
 })

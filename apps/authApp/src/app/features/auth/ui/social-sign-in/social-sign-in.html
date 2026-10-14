@@ -1,11 +1,14 @@
-<div class="social-divider"><span>Or</span></div>
+<div class="social-divider"><span>{{ 'auth.social.or' | translate }}</span></div>
 
 <div class="social-row">
   @for (provider of providers; track provider) {
     <button
       type="button"
       class="social-button"
-      [attr.aria-label]="'Continue with ' + provider"
+      [attr.aria-label]="
+        'auth.social.continueWith'
+          | translate: { provider: ('auth.social.providers.' + provider | translate) }
+      "
       (click)="providerSelected.emit(provider)"
     >
       @switch (provider) {

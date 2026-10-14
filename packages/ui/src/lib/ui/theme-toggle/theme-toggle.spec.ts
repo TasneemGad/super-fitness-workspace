@@ -1,3 +1,4 @@
+import { provideTranslateService } from '@ngx-translate/core';
 import { TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { ThemeService } from '../../theme/theme.service';
@@ -9,6 +10,7 @@ describe('ThemeToggle', () => {
     localStorage.clear();
     await TestBed.configureTestingModule({
       imports: [ThemeToggle],
+      providers: [provideTranslateService()],
     }).compileComponents();
   });
 
@@ -25,12 +27,12 @@ describe('ThemeToggle', () => {
     const icon = fixture.debugElement.query(By.directive(FieldIcon))
       .componentInstance as FieldIcon;
     expect(icon.name()).toBe('sun');
-    expect(button.getAttribute('aria-label')).toBe('Switch to light mode');
+    expect(button.getAttribute('aria-label')).toBe('ui.theme.switchToLight');
     button.click();
     fixture.detectChanges();
     expect(TestBed.inject(ThemeService).theme()).toBe('light');
     expect(icon.name()).toBe('moon');
-    expect(button.getAttribute('aria-label')).toBe('Switch to dark mode');
+    expect(button.getAttribute('aria-label')).toBe('ui.theme.switchToDark');
     button.click();
     fixture.detectChanges();
     expect(icon.name()).toBe('sun');
@@ -67,15 +69,15 @@ describe('ThemeToggle', () => {
     second.detectChanges();
     expect(
       second.nativeElement.querySelector('button').getAttribute('aria-label'),
-    ).toBe('Switch to dark mode');
+    ).toBe('ui.theme.switchToDark');
     TestBed.inject(ThemeService).setTheme('dark');
     first.detectChanges();
     second.detectChanges();
     expect(
       first.nativeElement.querySelector('button').getAttribute('aria-label'),
-    ).toBe('Switch to light mode');
+    ).toBe('ui.theme.switchToLight');
     expect(
       second.nativeElement.querySelector('button').getAttribute('aria-label'),
-    ).toBe('Switch to light mode');
+    ).toBe('ui.theme.switchToLight');
   });
 });

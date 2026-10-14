@@ -79,3 +79,8 @@
   outline: 2px solid #fff;
   outline-offset: 2px;
 }
+
+/* Mirror the prev/next chevrons in right-to-left layouts. */
+:host-context([dir='rtl']) .gallery-nav > * {
+  transform: scaleX(-1);
+}

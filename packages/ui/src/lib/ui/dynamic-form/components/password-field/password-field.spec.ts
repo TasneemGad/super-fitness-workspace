@@ -1,3 +1,4 @@
+import { provideTranslateService } from '@ngx-translate/core';
 import { TestBed } from '@angular/core/testing';
 import { PasswordField } from './password-field';
 import { PasswordFieldConfig } from '../../../../models/field-types';
@@ -24,6 +25,7 @@ describe('PasswordField', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [PasswordField],
+      providers: [provideTranslateService()],
     }).compileComponents();
   });
 
@@ -49,12 +51,12 @@ describe('PasswordField', () => {
     const input: HTMLInputElement = fixture.nativeElement.querySelector('input');
     const toggle: HTMLButtonElement = fixture.nativeElement.querySelector('.field-toggle');
 
-    expect(toggle.getAttribute('aria-label')).toBe('Show password');
+    expect(toggle.getAttribute('aria-label')).toBe('form.showPassword');
     toggle.click();
     await fixture.whenStable();
     expect(input.type).toBe('text');
     expect(toggle.getAttribute('aria-pressed')).toBe('true');
-    expect(toggle.getAttribute('aria-label')).toBe('Hide password');
+    expect(toggle.getAttribute('aria-label')).toBe('form.hidePassword');
 
     toggle.click();
     await fixture.whenStable();

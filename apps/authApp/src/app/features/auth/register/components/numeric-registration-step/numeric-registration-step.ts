@@ -8,6 +8,7 @@ import {
   model,
   output,
 } from '@angular/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import {
   NumericWheelSelector,
   QuestionDescription,
@@ -62,6 +63,7 @@ export interface NumericRegistrationSelectorContext {
     NumericWheelSelector,
     QuestionTitle,
     QuestionDescription,
+    TranslatePipe,
   ],
 })
 export class NumericRegistrationStep {
@@ -87,8 +89,8 @@ export class NumericRegistrationStep {
   /** Two-way binding for the currently selected numeric value. */
   value = model.required<number>();
 
-  /** Label for the primary CTA button (default "Next"). */
-  nextLabel = input('Next');
+  /** Label for the primary CTA button (defaults to the translated "Next"). */
+  nextLabel = input('');
   /** Optional replacement for the default numeric wheel. */
   selectorTemplate = input<
     TemplateRef<NumericRegistrationSelectorContext> | null

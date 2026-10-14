@@ -111,7 +111,7 @@ ul {
 .drawer {
   position: fixed;
   top: 0;
-  left: 0;
+  inset-inline-start: 0;
   z-index: 70;
   width: min(278px, calc(100vw - 48px));
   padding: 14px 13px 12px;
@@ -143,6 +143,18 @@ ul {
   from {
     transform: translateX(-100%);
   }
+}
+
+@keyframes slide-in-rtl {
+  from {
+    transform: translateX(100%);
+  }
+}
+
+/* RTL: the drawer opens from the right edge, so mirror its slide-in and shadow */
+:host-context([dir='rtl']) .drawer {
+  box-shadow: -8px 8px 28px rgb(32 38 37 / 12%);
+  animation-name: slide-in-rtl;
 }
 
 @keyframes fade-in {

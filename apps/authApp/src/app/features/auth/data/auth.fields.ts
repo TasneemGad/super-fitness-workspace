@@ -4,26 +4,31 @@ import { PASSWORD_PATTERN } from '@super-fitness/data-access-user';
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
 function emailRule(value: unknown): string | null {
-  return EMAIL_PATTERN.test(String(value)) ? null : 'Enter a valid email address.';
+  return EMAIL_PATTERN.test(String(value)) ? null : 'auth.validation.email';
 }
 
 function passwordRule(value: unknown): string | null {
   return PASSWORD_PATTERN.test(String(value))
     ? null
-    : 'At least 8 characters, with an uppercase, a lowercase, a number and a symbol.';
+    : 'auth.validation.password';
 }
+
+/** Rules return i18n keys; `translateFields` resolves them at render time. */
+const MIN_LENGTH_KEYS: Readonly<Record<number, string>> = {
+  2: 'auth.validation.minLength2',
+};
 
 function minLengthRule(min: number) {
   return (value: unknown): string | null =>
-    String(value).trim().length >= min ? null : `Must be at least ${min} characters.`;
+    String(value).trim().length >= min ? null : MIN_LENGTH_KEYS[min];
 }
 
 export const LOGIN_FIELDS: FieldConfig[] = [
   {
     key: 'email',
     type: 'email',
-    label: 'Email',
-    placeholder: 'Email',
+    label: 'auth.login.email',
+    placeholder: 'auth.login.email',
     icon: 'email',
     autocomplete: 'email',
     hideLabel: true,
@@ -33,8 +38,8 @@ export const LOGIN_FIELDS: FieldConfig[] = [
   {
     key: 'password',
     type: 'password',
-    label: 'Password',
-    placeholder: 'Password',
+    label: 'auth.login.password',
+    placeholder: 'auth.login.password',
     icon: 'lock',
     autocomplete: 'current-password',
     hideLabel: true,
@@ -86,8 +91,8 @@ export const REGISTER_ACCOUNT_FIELDS: FieldConfig[] = [
   {
     key: 'firstName',
     type: 'text',
-    label: 'First Name',
-    placeholder: 'First Name',
+    label: 'auth.register.account.firstName',
+    placeholder: 'auth.register.account.firstName',
     icon: 'user',
     autocomplete: 'given-name',
     hideLabel: true,
@@ -97,8 +102,8 @@ export const REGISTER_ACCOUNT_FIELDS: FieldConfig[] = [
   {
     key: 'lastName',
     type: 'text',
-    label: 'Last Name',
-    placeholder: 'Last Name',
+    label: 'auth.register.account.lastName',
+    placeholder: 'auth.register.account.lastName',
     icon: 'user',
     autocomplete: 'family-name',
     hideLabel: true,
@@ -108,8 +113,8 @@ export const REGISTER_ACCOUNT_FIELDS: FieldConfig[] = [
   {
     key: 'email',
     type: 'email',
-    label: 'Email',
-    placeholder: 'Email',
+    label: 'auth.register.account.email',
+    placeholder: 'auth.register.account.email',
     icon: 'email',
     autocomplete: 'email',
     hideLabel: true,
@@ -119,8 +124,8 @@ export const REGISTER_ACCOUNT_FIELDS: FieldConfig[] = [
   {
     key: 'password',
     type: 'password',
-    label: 'Password',
-    placeholder: 'Password',
+    label: 'auth.register.account.password',
+    placeholder: 'auth.register.account.password',
     icon: 'lock',
     autocomplete: 'new-password',
     hideLabel: true,

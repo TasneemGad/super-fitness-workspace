@@ -10,7 +10,8 @@
     <p class="nws-unit" aria-hidden="true">{{ unit() }}</p>
   }
 
-  <div class="nws-row" role="presentation">
+  <!-- Always LTR: drag/keyboard math is physical (left = smaller), so the row must not mirror in RTL. -->
+  <div class="nws-row" role="presentation" dir="ltr">
     @for (item of items(); track item.offset) {
       <button
         type="button"

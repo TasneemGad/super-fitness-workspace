@@ -1,5 +1,6 @@
 import { Component, signal } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideTranslateService } from '@ngx-translate/core';
 import { NumericRegistrationStep } from './numeric-registration-step';
 
 @Component({
@@ -40,6 +41,7 @@ describe('NumericRegistrationStep', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [CustomSelectorHost],
+      providers: [provideTranslateService()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(CustomSelectorHost);

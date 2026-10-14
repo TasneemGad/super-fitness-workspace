@@ -1,3 +1,4 @@
+import { provideTranslateService } from '@ngx-translate/core';
 import { TestBed } from '@angular/core/testing';
 import { ImageGalleryModal } from './image-gallery-modal';
 
@@ -13,6 +14,7 @@ describe('ImageGalleryModal', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [ImageGalleryModal],
+      providers: [provideTranslateService()],
     }).compileComponents();
   });
 
