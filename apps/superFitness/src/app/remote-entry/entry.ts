@@ -12,4 +12,4 @@ import { HeroSection } from '../features/hero-section/hero-section';
     <router-outlet />
   `,
 })
-export class RemoteEntry {}
+export class RemoteEntry { }

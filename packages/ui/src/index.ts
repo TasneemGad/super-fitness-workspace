@@ -4,6 +4,7 @@ export * from './lib/constant/field-registry';
 export * from './lib/ui/ui';
 export * from './lib/ui/icon/field-icon';
 export * from './lib/ui/auth-header/auth-header';
+export * from './lib/ui/site-button/site-button';
 export * from './lib/ui/dynamic-form/dynamic-form';
 export * from './lib/ui/dynamic-form/components/checkbox-field/checkbox-field';
 export * from './lib/ui/dynamic-form/components/password-field/password-field';
