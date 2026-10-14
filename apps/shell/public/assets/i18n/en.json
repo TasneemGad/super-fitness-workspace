@@ -21,7 +21,10 @@
       "descriptionHighlight": "Upcoming Workouts",
       "error": "Unable to load workouts. Please try again later.",
       "empty": "No muscles found.",
-      "explore": "Explore"
+      "explore": "Explore",
+      "readMore": "Read more",
+      "more": "More workouts",
+      "backToHome": "Back to home"
     },
     "healthy": {
       "title": "Healthy",
@@ -31,6 +34,8 @@
       "descriptionSuffix": " for you",
       "loading": "Loading meal categories...",
       "readMore": "Read more",
+      "more": "More healthy categories",
+      "backToHome": "Back to home",
       "error": "Unable to load meal categories. Please try again later.",
       "empty": "No meal categories are available."
     }
