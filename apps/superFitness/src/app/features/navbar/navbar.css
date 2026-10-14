@@ -193,3 +193,28 @@ ul {
     display: none;
   }
 } */
+
+/* Dark mode */
+:host-context(.dark) .navbar.scrolled {
+  background: rgb(36 36 36 / 92%);
+  box-shadow: 0 4px 20px rgb(0 0 0 / 40%);
+}
+
+:host-context(.dark) .link,
+:host-context(.dark) .drawer-links .link {
+  color: #f3f3f4;
+}
+
+:host-context(.dark) .link:hover,
+:host-context(.dark) .link.active {
+  color: #ff4100;
+}
+
+:host-context(.dark) .drawer {
+  background: #1e1e1e;
+  box-shadow: 8px 8px 28px rgb(0 0 0 / 45%);
+}
+
+:host-context(.dark[dir='rtl']) .drawer {
+  box-shadow: -8px 8px 28px rgb(0 0 0 / 45%);
+}

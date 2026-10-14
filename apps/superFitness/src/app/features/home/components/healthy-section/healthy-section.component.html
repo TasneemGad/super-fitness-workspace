@@ -16,11 +16,11 @@
   ]" align="center" />
 
     @if (isLoading()) {
-    <p class="mt-8 text-center text-lg text-[#242424]" role="status">
+    <p class="mt-8 text-center text-lg text-[#242424] dark:text-[#f3f3f4]" role="status">
       {{ 'home.healthy.loading' | translate }}
     </p>
     } @else if (errorMessage()) {
-    <p class="mt-8 text-center text-lg text-[#242424]" role="alert">
+    <p class="mt-8 text-center text-lg text-[#242424] dark:text-[#f3f3f4]" role="alert">
       {{ errorMessage() | translate }}
     </p>
     } @else if (mealCategories().length > 0) {
@@ -63,7 +63,7 @@
       </div>
     </div>
     } @else {
-    <p class="mt-8 text-center text-lg text-[#242424]">
+    <p class="mt-8 text-center text-lg text-[#242424] dark:text-[#f3f3f4]">
       {{ 'home.healthy.empty' | translate }}
     </p>
     }

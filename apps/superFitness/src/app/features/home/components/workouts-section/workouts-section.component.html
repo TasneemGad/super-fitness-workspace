@@ -12,7 +12,7 @@
   <div class="relative z-10 mx-auto w-full min-w-0">
 
     @if (isLoading()) {
-    <p class="text-lg text-[#242424]">{{ 'home.workouts.loading' | translate }}</p>
+    <p class="text-lg text-[#242424] dark:text-[#f3f3f4]">{{ 'home.workouts.loading' | translate }}</p>
     } @else {
     <div class=" w-full min-h-[77px] mx-auto mb-3 sm:mb-5 lg:mb-6">
       <lib-section-title [primaryText]="'home.workouts.title' | translate"
@@ -40,11 +40,11 @@
       }
     </div>
     @if (isLoadingMuscles()) {
-    <p class="py-8 text-center text-[#242424]" role="status">
+    <p class="py-8 text-center text-[#242424] dark:text-[#f3f3f4]" role="status">
       {{ 'home.workouts.loadingWorkouts' | translate }}
     </p>
     } @else if (errorMessage()) {
-    <p class="py-8 text-center text-[#242424]" role="alert">
+    <p class="py-8 text-center text-[#242424] dark:text-[#f3f3f4]" role="alert">
       {{ errorMessage() | translate }}
     </p>
     } @else if (muscles().length > 0) {
@@ -77,7 +77,7 @@
       </div>
     </div>
     } @else {
-    <p class="py-8 text-center text-[#242424]">
+    <p class="py-8 text-center text-[#242424] dark:text-[#f3f3f4]">
       {{ 'home.workouts.empty' | translate }}
     </p>
     }

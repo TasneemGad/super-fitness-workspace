@@ -6,3 +6,7 @@
   background-size: cover;
 }
 
+
+:host-context(.dark) .healthy-section {
+  background-color: #1e1e1e;
+}

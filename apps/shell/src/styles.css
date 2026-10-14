@@ -25,3 +25,20 @@
   src: url('/assets/fonts/ubuntu.woff2');
 }
 
+
+/* Page colors for light / dark theme (ThemeService toggles .dark on <html>) */
+@layer base {
+  html.dark {
+    color-scheme: dark;
+  }
+
+  body {
+    background-color: #f7f8f8;
+    color: #242424;
+  }
+
+  html.dark body {
+    background-color: #242424;
+    color: #f3f3f4;
+  }
+}

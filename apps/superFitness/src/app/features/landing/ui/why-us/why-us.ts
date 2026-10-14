@@ -9,7 +9,7 @@ import {
 @Component({
   selector: 'app-why-us',
   standalone: true,
-  host: { class: 'block bg-[#f1f3f4]' },
+  host: { class: 'block bg-[#f1f3f4] dark:bg-[#1e1e1e]' },
   imports: [SectionTitle, ParagraphTitle, ParagraphDescription, TranslatePipe],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './why-us.html',

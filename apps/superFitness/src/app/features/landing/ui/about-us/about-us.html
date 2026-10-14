@@ -1,8 +1,8 @@
 <section class="mx-auto grid w-[min(1180px,calc(100%_-_64px))] grid-cols-[minmax(320px,0.92fr)_minmax(0,1.08fr)] items-center gap-[clamp(42px,6vw,86px)] py-[76px] pb-[84px] max-[800px]:w-[min(100%_-_36px,620px)] max-[800px]:grid-cols-1 max-[800px]:gap-9 max-[800px]:py-12" aria-labelledby="about-title">
   <div class="relative min-h-[500px] max-[800px]:min-h-[min(115vw,480px)]" [attr.aria-label]="'landing.aboutUs.galleryLabel' | translate">
-    <img class="absolute start-0 top-0 bottom-[25%] block h-3/4 w-[62%] rounded-[13px] object-cover shadow-[0_18px_40px_rgb(24_31_35_/_10%)]" src="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?auto=format&fit=crop&w=900&q=85" [alt]="'landing.aboutUs.images.kettlebell' | translate" />
-    <img class="absolute end-0 top-[11%] block h-[28%] w-[40%] rounded-[13px] object-cover shadow-[0_18px_40px_rgb(24_31_35_/_10%)]" src="https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?auto=format&fit=crop&w=600&q=85" [alt]="'landing.aboutUs.images.strength' | translate" />
-    <img class="absolute start-[34%] end-0 bottom-0 block h-[61%] w-[63%] rounded-[13px] object-cover shadow-[0_18px_40px_rgb(24_31_35_/_10%)]" src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=800&q=85" [alt]="'landing.aboutUs.images.studio' | translate" />
+    <img class="absolute start-0 top-0 bottom-[25%] block h-3/4 w-[62%] rounded-[13px] object-cover shadow-[0_18px_40px_rgb(24_31_35_/_10%)] dark:shadow-[0_18px_40px_rgb(0_0_0_/_45%)]" src="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?auto=format&fit=crop&w=900&q=85" [alt]="'landing.aboutUs.images.kettlebell' | translate" />
+    <img class="absolute end-0 top-[11%] block h-[28%] w-[40%] rounded-[13px] object-cover shadow-[0_18px_40px_rgb(24_31_35_/_10%)] dark:shadow-[0_18px_40px_rgb(0_0_0_/_45%)]" src="https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?auto=format&fit=crop&w=600&q=85" [alt]="'landing.aboutUs.images.strength' | translate" />
+    <img class="absolute start-[34%] end-0 bottom-0 block h-[61%] w-[63%] rounded-[13px] object-cover shadow-[0_18px_40px_rgb(24_31_35_/_10%)] dark:shadow-[0_18px_40px_rgb(0_0_0_/_45%)]" src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=800&q=85" [alt]="'landing.aboutUs.images.studio' | translate" />
   </div>
   <div class="relative">
     <lib-section-title
@@ -27,9 +27,9 @@
     />
     <div class="my-[26px] mb-[25px] grid grid-cols-2 max-[480px]:grid-cols-1">
       @for (benefit of benefits; track benefit.title) {
-        <article class="flex gap-[13px] border-b border-[#e5e6e6] py-[18px] pe-[14px] pb-[17px] odd:pe-[22px] even:ps-4 max-[480px]:even:ps-0">
+        <article class="flex gap-[13px] border-b border-[#e5e6e6] dark:border-[#3a3a3a] py-[18px] pe-[14px] pb-[17px] odd:pe-[22px] even:ps-4 max-[480px]:even:ps-0">
           <svg class="size-[35px] shrink-0 rtl:-scale-x-100" width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><g [attr.clip-path]="'url(#benefit-arrow-clip-' + $index + ')' "><path fill-rule="evenodd" clip-rule="evenodd" d="M22.6872 11.1455C20.9633 12.8694 17.8844 12.9329 16.2287 11.2772L15.5499 10.5984L14.1357 12.0126L14.8145 12.6914C16.0188 13.8957 17.6984 14.4751 19.3914 14.4413L10.6664 23.1663L12.024 24.5239L20.749 15.7989C20.7152 17.4918 21.2946 19.1715 22.4988 20.3757L23.1777 21.0546L24.5919 19.6404L23.9131 18.9615C22.2574 17.3059 22.3209 14.227 24.0449 12.5031L24.752 11.796L23.3943 10.4383L22.6872 11.1455Z" fill="#FF4100" /></g><defs><clipPath [attr.id]="'benefit-arrow-clip-' + $index"><rect width="25" height="24" fill="white" transform="translate(0 17.6776) rotate(-45)" /></clipPath></defs></svg>
-          <div><h2 class="mb-[7px] text-sm font-bold">{{ benefit.title | translate }}</h2><p class="m-0 text-[13px] leading-[1.6] text-[#57595a]">{{ benefit.body | translate }}</p></div>
+          <div><h2 class="mb-[7px] text-sm font-bold">{{ benefit.title | translate }}</h2><p class="m-0 text-[13px] leading-[1.6] text-[#57595a] dark:text-[#b5b5b5]">{{ benefit.body | translate }}</p></div>
         </article>
       }
     </div>
