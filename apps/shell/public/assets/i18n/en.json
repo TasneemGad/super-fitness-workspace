@@ -8,6 +8,8 @@
     "classes": "Classes",
     "healthy": "Healthy",
     "account": "Account",
+    "login": "Login",
+    "register": "Register",
     "openMenu": "Open menu",
     "closeMenu": "Close menu"
   },
@@ -38,6 +40,22 @@
       "backToHome": "Back to home",
       "error": "Unable to load meal categories. Please try again later.",
       "empty": "No meal categories are available."
+    }
+  },
+  "landing": {
+    "hero": {
+      "headlineFirst": "Your body can",
+      "headlineHighlight": " stand",
+      "headlineSecondHighlight": "almost",
+      "headlineSecond": " anything",
+      "description": "It's your mind that needs convincing. Push past your limits, stay committed, and watch as your body transforms into a powerhouse of strength and resilience. Start your journey today and discover what you're truly capable of.",
+      "activeMembers": "Active Members",
+      "certifiedTrainers": "Certified Trainers",
+      "yearsExperience": "Year Of Experience",
+      "getStarted": "Get Started",
+      "exploreMore": "Explore More",
+      "assistantPrompt": "Hey Ask Me",
+      "athleteAlt": "Athlete in a blue training top"
     }
   },
   "form": {

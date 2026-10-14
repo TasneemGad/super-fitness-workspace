@@ -25,3 +25,4 @@ export * from './lib/ui/paragraph-title/paragraph-title';
 export * from './lib/ui/paragraph-description/paragraph-description';
 export * from './lib/theme/theme.service';
 export * from './lib/ui/theme-toggle/theme-toggle';
+export * from './lib/ui/site-button/site-button';

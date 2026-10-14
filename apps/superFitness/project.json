@@ -29,6 +29,16 @@
             "glob": "hero.png",
             "input": "apps/authApp/public/assets/auth",
             "output": "assets/auth"
+          },
+          {
+            "glob": "logo.png",
+            "input": "apps/authApp/public/assets/auth",
+            "output": "assets/auth"
+          },
+          {
+            "glob": "**/*.json",
+            "input": "apps/shell/public/assets/i18n",
+            "output": "assets/i18n"
           }
         ],
         "styles": [
