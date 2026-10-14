@@ -31,12 +31,14 @@
             "output": "assets/auth"
           },
           {
-            "glob": "Theo-Vance.svg",
-            "input": "apps/superFitness/public/assets/images",
-            "output": "assets/images"
+            "glob": "**/*",
+            "input": "apps/superFitness/public/assets",
+            "output": "assets"
           }
         ],
         "styles": [
+           "node_modules/ngx-owl-carousel-o/lib/styles/prebuilt-themes/owl.carousel.min.css",
+    "node_modules/ngx-owl-carousel-o/lib/styles/prebuilt-themes/owl.theme.default.min.css",
           "apps/shell/src/styles.css"
         ],
         "customWebpackConfig": {

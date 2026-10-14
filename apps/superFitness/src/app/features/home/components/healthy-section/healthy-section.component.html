@@ -1,0 +1,73 @@
+<section
+  class="healthy-section relative flex min-h-[48rem] w-full flex-col items-center overflow-hidden bg-[#F3F3F4] px-[clamp(1rem,5.56vw,5rem)]">
+  <!--  Overlay -->
+  <div class="pointer-events-none absolute left-0 top-[57px] z-0 h-[414px] w-full bg-[#FFFFFF99] dark:bg-[#24242499] backdrop-blur-[43px]">
+  </div>
+
+  <div class="relative z-10 mx-auto w-full flex-1 flex flex-col gap-6 mb-4 sm:mb-6 lg:mb-8">
+    <lib-section-title [primaryText]="'home.healthy.title' | translate"
+      [secondaryText]="'home.healthy.subtitle' | translate" size="sm" [primaryTextFontSize]="64"
+      [secondaryTextFontSize]="13.1" />
+
+    <lib-paragraph-title [segments]="[
+    { text: 'home.healthy.descriptionPrefix' | translate },
+    { text: 'home.healthy.descriptionHighlight' | translate, highlight: true },
+    { text: 'home.healthy.descriptionSuffix' | translate }
+  ]" align="center" />
+
+    @if (isLoading()) {
+    <p class="mt-8 text-center text-lg text-[#242424]" role="status">
+      {{ 'home.healthy.loading' | translate }}
+    </p>
+    } @else if (errorMessage()) {
+    <p class="mt-8 text-center text-lg text-[#242424]" role="alert">
+      {{ errorMessage() | translate }}
+    </p>
+    } @else if (mealCategories().length > 0) {
+    <div class="mt-8 w-full">
+      <div class="grid grid-cols-1 gap-4 md:hidden">
+        @for (category of mealCategories().slice(0, 3); track category.idCategory) {
+        <div class=w-full></div>
+        <app-info-card
+          [image]="category.strCategoryThumb"
+          [title]="category.strCategory"
+          buttonText="home.healthy.readMore"
+        />
+        }
+      </div>
+      <div class="hidden md:block">
+        <app-owl-carousel
+          [items]="mealCategories()"
+          [options]="customOptions"
+          [itemId]="getCategoryId"
+        >
+          <ng-template #slide let-category>
+            <app-info-card
+              [image]="category.strCategoryThumb"
+              [title]="category.strCategory"
+              buttonText="home.healthy.readMore"
+            />
+          </ng-template>
+        </app-owl-carousel>
+      </div>
+      <div class="mt-auto flex justify-end pt-6 pb-4 md:hidden">
+      <a
+        routerLink=""
+        class="rounded-full text-[#FF4100]  py-2
+           font-['Inter'] text-[13.1px] font-semibold
+           leading-[25.6px] capitalize 
+           transition-colors "
+      >
+        {{ 'home.healthy.readMore' | translate }}
+      </a>
+      </div>
+    </div>
+    } @else {
+    <p class="mt-8 text-center text-lg text-[#242424]">
+      {{ 'home.healthy.empty' | translate }}
+    </p>
+    }
+  </div>
+
+  <app-fitness-marquee />
+</section>

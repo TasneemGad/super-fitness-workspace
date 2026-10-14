@@ -1,0 +1,10 @@
+<owl-carousel-o [options]="options()">
+  @for (item of items(); track itemId()(item)) {
+    <ng-template carouselSlide [id]="itemId()(item)">
+      <ng-container
+        [ngTemplateOutlet]="slideTemplate"
+        [ngTemplateOutletContext]="{ $implicit: item }"
+      />
+    </ng-template>
+  }
+</owl-carousel-o>
