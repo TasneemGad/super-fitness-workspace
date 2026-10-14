@@ -1,6 +1,7 @@
 import { Component, DestroyRef, OnInit, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TranslatePipe } from '@ngx-translate/core';
+import { RouterLink } from '@angular/router';
 import { ParagraphTitle, SectionTitle } from '@org/ui';
 import { InfoCardComponent } from '../../../../shared/components/info-card/info-card.component';
 import { OwlCarouselComponent } from '../../../../shared/components/owl-carousel/owl-carousel.component';
@@ -18,6 +19,7 @@ import { MealsService } from '../../services/meals.service';
     ParagraphTitle,
     FitnessMarquee,
     OwlCarouselComponent,
+    RouterLink,
   ],
   templateUrl: './healthy-section.component.html',
   styleUrl: './healthy-section.component.scss',
@@ -31,12 +33,14 @@ export class HealthySectionComponent implements OnInit {
   readonly errorMessage = signal<string | null>(null);
 
   readonly getCategoryId = (category: MealCategoryModel): string =>category.idCategory;
-  readonly customOptions = {
+  get customOptions () {
+    const itemCount = this.mealCategories().length;
+    return {
     loop: false,
     mouseDrag: true,
     touchDrag: true,
     pullDrag: true,
-    dots: true,
+    dots: itemCount > 3,
     nav: false,
     navSpeed: 700,
     margin: 16,
@@ -57,7 +61,7 @@ export class HealthySectionComponent implements OnInit {
       margin: 16,
     },
   },
-    
+  }
   };
 ngOnInit(): void {
   this.loadCategories();

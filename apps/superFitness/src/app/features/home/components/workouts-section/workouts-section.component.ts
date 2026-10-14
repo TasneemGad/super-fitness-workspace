@@ -1,6 +1,7 @@
 import { Component,  effect, inject, signal } from '@angular/core';
 import { DestroyRef } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { RouterLink } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 import { ParagraphTitle, SectionTitle } from '@org/ui';
 import { InfoCardComponent } from '../../../../shared/components/info-card/info-card.component';
@@ -18,6 +19,7 @@ import { LanguageService } from '@org/i18n';
     ParagraphTitle,
     TranslatePipe,
     OwlCarouselComponent,
+    RouterLink,
   ],
   templateUrl: './workouts-section.component.html',
   styleUrl: './workouts-section.component.scss',
@@ -43,12 +45,15 @@ export class WorkoutsSectionComponent  {
     fill="#FF4100"/>
 </svg>`;
   
-  customOptions = {
+  get customOptions (){
+    const itemCount = this.muscles().length;
+    
+    return {
     loop: false,
     mouseDrag: true,
     touchDrag: true,
     pullDrag: true,
-    dots: true,
+    dots: itemCount>3,
     nav: false,
     navSpeed: 700,
     margin: 16,
@@ -69,7 +74,7 @@ export class WorkoutsSectionComponent  {
       margin: 16,
     },
   },
-    
+  } 
   };
 
 
