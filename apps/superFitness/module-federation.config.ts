@@ -3,7 +3,9 @@ import type { ModuleFederationConfig } from '@nx/module-federation';
 const config: ModuleFederationConfig = {
   name: 'superFitness',
   shared: (name, config) =>
-    name === '@super-fitness/auth' ? { ...config, singleton: true } : config,
+    name === '@super-fitness/auth' || name === '@org/ui'
+      ? { ...config, singleton: true }
+      : config,
   exposes: {
     './Routes': 'apps/superFitness/src/app/remote-entry/entry.routes.ts',
   },

@@ -19,7 +19,10 @@ export type FieldIconName =
   | 'upload'
   | 'image'
   | 'close'
-  | 'menu';
+  | 'menu'
+  | 'sun'
+  | 'moon'
+  | 'globe';
 
 export type FormMode = 'create' | 'update';
 

@@ -16,7 +16,13 @@ export * from './lib/ui/step-progress/step-progress';
 export * from './lib/ui/numeric-wheel-selector/numeric-wheel-selector';
 export * from './lib/ui/question-title/question-title';
 export * from './lib/ui/question-description/question-description';
+export * from './lib/ui/site-button/site-button';
 
 export * from './lib/ui/icons/dumbbell-icon/dumbbell-icon';
 export * from './lib/ui/section-title/section-title';
+
+export * from './lib/ui/paragraph-title/paragraph-title';
+export * from './lib/ui/paragraph-description/paragraph-description';
+export * from './lib/theme/theme.service';
+export * from './lib/ui/theme-toggle/theme-toggle';
 export * from './lib/ui/site-button/site-button';
