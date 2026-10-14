@@ -58,6 +58,26 @@
       "athleteAlt": "رياضي يرتدي قميص تدريب أزرق"
     }
   },
+  "footer": {
+    "taglineLine1": "اضغط بقوة، وادفع حدودك. رحلتك",
+    "taglineLine2": "الرياضية تبدأ اليوم!",
+    "contactUs": "اتصل بنا",
+    "phone": "+91 123 456 789",
+    "email": "info@gmail.com",
+    "gymTiming": "أوقات العمل",
+    "monFri": "الإثنين - الجمعة : 08:00 صباحاً - 10:00 مساءً",
+    "satSun": "السبت - الأحد : 08:00 صباحاً - 09:00 مساءً",
+    "location": "موقعنا",
+    "addressLine1": "2715 آش درايف، سان خوسيه،",
+    "addressLine2": "داكوتا الجنوبية 83475"
+  },
+  "chat": {
+    "smartCoach": "المدرب الذكي",
+    "askPlaceholder": "اسألني عن أي شيء",
+    "tapToClose": "اضغط للإغلاق",
+    "heyAskMe": "اسألني الآن",
+    "previousConversations": "المحادثات السابقة"
+  },
   "form": {
     "requiredMessage": "{{label}} مطلوب",
     "selectPlaceholder": "اختر"
