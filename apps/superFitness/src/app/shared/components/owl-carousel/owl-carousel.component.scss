@@ -126,3 +126,8 @@
 :host-context(.dark) ::ng-deep .owl-carousel .owl-dots .owl-dot:not(.active) span {
   background: #f3f3f4;
 }
+.slide-group {
+  display: grid;
+  grid-template-rows: repeat(var(--rows, 1), auto);
+  gap: 1rem;
+}

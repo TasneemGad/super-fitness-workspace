@@ -11,7 +11,7 @@ import { TranslatePipe } from '@ngx-translate/core';
 export class InfoCardComponent {
   image = input.required<string>();
   title = input.required<string>();
-  buttonText = input<string>('home.workouts.explore');
+  buttonText = input<string>('workouts.explore');
 
   buttonClick = output<void>();
 

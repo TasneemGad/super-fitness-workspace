@@ -12,16 +12,16 @@
   <div class="relative z-10 mx-auto w-full min-w-0">
 
     @if (isLoading()) {
-    <p class="text-lg text-[#242424] dark:text-[#f3f3f4]">{{ 'home.workouts.loading' | translate }}</p>
+    <p class="text-lg text-[#242424] dark:text-[#f3f3f4]">{{ 'workouts.loading' | translate }}</p>
     } @else {
     <div class=" w-full min-h-[77px] mx-auto mb-3 sm:mb-5 lg:mb-6">
-      <lib-section-title [primaryText]="'home.workouts.title' | translate"
-        [secondaryText]="'home.workouts.subtitle' | translate" size="sm" [primaryTextFontSize]="64" />
+      <lib-section-title [primaryText]="'workouts.title' | translate"
+        [secondaryText]="'workouts.subtitle' | translate" size="sm" [primaryTextFontSize]="64" />
     </div>
 
     <lib-paragraph-title [segments]="[
-    { text: ('home.workouts.descriptionPrefix' | translate) },
-    { text: ('home.workouts.descriptionHighlight' | translate), highlight: true }
+    { text: ('workouts.descriptionPrefix' | translate) },
+    { text: ('workouts.descriptionHighlight' | translate), highlight: true }
    ]" align="center" />
 
 
@@ -33,7 +33,7 @@
      
     @if (isLoadingMuscles()) {
     <p class="py-8 text-center text-[#242424] dark:text-[#f3f3f4]" role="status">
-      {{ 'home.workouts.loadingWorkouts' | translate }}
+      {{ 'workouts.loadingWorkouts' | translate }}
     </p>
     } @else if (errorMessage()) {
     <p class="py-8 text-center text-[#242424] dark:text-[#f3f3f4]" role="alert">
@@ -71,13 +71,13 @@
            font-['Inter'] text-[13.1px] font-semibold
            leading-[25.6px] capitalize text-[#FF4100]
       ">
-          {{ 'home.workouts.readMore' | translate }}
+          {{ 'workouts.readMore' | translate }}
         </a>
       </div>
     </div>
     } @else {
     <p class="py-8 text-center text-[#242424] dark:text-[#f3f3f4]">
-      {{ 'home.workouts.empty' | translate }}
+      {{ 'workouts.empty' | translate }}
     </p>
     }
     }

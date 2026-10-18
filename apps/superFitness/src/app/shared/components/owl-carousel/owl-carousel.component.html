@@ -1,10 +1,12 @@
 <owl-carousel-o [options]="carouselOptions()">
-  @for (item of items(); track itemId()(item)) {
-    <ng-template carouselSlide [id]="itemId()(item)">
-      <ng-container
-        [ngTemplateOutlet]="slideTemplate"
-        [ngTemplateOutletContext]="{ $implicit: item }"
-      />
-    </ng-template>
+  @for (group of slides(); track slideId(group)) {
+  <ng-template carouselSlide [id]="slideId(group)">
+    <div class="slide-group" [style.--rows]="rows()">
+      @for (item of group; track itemId()(item)) {
+      <ng-container [ngTemplateOutlet]="slideTemplate" 
+      [ngTemplateOutletContext]="{ $implicit: item }" />
+      }
+    </div>
+  </ng-template>
   }
 </owl-carousel-o>

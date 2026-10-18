@@ -83,7 +83,7 @@ export class HealthySectionComponent implements OnInit {
           this.isLoading.set(false);
         },
         error: () => {
-          this.errorMessage.set('home.healthy.error');
+          this.errorMessage.set('healthy.error');
           this.isLoading.set(false);
         },
       });

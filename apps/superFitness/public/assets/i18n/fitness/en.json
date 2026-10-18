@@ -10,34 +10,32 @@
     "openMenu": "Open menu",
     "closeMenu": "Close menu"
   },
-  "home": {
-    "workouts": {
-      "title": "Workouts",
-      "subtitle": "Fitness class",
-      "loading": "Loading muscles...",
-      "loadingWorkouts": "Loading workouts...",
-      "descriptionPrefix": "Transform Your Body with Our Dynamic ",
-      "descriptionHighlight": "Upcoming Workouts",
-      "error": "Unable to load workouts. Please try again later.",
-      "empty": "No muscles found.",
-      "explore": "Explore",
-      "readMore": "Read more",
-      "more": "More workouts",
-      "backToHome": "Back to home"
-    },
-    "healthy": {
-      "title": "Healthy",
-      "subtitle": "Healthy Nutritions",
-      "descriptionPrefix": "Fuel your fitness journey with customized ",
-      "descriptionHighlight": "meal plans",
-      "descriptionSuffix": " for you",
-      "loading": "Loading meal categories...",
-      "readMore": "Read more",
-      "more": "More healthy categories",
-      "backToHome": "Back to home",
-      "error": "Unable to load meal categories. Please try again later.",
-      "empty": "No meal categories are available."
-    }
+  "workouts": {
+    "title": "Workouts",
+    "subtitle": "Fitness class",
+    "loading": "Loading muscles...",
+    "loadingWorkouts": "Loading workouts...",
+    "descriptionPrefix": "Transform Your Body with Our Dynamic ",
+    "descriptionHighlight": "Upcoming Workouts",
+    "error": "Unable to load workouts. Please try again later.",
+    "empty": "No muscles found.",
+    "explore": "Explore",
+    "readMore": "Read more",
+    "more": "More workouts",
+    "backToHome": "Back to home"
+  },
+  "healthy": {
+    "title": "Healthy",
+    "subtitle": "Healthy Nutritions",
+    "descriptionPrefix": "Fuel your fitness journey with customized ",
+    "descriptionHighlight": "meal plans",
+    "descriptionSuffix": " for you",
+    "loading": "Loading meal categories...",
+    "readMore": "Read more",
+    "more": "More healthy categories",
+    "backToHome": "Back to home",
+    "error": "Unable to load meal categories. Please try again later.",
+    "empty": "No meal categories are available."
   },
   "landing": {
     "hero": {

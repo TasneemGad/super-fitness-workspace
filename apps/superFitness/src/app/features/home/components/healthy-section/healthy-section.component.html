@@ -5,19 +5,19 @@
   </div>
 
   <div class="relative z-10 mx-auto w-full flex-1 flex flex-col gap-6 mb-4 sm:mb-6 lg:mb-8">
-    <lib-section-title [primaryText]="'home.healthy.title' | translate"
-      [secondaryText]="'home.healthy.subtitle' | translate" size="sm" [primaryTextFontSize]="64"
+    <lib-section-title [primaryText]="'healthy.title' | translate"
+      [secondaryText]="'healthy.subtitle' | translate" size="sm" [primaryTextFontSize]="64"
        />
 
     <lib-paragraph-title [segments]="[
-    { text: 'home.healthy.descriptionPrefix' | translate },
-    { text: 'home.healthy.descriptionHighlight' | translate, highlight: true },
-    { text: 'home.healthy.descriptionSuffix' | translate }
+    { text: 'healthy.descriptionPrefix' | translate },
+    { text: 'healthy.descriptionHighlight' | translate, highlight: true },
+    { text: 'healthy.descriptionSuffix' | translate }
   ]" align="center" />
 
     @if (isLoading()) {
     <p class="mt-8 text-center text-lg text-[#242424] dark:text-[#f3f3f4]" role="status">
-      {{ 'home.healthy.loading' | translate }}
+      {{ 'healthy.loading' | translate }}
     </p>
     } @else if (errorMessage()) {
     <p class="mt-8 text-center text-lg text-[#242424] dark:text-[#f3f3f4]" role="alert">
@@ -31,7 +31,7 @@
           <app-info-card
             [image]="category.strCategoryThumb"
             [title]="category.strCategory"
-            buttonText="home.healthy.readMore"
+            buttonText="healthy.readMore"
           />
         </div>
         }
@@ -47,7 +47,7 @@
             <app-info-card
               [image]="category.strCategoryThumb"
               [title]="category.strCategory"
-              buttonText="home.healthy.readMore"
+              buttonText="healthy.readMore"
             />
           </ng-template>
         </app-owl-carousel>
@@ -58,7 +58,7 @@
             <app-info-card
               [image]="category.strCategoryThumb"
               [title]="category.strCategory"
-              buttonText="home.healthy.readMore"
+              buttonText="healthy.readMore"
             />
           </div>
           }
@@ -73,13 +73,13 @@
            leading-[25.6px] capitalize 
            transition-colors "
       >
-        {{ 'home.healthy.readMore' | translate }}
+        {{ 'healthy.readMore' | translate }}
       </a>
       </div>
     </div>
     } @else {
     <p class="mt-8 text-center text-lg text-[#242424] dark:text-[#f3f3f4]">
-      {{ 'home.healthy.empty' | translate }}
+      {{ 'healthy.empty' | translate }}
     </p>
     }
   </div>

@@ -8,8 +8,11 @@ import { ParagraphTitle, SectionTitle } from '@org/ui';
 import { InfoCardComponent } from '../../../../shared/components/info-card/info-card.component';
 import { OwlCarouselComponent } from '../../../../shared/components/owl-carousel/owl-carousel.component';
 import { TabsBarComponent, TabItem } from '../../../../shared/components/tabs-bar/tabs-bar.component';
-import { MuscleGroupModel, MuscleModel } from '../../models/muscles.model';
-import { MusclesService } from '../../services/muscles.service';
+import {
+  MuscleGroupModel,
+  MuscleModel,
+} from '../../../classes/models/muscles.model';
+import { MusclesService } from '../../../classes/services/muscles.service';
 import { LanguageService } from '@org/i18n';
 
 @Component({
@@ -123,7 +126,7 @@ export class WorkoutsSectionComponent  {
 
         },
         error: () => {
-          this.errorMessage.set('home.workouts.error');
+          this.errorMessage.set('workouts.error');
           this.isLoading.set(false);
         },
       });
@@ -146,7 +149,7 @@ export class WorkoutsSectionComponent  {
         this.isLoadingMuscles.set(false);
       },
       error: () => {
-        this.errorMessage.set('home.workouts.error');
+        this.errorMessage.set('workouts.error');
         this.isLoadingMuscles.set(false);
       },
     });
