@@ -48,7 +48,7 @@
         </div>
         }
       </div>
-      <div class="hidden md:block">
+      <div class="hidden md:block mx-auto w-full max-w-[1490px]">
         @if (useCarousel()) {
         <app-owl-carousel [items]="muscles()" [options]="customOptions()" [itemId]="getMuscleId">
           <ng-template #slide let-muscle>
@@ -67,7 +67,7 @@
       </div>
 
       <div class="mt-auto flex justify-end pt-6 pb-4 md:hidden">
-        <a routerLink="" class="rounded-full   py-2
+        <a routerLink="classes" class="rounded-full   py-2
            font-['Inter'] text-[13.1px] font-semibold
            leading-[25.6px] capitalize text-[#FF4100]
       ">

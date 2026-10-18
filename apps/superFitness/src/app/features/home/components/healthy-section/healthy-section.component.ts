@@ -60,11 +60,7 @@ export class HealthySectionComponent implements OnInit {
         0: {  items: 1, margin: 12, dots: itemCount > 1 },
         640: { items: 2, margin: 16, dots: itemCount > 2 },
         1024: { items: 3,margin: 16, dots: itemCount > 3 },
-        1800: { items: 4, margin: 16, dots: itemCount > 4 },
-        2200: { items: 5, margin: 16, dots: itemCount > 5 },
-        2600: { items: 6, margin: 16, dots: itemCount > 6 },
-        3000: { items: 7, margin: 16, dots: itemCount > 7 },
-        4000: { items: 8, margin: 16, dots: itemCount > 8 },
+        
       }
     };
   });

@@ -40,7 +40,7 @@ export class ClassesPage {
     this.muscleGroups().map((group) => ({ id: group._id, label: group.name })),
   );
   readonly getMuscleId = (muscle: MuscleModel): string => muscle._id;
-  readonly useCarousel = computed(() => this.muscles().length > 6);
+  readonly useCarousel = computed(() => this.muscles().length > 4);
 
   readonly carouselOptions = computed<OwlOptions>(() => {
     const itemCount = this.muscles().length;
