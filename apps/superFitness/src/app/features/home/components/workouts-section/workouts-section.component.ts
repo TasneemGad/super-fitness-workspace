@@ -8,8 +8,11 @@ import { ParagraphTitle, SectionTitle } from '@org/ui';
 import { InfoCardComponent } from '../../../../shared/components/info-card/info-card.component';
 import { OwlCarouselComponent } from '../../../../shared/components/owl-carousel/owl-carousel.component';
 import { TabsBarComponent, TabItem } from '../../../../shared/components/tabs-bar/tabs-bar.component';
-import { MuscleGroupModel, MuscleModel } from '../../models/muscles.model';
-import { MusclesService } from '../../services/muscles.service';
+import {
+  MuscleGroupModel,
+  MuscleModel,
+} from '../../../classes/models/muscles.model';
+import { MusclesService } from '../../../classes/services/muscles.service';
 import { LanguageService } from '@org/i18n';
 
 @Component({
@@ -73,11 +76,7 @@ export class WorkoutsSectionComponent  {
         0: {  items: 1, margin: 12, dots: itemCount > 1 },
         640: { items: 2, margin: 16, dots: itemCount > 2 },
         1024: { items: 3,margin: 16, dots: itemCount > 3 },
-        1800: { items: 4, margin: 16, dots: itemCount > 4 },
-        2200: { items: 5, margin: 16, dots: itemCount > 5 },
-        2600: { items: 6, margin: 16, dots: itemCount > 6 },
-        3000: { items: 7, margin: 16, dots: itemCount > 7 },
-        4000: { items: 8, margin: 16, dots: itemCount > 8 },
+        
       }
       
     };
@@ -123,7 +122,7 @@ export class WorkoutsSectionComponent  {
 
         },
         error: () => {
-          this.errorMessage.set('home.workouts.error');
+          this.errorMessage.set('workouts.error');
           this.isLoading.set(false);
         },
       });
@@ -146,7 +145,7 @@ export class WorkoutsSectionComponent  {
         this.isLoadingMuscles.set(false);
       },
       error: () => {
-        this.errorMessage.set('home.workouts.error');
+        this.errorMessage.set('workouts.error');
         this.isLoadingMuscles.set(false);
       },
     });

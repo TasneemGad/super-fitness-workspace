@@ -4,11 +4,13 @@ import { WorkoutsSectionComponent } from '../components/workouts-section/workout
 import { FitnessMarquee } from '../../landing/ui/fitness-marquee/fitness-marquee';
 import { AboutUs } from '../../landing/ui/about-us/about-us';
 import { WhyUs } from '../../landing/ui/why-us/why-us';
+import { HeroSection } from '../../hero-section/hero-section';
 
 @Component({
   selector: 'app-home-page',
   standalone: true,
-  imports: [FitnessMarquee, AboutUs, WorkoutsSectionComponent, WhyUs, HealthySectionComponent],
+  imports: [FitnessMarquee, AboutUs, WorkoutsSectionComponent,
+     WhyUs, HealthySectionComponent ,HeroSection],
   templateUrl: './home-page.html',
   styleUrl: './home-page.scss',
 })

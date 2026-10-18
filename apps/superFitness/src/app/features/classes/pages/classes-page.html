@@ -1,0 +1,64 @@
+<main class="classes-page flex min-h-screen w-full flex-col items-center overflow-hidden ">
+
+  <section class="mx-auto w-full">
+    <div class="flex flex-col gap-4">
+      <lib-section-title [primaryText]="'workouts.title' | translate" [secondaryText]="'workouts.subtitle' | translate"
+        size="sm" [primaryTextFontSize]="64" />
+
+      <lib-paragraph-title [segments]="[
+    { text: ('workouts.descriptionPrefix' | translate) },
+    { text: ('workouts.descriptionHighlight' | translate), highlight: true }
+   ]" align="center" />
+    </div>
+
+
+    @if (isLoadingGroups()) {
+    <p class="py-10 text-center text-[#242424] dark:text-[#f3f3f4]" role="status">
+      {{ 'workouts.loading' | translate }}
+    </p>
+    } @else if (errorMessage()) {
+    <p class="py-10 text-center text-[#242424] dark:text-[#f3f3f4]" role="alert">
+      {{ errorMessage() | translate }}
+    </p>
+    } @else if (muscleGroups().length === 0) {
+    <p class="py-10 text-center text-[#242424] dark:text-[#f3f3f4]">
+      {{ 'workouts.empty' | translate }}
+    </p>
+    } @else {
+    <app-tabs-bar class="my-8 block" [tabs]="muscleGroupTabs()" [selectedId]="selectedGroupId()"
+      (tabSelected)="selectGroup($event)" widthClass="w-full lg:w-1/2" />
+
+    @if (isLoadingMuscles()) {
+    <p class="py-10 text-center text-[#242424] dark:text-[#f3f3f4]" role="status">
+      {{ 'workouts.loadingWorkouts' | translate }}
+    </p>
+    } @else if (errorMessage()) {
+    <p class="py-10 text-center text-[#242424] dark:text-[#f3f3f4]" role="alert">
+      {{ errorMessage() | translate }}
+    </p>
+    } @else if (muscles().length > 0) {
+      <div class="mx-auto mt-8 w-full max-w-[1490px] ">
+        @if (useCarousel()) {
+        <app-owl-carousel [items]="muscles()" [options]="carouselOptions()" [itemId]="getMuscleId" [rows]="2">
+          <ng-template #slide let-muscle>
+            <app-info-card [image]="muscle.image" [title]="muscle.name" />
+          </ng-template>
+        </app-owl-carousel>
+        } @else {
+        <div class="flex flex-wrap justify-center gap-4">
+          @for (muscle of muscles(); track getMuscleId(muscle)) {
+          <div class="w-full md:w-[calc(50%-0.5rem)] max-w-[480px] lg:w-[calc(33.333%-0.75rem)]">
+            <app-info-card [image]="muscle.image" [title]="muscle.name" />
+          </div>
+          }
+        </div>
+        }
+      </div>
+      } @else {
+      <p class="py-10 text-center text-[#242424] dark:text-[#f3f3f4]">
+        {{ 'workouts.empty' | translate }}
+      </p>
+      }
+      }
+  </section>
+</main>

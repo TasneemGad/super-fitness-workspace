@@ -7,13 +7,12 @@ export interface MuscleModel {
 export interface MuscleGroupModel {
   _id: string;
   name: string;
- 
 }
 
 export interface MusclesResponseModel {
   message: string;
   muscleGroup: MuscleGroupModel;
-  muscles: MuscleModel[]
+  muscles: MuscleModel[];
 }
 
 export interface MuscleGroupResponseModel {
