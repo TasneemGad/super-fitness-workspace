@@ -37,33 +37,41 @@ export class HealthySectionComponent implements OnInit {
   readonly isLoading = signal(true);
   readonly errorMessage = signal<string | null>(null);
 
-  readonly getCategoryId = (category: MealCategoryModel): string =>category.idCategory;
+  readonly getCategoryId = (category: MealCategoryModel): string => category.idCategory;
+  readonly useCarousel = computed(() => this.mealCategories().length > 3);
+
   // computed (not a getter) so owl-carousel gets a stable options object and doesn't re-init every change detection
   readonly customOptions = computed<OwlOptions>(() => {
-    const hasMoreThanOnePage = this.mealCategories().length > 3;
+    const itemCount = this.mealCategories().length;
+
     return {
-      loop: hasMoreThanOnePage,
-      autoplay: hasMoreThanOnePage,
-      autoplayTimeout: 4000,
-      autoplayHoverPause: true,
-      smartSpeed: 700,
+      loop: false,
       mouseDrag: true,
       touchDrag: true,
       pullDrag: true,
-      dots: hasMoreThanOnePage,
-      nav: false,
-      rtl: this.languageService.isRtl(),
+      dots: true,
+      nav: true,
+      navSpeed: 700,
       margin: 16,
+      autoWidth: false,
+      autoHeight: false,
+      rtl: this.languageService.isRtl(),
       responsive: {
-        0: { items: 1, margin: 12 },
-        640: { items: 2, margin: 16 },
-        1024: { items: 3, margin: 16 },
-      },
+        0: {  items: 1, margin: 12, dots: itemCount > 1 },
+        640: { items: 2, margin: 16, dots: itemCount > 2 },
+        1024: { items: 3,margin: 16, dots: itemCount > 3 },
+        1800: { items: 4, margin: 16, dots: itemCount > 4 },
+        2200: { items: 5, margin: 16, dots: itemCount > 5 },
+        2600: { items: 6, margin: 16, dots: itemCount > 6 },
+        3000: { items: 7, margin: 16, dots: itemCount > 7 },
+        4000: { items: 8, margin: 16, dots: itemCount > 8 },
+      }
     };
   });
-ngOnInit(): void {
-  this.loadCategories();
-}
+
+  ngOnInit(): void {
+    this.loadCategories();
+  }
   loadCategories(): void {
 
     this.mealsService
