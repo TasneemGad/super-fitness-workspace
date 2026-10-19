@@ -7,7 +7,7 @@
   <ul class="links">
     @for (link of links(); track link.label) {
     <li>
-      <a class="link" routerLink="/superFitness" [fragment]="link.fragment">{{ link.label | translate }}</a>
+      <a class="link" [routerLink]="link.route" >{{ link.label | translate }}</a>
     </li>
     }
   </ul>
@@ -41,7 +41,7 @@
   <ul class="drawer-links">
     @for (link of links(); track link.label) {
     <li>
-      <a class="link" routerLink="/superFitness" [fragment]="link.fragment"
+      <a class="link" [routerLink]="link.route" [fragment]="link.fragment"
         (click)="closeMenu()">
         {{ link.label | translate }}
       </a>
