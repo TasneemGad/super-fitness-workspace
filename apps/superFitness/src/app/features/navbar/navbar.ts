@@ -4,6 +4,12 @@ import { TranslatePipe } from '@ngx-translate/core';
 import { LanguageSwitcher } from '@org/i18n';
 import { FieldIcon, ThemeToggle } from '@org/ui';
 
+type NavbarLink = {
+  label: string;
+  route: string;
+  fragment?: string;
+};
+
 @Component({
   selector: 'app-navbar',
   imports: [RouterLink, FieldIcon, TranslatePipe, ThemeToggle, LanguageSwitcher],
@@ -11,11 +17,11 @@ import { FieldIcon, ThemeToggle } from '@org/ui';
   styleUrl: './navbar.css',
 })
 export class Navbar {
-  links = signal([
-    { label: 'navbar.home', fragment: 'home' },
-    { label: 'navbar.about', fragment: 'about' },
-    { label: 'navbar.classes', fragment: 'classes' },
-    { label: 'navbar.healthy', fragment: 'healthy' },
+  links = signal<NavbarLink[]>([
+    { label: 'navbar.home', route: '/superFitness' },
+    { label: 'navbar.about', route: 'about' },
+    { label: 'navbar.classes', route: 'classes' },
+    { label: 'navbar.healthy', route: 'healthy' },
   ]);
 
   menuOpen = signal(false);
