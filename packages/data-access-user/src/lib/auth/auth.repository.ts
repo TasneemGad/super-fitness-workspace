@@ -8,10 +8,12 @@ import {
   AuthenticatedUser,
   ForgotPasswordRequest,
   PasswordResetResponse,
+  ProfileResponse,
   ResetPasswordRequest,
   SigninRequest,
   SignupRequest,
   VerifyResetCodeRequest,
+  UpdateMetricRequest,
   parseAuthError,
 } from './auth.models';
 
@@ -28,6 +30,18 @@ export class AuthRequestError extends Error {
 @Injectable({ providedIn: 'root' })
 export class AuthRepository extends ApiClient<AuthenticatedUser> {
   protected readonly endpoint = 'auth';
+
+  loadProfile(): Observable<ProfileResponse> {
+    return this.withAuthErrors(
+      this.http.get<ProfileResponse>(`${this.resourceUrl}/profile-data`)
+    );
+  }
+
+  updateMetric(payload: UpdateMetricRequest): Observable<ProfileResponse> {
+    return this.withAuthErrors(
+      this.http.put<ProfileResponse>(`${this.resourceUrl}/editProfile`, payload)
+    );
+  }
 
   signup(payload: SignupRequest): Observable<AuthResponse> {
     return this.post$('signup', payload);

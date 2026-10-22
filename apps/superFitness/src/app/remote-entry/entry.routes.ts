@@ -7,6 +7,13 @@ export const remoteRoutes: Route[] = [
     component: RemoteEntry,
     children: [
       {
+        path: 'account',
+        loadChildren: () =>
+          import('../features/account/account.routes').then(
+            (module) => module.accountRoutes,
+          ),
+      },
+      {
         path: 'classes',
         loadChildren: () =>
           import('../features/classes/classes.routes').then(
