@@ -9,5 +9,8 @@ import { Navbar } from '../../../features/navbar/navbar';
   standalone: true,
   imports: [Navbar, RouterOutlet, FitnessMarquee, Footer],
   templateUrl: './main-layout.component.html',
+  host: {
+    class: 'block [--page-width:1490px] [--page-gutter:1rem] sm:[--page-gutter:1.5rem] lg:[--page-gutter:clamp(1rem,5.56vw,5rem)]',
+  },
 })
 export class MainLayout {}

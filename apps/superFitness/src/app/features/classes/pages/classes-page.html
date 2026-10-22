@@ -1,6 +1,6 @@
 <main class="classes-page flex min-h-screen w-full flex-col items-center overflow-hidden pt-[72px]">
 
-  <section class="mx-auto w-full">
+  <section class="mx-auto w-[min(var(--page-width),calc(100%_-_var(--page-gutter)*2))]">
     <div class="flex flex-col gap-4">
       <lib-section-title [primaryText]="'workouts.title' | translate" [secondaryText]="'workouts.subtitle' | translate"
         size="sm" [primaryTextFontSize]="64" />
@@ -16,7 +16,7 @@
     <p class="py-10 text-center text-[#242424] dark:text-[#f3f3f4]" role="status">
       {{ 'workouts.loading' | translate }}
     </p>
-    } @else if (errorMessage()) {
+    } @else if (errorMessage() && muscleGroups().length === 0) {
     <p class="py-10 text-center text-[#242424] dark:text-[#f3f3f4]" role="alert">
       {{ errorMessage() | translate }}
     </p>
@@ -25,6 +25,11 @@
       {{ 'workouts.empty' | translate }}
     </p>
     } @else {
+    @if (groupLoadError()) {
+    <p class="py-4 text-center text-[#242424] dark:text-[#f3f3f4]" role="alert">
+      {{ 'workouts.error' | translate }}
+    </p>
+    }
     <app-tabs-bar class="my-8 block" [tabs]="muscleGroupTabs()" [selectedId]="selectedGroupId()"
       (tabSelected)="selectGroup($event)" widthClass="w-full lg:w-1/2" />
 
