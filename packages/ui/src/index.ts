@@ -24,6 +24,7 @@ export * from './lib/ui/section-title/section-title';
 
 export * from './lib/ui/paragraph-title/paragraph-title';
 export * from './lib/ui/paragraph-description/paragraph-description';
+export * from './lib/ui/tabbed-list/tabbed-list';
 export * from './lib/theme/theme.service';
 export * from './lib/ui/theme-toggle/theme-toggle';
 export * from './lib/ui/site-button/site-button';
