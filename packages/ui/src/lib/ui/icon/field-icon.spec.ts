@@ -59,4 +59,17 @@ describe('FieldIcon', () => {
     expect(svg.getAttribute('width')).toBe('24');
     expect(svg.getAttribute('height')).toBe('24');
   });
+
+  it('renders the supplied refresh glyph with inherited color and its original proportions', async () => {
+    const fixture = await render('refresh');
+    const svg: SVGElement = fixture.nativeElement.querySelector('svg');
+    const path: SVGPathElement = fixture.nativeElement.querySelector('path');
+    expect(svg.getAttribute('width')).toBe('18');
+    expect(svg.getAttribute('height')).toBe('21');
+    expect(svg.getAttribute('viewBox')).toBe('0 0 18 21');
+    expect(svg.getAttribute('stroke')).toBe('none');
+    expect(path.getAttribute('fill')).toBe('currentColor');
+    expect(path.getAttribute('d')).toMatch(/^M6\.70957 5\.9725C/);
+    expect(path.getAttribute('d')).toMatch(/L8\.64682 18\.3085Z$/);
+  });
 });

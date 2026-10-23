@@ -22,7 +22,8 @@ export type FieldIconName =
   | 'menu'
   | 'sun'
   | 'moon'
-  | 'globe';
+  | 'globe'
+  | 'refresh';
 
 export type FormMode = 'create' | 'update';
 

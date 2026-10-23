@@ -31,7 +31,7 @@
             "output": "assets/auth"
           },
           {
-            "glob": "logo.png",
+            "glob": "{logo,background}.png",
             "input": "apps/authApp/public/assets/auth",
             "output": "assets/auth"
           },
