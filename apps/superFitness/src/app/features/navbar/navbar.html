@@ -16,7 +16,7 @@
   <div class="actions">
     <lib-language-switcher />
     <lib-theme-toggle />
-    <a class="btn" [attr.aria-label]="'navbar.account' | translate">
+    <a class="btn" routerLink="account" (click)="closeMenu()" [attr.aria-label]="'navbar.account' | translate">
       <lib-field-icon name="user" [size]="20" />
     </a>
     <button type="button" class="btn menu-btn" [attr.aria-label]="'navbar.openMenu' | translate"

@@ -152,5 +152,59 @@
     "editMessage": "Edit message",
     "userLabel": "User",
     "aiLabel": "AI"
+  },
+  "account": {
+    "title": "Account basic metrics",
+    "metrics": {
+      "goal": "Your Goal",
+      "activityLevel": "Level",
+      "weight": "Weight"
+    },
+    "tapToChange": "TAP TO CHANGE",
+    "unavailable": "Not available",
+    "unit": "KG",
+    "loading": "Loading your profile…",
+    "saving": "Saving…",
+    "save": "Save",
+    "cancel": "Cancel",
+    "retry": "Try again",
+    "weightRange": "Enter a whole number between 30 and 200 KG.",
+    "editors": {
+      "goal": {
+        "title": "What Is Your Goal?",
+        "description": "This Helps Us Create Your Personalized Plan"
+      },
+      "activityLevel": {
+        "title": "What Is Your Level?",
+        "description": "Choose The Level That Matches Your Activity"
+      },
+      "weight": {
+        "title": "What Is Your Weight?",
+        "description": "We Use This To Calculate Your Ideal Calorie Intake"
+      }
+    },
+    "options": {
+      "goal": {
+        "gainWeight": "Gain Weight",
+        "loseWeight": "Lose Weight",
+        "getFitter": "Get Fitter",
+        "gainFlexible": "Gain More Flexible",
+        "learnBasics": "Learn The Basics"
+      },
+      "activityLevel": {
+        "rookie": "Rookie",
+        "beginner": "Beginner",
+        "intermediate": "Intermediate",
+        "advance": "Advance",
+        "trueBeast": "True Beast"
+      }
+    },
+    "errors": {
+      "loadFailed": "Unable to load your profile. Please try again.",
+      "saveFailed": "Unable to save your change. Please try again.",
+      "network": "Cannot reach the server. Check your connection.",
+      "unauthorized": "Your session has expired. Please sign in again.",
+      "rejected": "The server could not accept this value. Please check your selection and try again."
+    }
   }
 }

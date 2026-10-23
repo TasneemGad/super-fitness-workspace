@@ -57,6 +57,36 @@ describe('AuthRepository', () => {
 
   afterEach(() => http.verify());
 
+  it('reads saved profile metrics from /auth/profile-data', () => {
+    const profile = { message: 'success', user: { ...success.user, goal: 'get fitter', activityLevel: 'level2', weight: 62 } };
+    const received = vi.fn();
+    repository.loadProfile().subscribe(received);
+    const request = http.expectOne(`${BASE_URL}/auth/profile-data`);
+    expect(request.request.method).toBe('GET');
+    request.flush(profile);
+    expect(received).toHaveBeenCalledWith(profile);
+  });
+
+  it('returns backend-confirmed user data from a partial metric update', () => {
+    const profile = { message: 'success', user: { ...success.user, weight: 50 } };
+    const received = vi.fn();
+    repository.updateMetric({ weight: 50 }).subscribe(received);
+    const request = http.expectOne(`${BASE_URL}/auth/editProfile`);
+    expect(request.request.method).toBe('PUT');
+    expect(request.request.body).toEqual({ weight: 50 });
+    request.flush(profile);
+    expect(received).toHaveBeenCalledWith(profile);
+  });
+
+  it('reports failed metric updates through the existing auth error handling', () => {
+    const failed = vi.fn();
+    repository.updateMetric({ goal: 'lose weight' }).subscribe({ error: failed });
+    http.expectOne(`${BASE_URL}/auth/editProfile`).flush(
+      { message: 'Invalid goal' }, { status: 400, statusText: 'Bad Request' }
+    );
+    expect(failed).toHaveBeenCalledWith(expect.objectContaining({ status: 400, messages: ['Invalid goal'] }));
+  });
+
   describe('signup', () => {
     it('POSTs the payload to /auth/signup', () => {
       repository.signup(signupPayload).subscribe();
