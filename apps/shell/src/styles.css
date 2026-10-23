@@ -2,6 +2,10 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
+@theme {
+  --font-sans: 'Baloo 2', system-ui, sans-serif;
+}
+
 @source "../../authApp/src";
 @source "../../superFitness/src";
 @source "../../../packages/ui/src";

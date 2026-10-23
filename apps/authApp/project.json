@@ -30,6 +30,11 @@
             "glob": "*.json",
             "input": "apps/shell/public/assets/i18n/shell",
             "output": "assets/i18n/shell"
+          },
+          {
+            "glob": "*.woff2",
+            "input": "apps/shell/public/assets/fonts",
+            "output": "assets/fonts"
           }
         ],
         "styles": [

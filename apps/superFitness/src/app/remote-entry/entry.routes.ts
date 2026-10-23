@@ -11,6 +11,9 @@ export const remoteRoutes: Route[] = [
         loadChildren: () =>
           import('../features/account/account.routes').then(
             (module) => module.accountRoutes,
+          ),
+      },
+      {
         path: 'about',
         loadChildren: () =>
           import('../features/about/about.routes').then(

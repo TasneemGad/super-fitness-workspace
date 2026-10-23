@@ -1,6 +1,6 @@
 import { Component, DestroyRef, computed, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { TranslatePipe } from '@ngx-translate/core';
@@ -31,6 +31,7 @@ export class HealthyPage {
   private readonly mealsService = inject(MealsService);
   private readonly destroyRef = inject(DestroyRef);
   private readonly route = inject(ActivatedRoute);
+  private readonly router = inject(Router);
 
   // Meals already fetched per category, so switching back to a tab doesn't re-request
   private readonly mealsCache = new Map<string, MealModel[]>();
@@ -132,5 +133,12 @@ export class HealthyPage {
           this.isLoadingMeals.set(false);
         },
       });
+  }
+
+  openMeal(mealId: string): void {
+    this.router.navigate([mealId], {
+      relativeTo: this.route,
+      queryParams: { category: this.selectedCategory() },
+    });
   }
 }

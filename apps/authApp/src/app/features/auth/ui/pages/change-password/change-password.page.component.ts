@@ -18,7 +18,7 @@ import { AuthStore } from '../../../store/auth.store';
       place-items: center;
       padding: 32px 16px;
       background: linear-gradient(135deg, #eef8f3 0%, #f6f3ef 100%);
-      font-family: 'Segoe UI', sans-serif;
+      font-family: 'Baloo 2', system-ui, sans-serif;
       color: #1f2a24;
     }
     .auth-card {

@@ -6,4 +6,9 @@ export const healthyRoutes: Route[] = [
     loadComponent: () =>
       import('./pages/healthy-page').then((module) => module.HealthyPage),
   },
+  {
+    path: ':mealId',
+    loadComponent: () =>
+      import('./pages/meal-details-page').then((module) => module.MealDetailsPage),
+  },
 ];
