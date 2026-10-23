@@ -35,7 +35,10 @@
     "more": "More healthy categories",
     "backToHome": "Back to home",
     "error": "Unable to load meal categories. Please try again later.",
-    "empty": "No meal categories are available."
+    "empty": "No meal categories are available.",
+    "loadingMeals": "Loading meals...",
+    "mealsError": "Unable to load meals. Please try again later.",
+    "emptyMeals": "No meals found in this category."
   },
   "landing": {
     "hero": {

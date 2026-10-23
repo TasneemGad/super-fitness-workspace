@@ -9,6 +9,7 @@ import { CarouselComponent, CarouselModule, OwlOptions } from 'ngx-owl-carousel-
   imports: [CarouselModule, NgTemplateOutlet],
   templateUrl: './owl-carousel.component.html',
   styleUrl: './owl-carousel.component.scss',
+  host: { '[class.nav-outside]': 'navOutside()' },
 })
 export class OwlCarouselComponent<T> {
 
@@ -21,6 +22,8 @@ export class OwlCarouselComponent<T> {
 
   readonly rows = input<number>(1);
   readonly horizontalWheel = input(false);
+  // Places the prev/next arrows beside the slides instead of on top of them
+  readonly navOutside = input(false);
   private lastWheelTime = 0;
   private wheelDirection = 0;
 

@@ -21,6 +21,13 @@ export const remoteRoutes: Route[] = [
           ),
       },
       {
+        path: 'healthy',
+        loadChildren: () =>
+          import('../features/healthy/healthy.routes').then(
+            (module) => module.healthyRoutes,
+          ),
+      },
+      {
         path: '',
         loadChildren: () =>
           import('../features/home/home.routes').then(
