@@ -6,7 +6,6 @@ import { RouterLink } from '@angular/router';
 import { ParagraphTitle, SectionTitle } from '@org/ui';
 import { InfoCardComponent } from '../../../../shared/components/info-card/info-card.component';
 import { OwlCarouselComponent } from '../../../../shared/components/owl-carousel/owl-carousel.component';
-import { FitnessMarquee } from '../../../landing/ui/fitness-marquee/fitness-marquee';
 import { MealCategoryModel } from '../../models/meal-categories.model';
 import { MealsService } from '../../services/meals.service';
 import { SmartCoach } from '../../../smart-coach/smart-coach';
@@ -20,7 +19,6 @@ import { LanguageService } from '@org/i18n';
     InfoCardComponent,
     TranslatePipe,
     ParagraphTitle,
-    FitnessMarquee,
     OwlCarouselComponent,
     RouterLink,
     SmartCoach
