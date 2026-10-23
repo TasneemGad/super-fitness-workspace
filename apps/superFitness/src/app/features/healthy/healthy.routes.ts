@@ -9,6 +9,6 @@ export const healthyRoutes: Route[] = [
   {
     path: ':mealId',
     loadComponent: () =>
-      import('./pages/meal-details-page').then((module) => module.MealDetailsPage),
+      import('./pages/meal-details/meal-details-page').then((module) => module.MealDetailsPage),
   },
 ];

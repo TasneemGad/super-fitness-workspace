@@ -4,18 +4,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { catchError, distinctUntilChanged, map, of, Subscription, switchMap, tap } from 'rxjs';
 import { TranslatePipe } from '@ngx-translate/core';
 import { TabbedList, TabbedListItem, TabbedListTab, SectionTitle } from '@org/ui';
-import {
-  MealCategoryModel,
-  MealDetailsModel,
-  MealModel,
-} from '../../home/models/meal-categories.model';
-import { MealsService } from '../../home/services/meals.service';
-import { SmartCoach } from '../../smart-coach/smart-coach';
-
-export interface MealIngredient {
-  name: string;
-  measure: string;
-}
+import { MealCategoryModel, MealModel } from '../../../home/models/meal-categories.model';
+import { MealsService } from '../../../home/services/meals.service';
+import { SmartCoach } from '../../../smart-coach/smart-coach';
+import { MealDetailsModel, MealIngredient } from '../../models/meal-details.model';
+import { MealDetailsService } from '../../services/meal-details.service';
 
 const MAX_INGREDIENTS = 20;
 
@@ -24,10 +17,11 @@ const MAX_INGREDIENTS = 20;
   standalone: true,
   imports: [TabbedList, TranslatePipe, SmartCoach, SectionTitle],
   templateUrl: './meal-details-page.html',
-  styleUrl: './healthy-page.scss',
+  styleUrl: './meal-details-page.scss',
 })
 export class MealDetailsPage {
   private readonly mealsService = inject(MealsService);
+  private readonly mealDetailsService = inject(MealDetailsService);
   private readonly destroyRef = inject(DestroyRef);
   private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
@@ -107,7 +101,7 @@ export class MealDetailsPage {
           this.errorMessage.set(null);
         }),
         switchMap((id) =>
-          this.mealsService.getMealById(id).pipe(
+          this.mealDetailsService.getMealById(id).pipe(
             map((response) => response.meals?.[0] ?? null),
             catchError(() => of(undefined)),
           ),
