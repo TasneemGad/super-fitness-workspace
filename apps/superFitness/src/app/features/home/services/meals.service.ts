@@ -3,7 +3,6 @@ import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import {
   MealCategoriesResponseModel,
-  MealDetailsResponseModel,
   MealsResponseModel,
 } from '../models/meal-categories.model';
 
@@ -19,12 +18,6 @@ export class MealsService {
   getMealsByCategory(category: string): Observable<MealsResponseModel> {
     return this.http.get<MealsResponseModel>(`${this.baseUrl}/filter.php`, {
       params: { c: category },
-    });
-  }
-
-  getMealById(id: string): Observable<MealDetailsResponseModel> {
-    return this.http.get<MealDetailsResponseModel>(`${this.baseUrl}/lookup.php`, {
-      params: { i: id },
     });
   }
 }
