@@ -33,7 +33,6 @@ export class HealthyPage {
   private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
 
-  // Meals already fetched per category, so switching back to a tab doesn't re-request
   private readonly mealsCache = new Map<string, MealModel[]>();
   private mealsRequest?: Subscription;
 
@@ -53,7 +52,6 @@ export class HealthyPage {
   readonly getMealId = (meal: MealModel): string => meal.idMeal;
   readonly useCarousel = computed(() => this.meals().length > 8);
 
-  // Two rows per slide, so each breakpoint shows `items * 2` cards; dots only when there's more to scroll to
   readonly carouselOptions = computed<OwlOptions>(() => {
     const itemCount = this.meals().length;
     const breakpoint = (items: number, margin: number) => ({
@@ -89,7 +87,6 @@ export class HealthyPage {
         next: ({ categories }) => {
           this.categories.set(categories);
           this.isLoadingCategories.set(false);
-          // Home page cards link here with ?category=<name> to open that tab directly
           const requested = this.route.snapshot.queryParamMap.get('category');
           const initial =
             categories.find((category) => category.strCategory === requested) ?? categories[0];
