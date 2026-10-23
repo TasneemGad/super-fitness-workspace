@@ -1,16 +1,20 @@
 import { Route } from '@angular/router';
-import { RemoteEntry } from './entry';
+import { MainLayout } from '../shared/components/main-layout/main-layout.component';
 
 export const remoteRoutes: Route[] = [
   {
     path: '',
-    component: RemoteEntry,
+    component: MainLayout,
     children: [
       {
         path: 'account',
         loadChildren: () =>
           import('../features/account/account.routes').then(
             (module) => module.accountRoutes,
+        path: 'about',
+        loadChildren: () =>
+          import('../features/about/about.routes').then(
+            (module) => module.aboutRoutes,
           ),
       },
       {

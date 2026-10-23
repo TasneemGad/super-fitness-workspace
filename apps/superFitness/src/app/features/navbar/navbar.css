@@ -8,7 +8,7 @@
   align-items: center;
   justify-content: space-between;
   height: 72px;
-  padding: 0 16px;
+  padding: 0 max(var(--page-gutter), calc((100% - var(--page-width)) / 2));
   transition: background-color 0.3s, box-shadow 0.3s;
 }
 
@@ -165,10 +165,6 @@ ul {
 
 /* Tablet and up: show links in the bar, hide the menu button */
 @media (min-width: 768px) {
-  .navbar {
-    padding: 0 40px;
-  }
-
   .logo {
     width: 80px;
   }
