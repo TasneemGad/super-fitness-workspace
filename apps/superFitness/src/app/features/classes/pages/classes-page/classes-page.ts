@@ -1,14 +1,15 @@
 import {Component, DestroyRef, computed, effect, inject, signal,} from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { ActivatedRoute, Router } from '@angular/router';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { TranslatePipe } from '@ngx-translate/core';
 import { LanguageService } from '@org/i18n';
 import { ParagraphTitle, SectionTitle } from '@org/ui';
-import { InfoCardComponent } from '../../../shared/components/info-card/info-card.component';
-import { OwlCarouselComponent } from '../../../shared/components/owl-carousel/owl-carousel.component';
-import { TabItem, TabsBarComponent,} from '../../../shared/components/tabs-bar/tabs-bar.component';
-import { MuscleGroupModel, MuscleModel,} from '../models/muscles.model';
-import { MusclesService } from '../services/muscles.service';
+import { InfoCardComponent } from '../../../../shared/components/info-card/info-card.component';
+import { OwlCarouselComponent } from '../../../../shared/components/owl-carousel/owl-carousel.component';
+import { TabItem, TabsBarComponent,} from '../../../../shared/components/tabs-bar/tabs-bar.component';
+import { MuscleGroupModel, MuscleModel,} from '../../models/muscles.model';
+import { MusclesService } from '../../services/muscles.service';
 
 @Component({
   selector: 'app-classes-page',
@@ -27,7 +28,9 @@ import { MusclesService } from '../services/muscles.service';
 export class ClassesPage {
   private readonly _musclesService = inject(MusclesService);
   private readonly destroyRef = inject(DestroyRef);
-  private readonly languageService = inject(LanguageService);
+  private readonly _router = inject(Router);
+  private readonly _route = inject(ActivatedRoute);
+  private readonly _languageService = inject(LanguageService);
 
   readonly muscleGroups = signal<MuscleGroupModel[]>([]);
   readonly muscles = signal<MuscleModel[]>([]);
@@ -42,6 +45,12 @@ export class ClassesPage {
   readonly getMuscleId = (muscle: MuscleModel): string => muscle._id;
   readonly useCarousel = computed(() => this.muscles().length > 4);
 
+  navigateToWorkoutDetails(muscleId: string): void {
+     this._router.navigate(['workout-details', muscleId], {
+      relativeTo: this._route,
+    });
+  }
+
   readonly carouselOptions = computed<OwlOptions>(() => {
     const itemCount = this.muscles().length;
     return {
@@ -55,7 +64,7 @@ export class ClassesPage {
       margin: 16,
       autoWidth: false,
       autoHeight: false,
-      rtl: this.languageService.isRtl(),
+      rtl: this._languageService.isRtl(),
       responsive: {
         0: { items: 1, margin: 12, dots: itemCount > 2 },
         640: { items: 2, margin: 16, dots: itemCount > 4 },
@@ -68,7 +77,7 @@ export class ClassesPage {
 
   constructor() {
   effect(() => {
-    this.languageService.currentLang();
+    this._languageService.currentLang();
 
     this.getAllMuscleGroups();
   });

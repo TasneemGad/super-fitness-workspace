@@ -26,7 +26,7 @@
     </p>
     } @else {
     <app-tabs-bar class="my-8 block" [tabs]="muscleGroupTabs()" [selectedId]="selectedGroupId()"
-      (tabSelected)="selectGroup($event)" widthClass="w-full lg:w-1/2" />
+      (tabSelected)="selectGroup($event)" widthClass="w-full md:w-4/5 lg:w-1/2" />
 
     @if (isLoadingMuscles()) {
     <p class="py-10 text-center text-[#242424] dark:text-[#f3f3f4]" role="status">
@@ -41,14 +41,14 @@
         @if (useCarousel()) {
         <app-owl-carousel [items]="muscles()" [options]="carouselOptions()" [itemId]="getMuscleId" [rows]="2">
           <ng-template #slide let-muscle>
-            <app-info-card [image]="muscle.image" [title]="muscle.name" />
+            <app-info-card (buttonClick)="navigateToWorkoutDetails(muscle._id)" [image]="muscle.image" [title]="muscle.name" />
           </ng-template>
         </app-owl-carousel>
         } @else {
         <div class="flex flex-wrap justify-center gap-4">
           @for (muscle of muscles(); track getMuscleId(muscle)) {
           <div class="w-full md:w-[calc(50%-0.5rem)] max-w-[480px] lg:w-[calc(33.333%-0.75rem)]">
-            <app-info-card [image]="muscle.image" [title]="muscle.name" />
+            <app-info-card (buttonClick)="navigateToWorkoutDetails(muscle._id)" [image]="muscle.image" [title]="muscle.name" />
           </div>
           }
         </div>

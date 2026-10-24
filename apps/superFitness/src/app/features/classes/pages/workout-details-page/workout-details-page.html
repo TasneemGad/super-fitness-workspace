@@ -1,0 +1,85 @@
+<main class="workout-details-page ">
+  <div class="mx-auto w-full max-w-[1990px] pt-[72px] pb-[clamp(1.5rem,3.5vw,3.125rem)] ps-[clamp(1rem,5.56vw,5rem)]">
+    <lib-section-title [primaryText]="'workouts.title' | translate" size="sm" [primaryTextFontSize]="64"
+      showIcon="false" />
+
+    <!-- Groups tabs bar -->
+    @if (isLoadingGroups()) {
+    <p class="py-10 text-center text-[#242424] dark:text-[#f3f3f4]" role="status">
+      {{ 'workouts.loading' | translate }}
+    </p>
+    } @else if (errorMessage()) {
+    <p class="py-10 text-center text-[#242424] dark:text-[#f3f3f4]" role="alert">
+      {{ errorMessage() | translate }}
+    </p>
+    } @else if (muscleGroups().length === 0) {
+    <p class="py-10 text-center text-[#242424] dark:text-[#f3f3f4]">
+      {{ 'workouts.empty' | translate }}
+    </p>
+    } @else {
+    <app-tabs-bar class="my-8 block mx-auto" [tabs]="muscleGroupTabs()" [selectedId]="selectedGroupId()"
+      (tabSelected)="selectGroup($event)" widthClass="w-full md:w-4/5 lg:w-1/2" />
+    }
+    <div class="grid grid-cols-1 gap-6 lg:grid-cols-[clamp(260px,24vw,360px)_minmax(0,1fr)]">
+
+
+
+
+
+
+      <div class="flex min-w-0 flex-col w-full max-w-[1490px] gap-6">
+        <div class="pe-[clamp(1rem,5.56vw,5rem)] flex flex-col gap-6">
+          <!-- workout-player -->
+        @if (selectedExercise(); as exercise) {
+        <app-workout-player
+          [title]="exercise.exercise"
+          [description]="exercise.target_muscle_group"
+          [videoUrl]="exercise.short_youtube_demonstration_link"
+          [level]="exercise.difficulty_level" />
+        }
+
+
+        <!-- Expertly designed workout. -->
+         <div class="hidden md:block">
+           <app-workout-highlights />
+        </div>
+       
+
+        </div>
+        
+        <!-- Recommendation For You  -->
+        <section class="mt-12" aria-labelledby="recommendations-title">
+          <div class="mx-auto w-full max-w-[1490px] flex flex-col gap-4">
+            <h2 id="recommendations-title" class="font-['Baloo_Thambi_2'] font-medium capitalize leading-[1.4] tracking-normal
+           text-[clamp(1.25rem,1rem+1.1vw,2rem)] dark:text-[#f3f3f4] text-[#242424]">
+              {{ 'workouts.recommendationForYou' | translate }}
+            </h2>
+
+            @if (isLoadingRecommendations()) {
+            <p class="py-8 text-center text-[#242424] dark:text-[#f3f3f4]" role="status">
+              {{ 'healthy.loading' | translate }}
+            </p>
+            } @else if (recommendationsErrorMessage()) {
+            <p class="py-8 text-center text-[#242424] dark:text-[#f3f3f4]" role="alert">
+              {{ recommendationsErrorMessage() | translate }}
+            </p>
+            } @else if (mealCategories().length > 0) {
+            <app-owl-carousel [items]="mealCategories()" [options]="recommendationCarouselOptions()"
+              [itemId]="getMealCategoryId" [rows]="1">
+              <ng-template #slide let-category>
+                <app-info-card [image]="category.strCategoryThumb" [title]="category.strCategory"
+                  buttonText="healthy.readMore" />
+              </ng-template>
+            </app-owl-carousel>
+            } @else {
+            <p class="py-8 text-center text-[#242424] dark:text-[#f3f3f4]">
+              {{ 'healthy.empty' | translate }}
+            </p>
+            }
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+
+</main>

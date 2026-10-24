@@ -2,7 +2,7 @@ import { Component, computed, effect, inject, signal } from '@angular/core';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { DestroyRef } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 import { ParagraphTitle, SectionTitle } from '@org/ui';
 import { InfoCardComponent } from '../../../../shared/components/info-card/info-card.component';
@@ -34,7 +34,9 @@ export class WorkoutsSectionComponent  {
   private readonly _musclesService = inject(MusclesService);
   private readonly destroyRef = inject(DestroyRef);
   private readonly languageService = inject(LanguageService);
-  
+  private readonly _router = inject(Router);
+  private readonly _route = inject(ActivatedRoute);
+
   readonly muscles = signal<MuscleModel[]>([]);
   readonly muscleGroups = signal<MuscleGroupModel[]>([]);
   readonly selectedGroupId = signal<string | null>(null);
@@ -46,6 +48,9 @@ export class WorkoutsSectionComponent  {
   readonly errorMessage = signal<string | null>(null);
  
   readonly getMuscleId = (muscle: MuscleModel): string => muscle._id;
+  navigateToWorkoutDetails(muscleId: string): void {
+     this._router.navigate(['classes/workout-details',muscleId,],{relativeTo:this._route});
+  }
   readonly workoutsIconSvg = `
 <svg width="34" height="20" viewBox="0 0 34 20"
      fill="none" xmlns="http://www.w3.org/2000/svg">
