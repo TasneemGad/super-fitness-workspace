@@ -10,7 +10,6 @@ import { OwlCarouselComponent } from '../../../shared/components/owl-carousel/ow
 import { TabItem, TabsBarComponent } from '../../../shared/components/tabs-bar/tabs-bar.component';
 import { MealCategoryModel, MealModel } from '../../home/models/meal-categories.model';
 import { MealsService } from '../../home/services/meals.service';
-import { SmartCoach } from '../../smart-coach/smart-coach';
 import { HttpErrorService } from '../../../core/http/http-error.service';
 import { LoadingService } from '../../../core/http/loading.service';
 import { withRequestState } from '../../../core/http/request-state';
@@ -28,7 +27,6 @@ const MEALS_REQUEST = 'healthy.meals';
     SectionTitle,
     TabsBarComponent,
     TranslatePipe,
-    SmartCoach,
   ],
   templateUrl: './healthy-page.html',
   styleUrl: './healthy-page.scss',

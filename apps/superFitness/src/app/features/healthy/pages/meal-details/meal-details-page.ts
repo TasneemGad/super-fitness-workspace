@@ -6,7 +6,6 @@ import { TranslatePipe } from '@ngx-translate/core';
 import { TabbedList, TabbedListItem, TabbedListTab, SectionTitle } from '@org/ui';
 import { MealCategoryModel, MealModel } from '../../../home/models/meal-categories.model';
 import { MealsService } from '../../../home/services/meals.service';
-import { SmartCoach } from '../../../smart-coach/smart-coach';
 import { MealDetailsModel, MealIngredient } from '../../models/meal-details.model';
 import { MealDetailsService } from '../../services/meal-details.service';
 
@@ -15,7 +14,7 @@ const MAX_INGREDIENTS = 20;
 @Component({
   selector: 'app-meal-details-page',
   standalone: true,
-  imports: [TabbedList, TranslatePipe, SmartCoach, SectionTitle],
+  imports: [TabbedList, TranslatePipe, SectionTitle],
   templateUrl: './meal-details-page.html',
   styleUrl: './meal-details-page.scss',
 })

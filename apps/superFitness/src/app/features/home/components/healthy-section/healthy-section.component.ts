@@ -8,7 +8,6 @@ import { InfoCardComponent } from '../../../../shared/components/info-card/info-
 import { OwlCarouselComponent } from '../../../../shared/components/owl-carousel/owl-carousel.component';
 import { MealCategoryModel } from '../../models/meal-categories.model';
 import { MealsService } from '../../services/meals.service';
-import { SmartCoach } from '../../../smart-coach/smart-coach';
 import { LanguageService } from '@org/i18n';
 
 @Component({
@@ -20,8 +19,7 @@ import { LanguageService } from '@org/i18n';
     TranslatePipe,
     ParagraphTitle,
     OwlCarouselComponent,
-    RouterLink,
-    SmartCoach
+    RouterLink
   ],
   templateUrl: './healthy-section.component.html',
   styleUrl: './healthy-section.component.scss',
