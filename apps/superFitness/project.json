@@ -31,7 +31,7 @@
             "output": "assets/auth"
           },
           {
-            "glob": "logo.png",
+            "glob": "{logo,background}.png",
             "input": "apps/authApp/public/assets/auth",
             "output": "assets/auth"
           },
@@ -39,6 +39,11 @@
             "glob": "*.json",
             "input": "apps/shell/public/assets/i18n/shell",
             "output": "assets/i18n/shell"
+          },
+          {
+            "glob": "*.woff2",
+            "input": "apps/shell/public/assets/fonts",
+            "output": "assets/fonts"
           }
         ],
         "styles": [

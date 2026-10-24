@@ -1,5 +1,5 @@
 <section
-  class="healthy-section relative flex min-h-[48rem] w-full flex-col items-center overflow-hidden bg-[#F3F3F4] px-4 sm:px-6 lg:px-[clamp(1rem,5.56vw,5rem)]">
+  class="healthy-section relative flex min-h-[48rem] w-full flex-col items-center overflow-hidden bg-[#F3F3F4] px-[max(var(--page-gutter),calc((100%_-_var(--page-width))/2))]">
   <!--  Overlay -->
   <div class="pointer-events-none absolute start-0 top-[57px] z-0 h-[414px] w-full bg-[#FFFFFF99] dark:bg-[#24242499] backdrop-blur-[43px]">
   </div>
@@ -25,40 +25,32 @@
     </p>
     } @else if (mealCategories().length > 0) {
     <div class="mt-8 w-full">
-      <div class="grid grid-cols-1 gap-4 md:hidden">
-        @for (category of mealCategories().slice(0, 3); track category.idCategory) {
-        <div class="w-full">
-          <app-info-card
-            [image]="category.strCategoryThumb"
-            [title]="category.strCategory"
-            buttonText="healthy.readMore"
-          />
-        </div>
-        }
-      </div>
-      <div class="hidden md:block mx-auto w-full max-w-[1490px]">
+      <div class="mx-auto w-full">
         @if (useCarousel()) {
         <app-owl-carousel
           [items]="mealCategories()"
           [options]="customOptions()"
           [itemId]="getCategoryId"
+          [horizontalWheel]="true"
         >
           <ng-template #slide let-category>
             <app-info-card
               [image]="category.strCategoryThumb"
               [title]="category.strCategory"
               buttonText="healthy.readMore"
+              (buttonClick)="openCategory(category.strCategory)"
             />
           </ng-template>
         </app-owl-carousel>
         } @else {
         <div class="flex flex-wrap justify-center gap-4">
           @for (category of mealCategories(); track category.idCategory) {
-          <div class="w-[calc(50%-0.5rem)] lg:w-[calc(33.333%-0.75rem)]">
+          <div class="w-full max-w-[480px] sm:w-[calc(50%-0.5rem)] lg:w-[calc(33.333%-0.75rem)]">
             <app-info-card
               [image]="category.strCategoryThumb"
               [title]="category.strCategory"
               buttonText="healthy.readMore"
+              (buttonClick)="openCategory(category.strCategory)"
             />
           </div>
           }
@@ -67,9 +59,9 @@
       </div>
       <div class="mt-auto flex justify-end pt-6 pb-4 md:hidden">
       <a
-        routerLink=""
+        routerLink="healthy"
         class="rounded-full text-[#FF4100]  py-2
-           font-['Inter'] text-[13.1px] font-semibold
+           text-[13.1px] font-semibold
            leading-[25.6px] capitalize 
            transition-colors "
       >
@@ -84,6 +76,4 @@
     }
   </div>
 
-  <app-fitness-marquee />
-  <app-smart-coach/>
 </section>

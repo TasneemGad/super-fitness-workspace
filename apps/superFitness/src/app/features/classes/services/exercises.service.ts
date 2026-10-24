@@ -23,4 +23,21 @@ export class ExercisesService extends ApiClient<ExerciseModel> {
       limit,
      });
   }
+
+
+   getRandomExercises(
+    targetMuscleGroupId: string,
+    difficultyLevelId: string,
+    limit = 5,
+  ): Observable<ExercisesResponse> {
+    return this.get<ExercisesResponse>(
+      {
+        targetMuscleGroupId,
+        difficultyLevelId,
+        limit,
+      },
+      
+    );
+  }
+
 }

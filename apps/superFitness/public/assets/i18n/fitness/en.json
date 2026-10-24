@@ -46,7 +46,24 @@
     "more": "More healthy categories",
     "backToHome": "Back to home",
     "error": "Unable to load meal categories. Please try again later.",
-    "empty": "No meal categories are available."
+    "empty": "No meal categories are available.",
+    "loadingMeals": "Loading meals...",
+    "mealsError": "Unable to load meals. Please try again later.",
+    "emptyMeals": "No meals found in this category.",
+    "details": {
+      "back": "Back to meals",
+      "loading": "Loading meal...",
+      "error": "Unable to load this meal. Please try again later.",
+      "notFound": "This meal could not be found.",
+      "itemDescription": "A healthy {{category}} recipe, tap to see the ingredients and steps.",
+      "category": "Category",
+      "area": "Cuisine",
+      "ingredientsCount": "Ingredients",
+      "steps": "Steps",
+      "ingredients": "Ingredients",
+      "instructions": "Instructions",
+      "watchVideo": "Watch video"
+    }
   },
   "landing": {
     "hero": {
@@ -160,5 +177,59 @@
     "editMessage": "Edit message",
     "userLabel": "User",
     "aiLabel": "AI"
+  },
+  "account": {
+    "title": "Account basic metrics",
+    "metrics": {
+      "goal": "Your Goal",
+      "activityLevel": "Level",
+      "weight": "Weight"
+    },
+    "tapToChange": "TAP TO CHANGE",
+    "unavailable": "Not available",
+    "unit": "KG",
+    "loading": "Loading your profile…",
+    "saving": "Saving…",
+    "save": "Save",
+    "cancel": "Cancel",
+    "retry": "Try again",
+    "weightRange": "Enter a whole number between 30 and 200 KG.",
+    "editors": {
+      "goal": {
+        "title": "What Is Your Goal?",
+        "description": "This Helps Us Create Your Personalized Plan"
+      },
+      "activityLevel": {
+        "title": "What Is Your Level?",
+        "description": "Choose The Level That Matches Your Activity"
+      },
+      "weight": {
+        "title": "What Is Your Weight?",
+        "description": "We Use This To Calculate Your Ideal Calorie Intake"
+      }
+    },
+    "options": {
+      "goal": {
+        "gainWeight": "Gain Weight",
+        "loseWeight": "Lose Weight",
+        "getFitter": "Get Fitter",
+        "gainFlexible": "Gain More Flexible",
+        "learnBasics": "Learn The Basics"
+      },
+      "activityLevel": {
+        "rookie": "Rookie",
+        "beginner": "Beginner",
+        "intermediate": "Intermediate",
+        "advance": "Advance",
+        "trueBeast": "True Beast"
+      }
+    },
+    "errors": {
+      "loadFailed": "Unable to load your profile. Please try again.",
+      "saveFailed": "Unable to save your change. Please try again.",
+      "network": "Cannot reach the server. Check your connection.",
+      "unauthorized": "Your session has expired. Please sign in again.",
+      "rejected": "The server could not accept this value. Please check your selection and try again."
+    }
   }
 }

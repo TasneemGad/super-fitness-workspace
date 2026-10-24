@@ -1,10 +1,11 @@
 import {Component,DestroyRef,computed,effect,inject,signal,} from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute } from '@angular/router';
+import { catchError, forkJoin, of, Subscription } from 'rxjs';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { TranslatePipe } from '@ngx-translate/core';
 import { LanguageService } from '@org/i18n';
-import { SectionTitle } from '@org/ui';
+import { SectionTitle, TabbedList, TabbedListItem, TabbedListTab } from '@org/ui';
 import { WorkoutHighlights } from '../../components/workout-highlights/workout-highlights';
 import { WorkoutPlayer } from '../../components/workout-player/workout-player';
 import { InfoCardComponent } from '../../../../shared/components/info-card/info-card.component';
@@ -14,15 +15,16 @@ import { MealCategoryModel } from '../../../home/models/meal-categories.model';
 import { MealsService } from '../../../home/services/meals.service';
 import { DifficultyLevelModel } from '../../models/difficulty-level.model';
 import { ExerciseModel } from '../../models/exercise.model';
-import { MuscleGroupModel } from '../../models/muscles.model';
+import { MuscleGroupModel, MuscleModel } from '../../models/muscles.model';
 import { DifficultyLevelsService } from '../../services/difficulty-levels.service';
 import { ExercisesService } from '../../services/exercises.service';
 import { MusclesService } from '../../services/muscles.service';
+import { getYouTubeThumbnailUrl } from '../../utils/youtube-video.utils';
 
 @Component({
   selector: 'app-workout-details-page',
   standalone: true,
-  imports: [InfoCardComponent,OwlCarouselComponent,SectionTitle,TabsBarComponent,
+  imports: [InfoCardComponent,OwlCarouselComponent,SectionTitle,TabbedList,TabsBarComponent,
     TranslatePipe,WorkoutPlayer,WorkoutHighlights,],
   templateUrl: './workout-details-page.html',
   styleUrl: './workout-details-page.scss',
@@ -33,21 +35,30 @@ export class WorkoutDetailsPage  {
   private readonly _difficultyLevelsService = inject(DifficultyLevelsService);
   private readonly _mealsService = inject(MealsService);
   private readonly _route = inject(ActivatedRoute);
+  private muscleId: string | null;
+  private difficultyLevelsRequest?: Subscription;
+  private exercisesRequest?: Subscription;
+  private groupMusclesRequest?: Subscription;
+  private groupLookupRequest?: Subscription;
   private readonly destroyRef = inject(DestroyRef);
   private readonly _languageService = inject(LanguageService);
 
   readonly muscleGroups = signal<MuscleGroupModel[]>([]);
+  readonly muscles = signal<MuscleModel[]>([]);
   readonly difficultyLevels = signal<DifficultyLevelModel[]>([]);
   readonly exercises = signal<ExerciseModel[]>([]);
   readonly mealCategories = signal<MealCategoryModel[]>([]);
   readonly selectedGroupId = signal<string | null>(null);
+  readonly selectedMuscleId = signal<string | null>(null);
   readonly selectedDifficultyLevelId = signal<string | null>(null);
   readonly selectedExercise = signal<ExerciseModel | null>(null);
   readonly isLoadingGroups = signal(true);
+  readonly isLoadingMuscles = signal(false);
   readonly isLoadingDifficultyLevels = signal(true);
   readonly isLoadingExercises = signal(true);
   readonly isLoadingRecommendations = signal(true);
   readonly errorMessage = signal<string | null>(null);
+  readonly musclesErrorMessage = signal<string | null>(null);
   readonly difficultyLevelsErrorMessage = signal<string | null>(null);
   readonly exercisesErrorMessage = signal<string | null>(null);
   readonly recommendationsErrorMessage = signal<string | null>(null);
@@ -55,15 +66,27 @@ export class WorkoutDetailsPage  {
   readonly muscleGroupTabs = computed<TabItem[]>(() =>
     this.muscleGroups().map((group) => ({ id: group._id, label: group.name })),
   );
-  readonly difficultyLevelTabs = computed<TabItem[]>(() =>
+  readonly muscleTabs = computed<TabItem[]>(() =>
+    this.muscles().map((muscle) => ({ id: muscle._id, label: muscle.name })),
+  );
+  readonly difficultyLevelTabs = computed<TabbedListTab[]>(() =>
     this.difficultyLevels().map((level) => ({ id: level.id, label: level.name })),
+  );
+  readonly exerciseItems = computed<TabbedListItem<ExerciseModel>[]>(() =>
+    this.exercises().map((exercise) => ({
+      id: exercise._id,
+      title: exercise.exercise,
+      image: getYouTubeThumbnailUrl(exercise.short_youtube_demonstration_link) ?? undefined,
+      lines: [exercise.target_muscle_group],
+      data: exercise,
+    })),
   );
   readonly getMealCategoryId = (category: MealCategoryModel): string =>
     category.idCategory;
   
   // Loads difficulty levels and meals, and refreshes muscle groups when the language changes.
    constructor() {
-   this.getDifficultyLevels();
+   this.muscleId = this._route.snapshot.paramMap.get('id');
 
    effect(() => {
      this._languageService.currentLang();
@@ -86,15 +109,24 @@ export class WorkoutDetailsPage  {
     responsive: {
       0: { items: 1, margin: 12 },
       640: { items: 2, margin: 16 },
-      1024: { items: 3, margin: 16 },
+      900: { items: 3, margin: 16 },
     },
   }));
 
   
 
   // Loads difficulty levels for the muscle ID in the current route.
-  private getDifficultyLevels(): void {
-    const muscleId = this._route.snapshot.paramMap.get('id');
+  private getDifficultyLevels(muscleId = this.muscleId): void {
+    this.difficultyLevelsRequest?.unsubscribe();
+    this.exercisesRequest?.unsubscribe();
+    this.difficultyLevels.set([]);
+    this.exercises.set([]);
+    this.selectedDifficultyLevelId.set(null);
+    this.selectedExercise.set(null);
+    this.difficultyLevelsErrorMessage.set(null);
+    this.exercisesErrorMessage.set(null);
+    this.isLoadingDifficultyLevels.set(true);
+    this.isLoadingExercises.set(true);
 
     if (!muscleId) {
       this.difficultyLevelsErrorMessage.set('workouts.error');
@@ -104,7 +136,7 @@ export class WorkoutDetailsPage  {
       return;
     }
 
-    this._difficultyLevelsService
+    this.difficultyLevelsRequest = this._difficultyLevelsService
       .getAllDifficultyLevels(muscleId)
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
@@ -128,8 +160,8 @@ export class WorkoutDetailsPage  {
 
   // Fetches exercises for the selected difficulty level and selects the first result.
   selectDifficultyLevel(id: string): void {
-    const muscleId = this._route.snapshot.paramMap.get('id');
-    if (!muscleId) {
+    this.exercisesRequest?.unsubscribe();
+    if (!this.muscleId) {
       this.exercisesErrorMessage.set('workouts.error');
       this.isLoadingExercises.set(false);
       return;
@@ -139,8 +171,8 @@ export class WorkoutDetailsPage  {
     this.isLoadingExercises.set(true);
     this.exercisesErrorMessage.set(null);
 
-    this._exercisesService
-      .getExercisesByMuscleAndDifficulty(muscleId, id)
+    this.exercisesRequest = this._exercisesService
+      .getExercisesByMuscleAndDifficulty(this.muscleId, id)
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         next: ({ exercises }) => {
@@ -157,14 +189,42 @@ export class WorkoutDetailsPage  {
 
   // Loads the available muscle groups and selects the first group by default.
   private getAllMuscleGroups(): void {
+    this.groupLookupRequest?.unsubscribe();
     this._musclesService
       .getAllMuscleGroups()
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         next: ({ musclesGroup }) => {
           this.muscleGroups.set(musclesGroup);
-          this.selectedGroupId.set(musclesGroup[0]?._id ?? null);
           this.isLoadingGroups.set(false);
+
+          if (musclesGroup.length === 0) {
+            this.selectedGroupId.set(null);
+            this.muscles.set([]);
+            this.selectedMuscleId.set(null);
+            this.isLoadingDifficultyLevels.set(false);
+            this.isLoadingExercises.set(false);
+            return;
+          }
+
+          this.groupLookupRequest = forkJoin(
+            musclesGroup.map((group) =>
+              this._musclesService.getGroupById(group._id).pipe(
+                catchError(() => of(null)),
+              ),
+            ),
+          )
+            .pipe(takeUntilDestroyed(this.destroyRef))
+            .subscribe((responses) => {
+              const routeGroupIndex = responses.findIndex((response) =>
+                response?.muscles.some((muscle) => muscle._id === this.muscleId),
+              );
+              const selectedIndex = routeGroupIndex >= 0 ? routeGroupIndex : 0;
+              this.selectGroup(
+                musclesGroup[selectedIndex]._id,
+                routeGroupIndex >= 0 ? this.muscleId : null,
+              );
+            });
         },
         error: () => {
           this.errorMessage.set('workouts.error');
@@ -191,12 +251,63 @@ export class WorkoutDetailsPage  {
   }
 
   // Updates the currently selected muscle group.
-  selectGroup(id: string): void {
+  selectGroup(id: string, preferredMuscleId: string | null = null): void {
+    if (!this.muscleGroups().some((group) => group._id === id)) return;
+
+    this.groupMusclesRequest?.unsubscribe();
+    this.difficultyLevelsRequest?.unsubscribe();
+    this.exercisesRequest?.unsubscribe();
     this.selectedGroupId.set(id);
+    this.muscles.set([]);
+    this.selectedMuscleId.set(null);
+    this.difficultyLevels.set([]);
+    this.exercises.set([]);
+    this.selectedDifficultyLevelId.set(null);
+    this.selectedExercise.set(null);
+    this.difficultyLevelsErrorMessage.set(null);
+    this.exercisesErrorMessage.set(null);
+    this.musclesErrorMessage.set(null);
+    this.isLoadingMuscles.set(true);
+
+    this.groupMusclesRequest = this._musclesService
+      .getGroupById(id)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
+        next: ({ muscles }) => {
+          this.muscles.set(muscles);
+          this.isLoadingMuscles.set(false);
+          const nextMuscleId =
+            muscles.find((muscle) => muscle._id === preferredMuscleId)?._id ??
+            muscles[0]?._id;
+
+          if (nextMuscleId) {
+            this.selectMuscle(nextMuscleId);
+          } else {
+            this.muscleId = null;
+            this.isLoadingDifficultyLevels.set(false);
+            this.isLoadingExercises.set(false);
+          }
+        },
+        error: () => {
+          this.musclesErrorMessage.set('workouts.error');
+          this.isLoadingMuscles.set(false);
+          this.isLoadingDifficultyLevels.set(false);
+          this.isLoadingExercises.set(false);
+        },
+      });
+  }
+
+  selectMuscle(id: string): void {
+    if (!this.muscles().some((muscle) => muscle._id === id)) return;
+    this.selectedMuscleId.set(id);
+    this.muscleId = id;
+    this.getDifficultyLevels(id);
   }
 
   // Updates the exercise displayed in the workout player.
-  selectExercise(exercise: ExerciseModel): void {
-  this.selectedExercise.set(exercise);
+  selectExercise(item: TabbedListItem<ExerciseModel>): void {
+    if (item.data) {
+      this.selectedExercise.set(item.data);
+    }
 }
 }

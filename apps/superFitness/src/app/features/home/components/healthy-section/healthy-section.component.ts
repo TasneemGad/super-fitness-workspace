@@ -2,14 +2,12 @@ import { Component, DestroyRef, OnInit, computed, inject, signal } from '@angula
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TranslatePipe } from '@ngx-translate/core';
-import { RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ParagraphTitle, SectionTitle } from '@org/ui';
 import { InfoCardComponent } from '../../../../shared/components/info-card/info-card.component';
 import { OwlCarouselComponent } from '../../../../shared/components/owl-carousel/owl-carousel.component';
-import { FitnessMarquee } from '../../../landing/ui/fitness-marquee/fitness-marquee';
 import { MealCategoryModel } from '../../models/meal-categories.model';
 import { MealsService } from '../../services/meals.service';
-import { SmartCoach } from '../../../smart-coach/smart-coach';
 import { LanguageService } from '@org/i18n';
 
 @Component({
@@ -20,10 +18,8 @@ import { LanguageService } from '@org/i18n';
     InfoCardComponent,
     TranslatePipe,
     ParagraphTitle,
-    FitnessMarquee,
     OwlCarouselComponent,
-    RouterLink,
-    SmartCoach
+    RouterLink
   ],
   templateUrl: './healthy-section.component.html',
   styleUrl: './healthy-section.component.scss',
@@ -32,6 +28,8 @@ export class HealthySectionComponent implements OnInit {
   private readonly mealsService = inject(MealsService);
   private readonly destroyRef = inject(DestroyRef);
   private readonly languageService = inject(LanguageService);
+  private readonly router = inject(Router);
+  private readonly route = inject(ActivatedRoute);
 
   readonly mealCategories = signal<MealCategoryModel[]>([]);
   readonly isLoading = signal(true);
@@ -67,6 +65,14 @@ export class HealthySectionComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadCategories();
+  }
+
+  // Opens the dedicated healthy page with this category's tab preselected
+  openCategory(category: string): void {
+    this.router.navigate(['healthy'], {
+      relativeTo: this.route,
+      queryParams: { category },
+    });
   }
   loadCategories(): void {
 

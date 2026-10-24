@@ -51,6 +51,17 @@ describe('AuthSession', () => {
     expect(create().token()).toBeNull();
   });
 
+  it('merges confirmed profile values without replacing the token or unrelated fields', () => {
+    const session = create();
+    session.save({ ...response, user: { ...response.user, photo: 'photo.jpg', goal: 'get fitter', activityLevel: 'level2' } });
+    session.updateUser({ ...response.user, weight: 50 });
+
+    expect(session.token()).toBe('a-token');
+    expect(session.user()).toEqual({ ...response.user, photo: 'photo.jpg', goal: 'get fitter', activityLevel: 'level2', weight: 50 });
+    expect(create().user()).toEqual(session.user());
+    expect(create().token()).toBe('a-token');
+  });
+
   it('ignores a corrupted stored user rather than throwing', () => {
     localStorage.setItem('super-fitness.token', 'a-token');
     localStorage.setItem('super-fitness.user', 'not json');

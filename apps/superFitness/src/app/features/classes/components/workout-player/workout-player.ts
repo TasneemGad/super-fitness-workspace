@@ -1,6 +1,7 @@
 import { Component, computed, effect, inject, input, signal } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { TranslatePipe } from '@ngx-translate/core';
+import { getYouTubeThumbnailUrl, getYouTubeVideoId } from '../../utils/youtube-video.utils';
 
 @Component({
   selector: 'app-workout-player',
@@ -27,18 +28,11 @@ constructor() {
   });
 }
 
-// Extracts the 11-character YouTube video ID from the supplied URL.
-private readonly videoId=computed(() => {
-  const url = this.videoUrl();
-  if (!url) return null;
-  const match = url.match(/(?:youtu\.be\/|v=)([\w-]{11})/);
-  return match ? match[1] : null;
-  });
+private readonly videoId = computed(() => getYouTubeVideoId(this.videoUrl()));
 
 // Builds the YouTube thumbnail URL (img)for the current video.
 readonly poster = computed(() => {
-  const id = this.videoId();
-  return id ? `https://img.youtube.com/vi/${id}/hqdefault.jpg` : '';
+  return getYouTubeThumbnailUrl(this.videoUrl()) ?? '';
 });
 // Creates a trusted YouTube embed URL that starts playback automatically.
 readonly embedUrl = computed(() => {

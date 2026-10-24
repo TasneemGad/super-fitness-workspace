@@ -37,6 +37,12 @@ export class AuthSession {
     write(USER_KEY, JSON.stringify(response.user));
   }
 
+  updateUser(user: AuthenticatedUser): void {
+    const updated = { ...this._user(), ...user };
+    this._user.set(updated);
+    write(USER_KEY, JSON.stringify(updated));
+  }
+
   clear(): void {
     this._token.set(null);
     this._user.set(null);

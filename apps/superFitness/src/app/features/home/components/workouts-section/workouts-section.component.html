@@ -1,6 +1,6 @@
 <section
   class="workouts-section relative flex min-h-[32rem] sm:min-h-[40rem] lg:min-h-[48rem]
-   w-full  min-w-0  flex-col items-center overflow-hidden bg-[#F3F3F4] px-4 sm:px-6 lg:px-[clamp(1rem,5.56vw,5rem)] pb-8 sm:pb-10">
+   w-full  min-w-0  flex-col items-center overflow-hidden bg-[#F3F3F4] px-[max(var(--page-gutter),calc((100%_-_var(--page-width))/2))] pb-8 sm:pb-10">
 
   <!--  Overlay -->
   <div
@@ -68,7 +68,7 @@
 
       <div class="mt-auto flex justify-end pt-6 pb-4 md:hidden">
         <a routerLink="classes" class="rounded-full   py-2
-           font-['Inter'] text-[13.1px] font-semibold
+           text-[13.1px] font-semibold
            leading-[25.6px] capitalize text-[#FF4100]
       ">
           {{ 'workouts.readMore' | translate }}

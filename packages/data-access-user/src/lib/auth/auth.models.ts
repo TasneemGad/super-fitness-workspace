@@ -28,7 +28,20 @@ export interface AuthenticatedUser {
   email: string;
   gender?: Gender;
   photo?: string;
+  goal?: string;
+  activityLevel?: ActivityLevel;
+  weight?: number;
 }
+
+export interface ProfileResponse {
+  message: string;
+  user: AuthenticatedUser;
+}
+
+export type UpdateMetricRequest =
+  | { goal: string }
+  | { activityLevel: ActivityLevel }
+  | { weight: number };
 
 export interface AuthResponse {
   message: string;
