@@ -11,6 +11,12 @@ import { TabItem, TabsBarComponent } from '../../../shared/components/tabs-bar/t
 import { MealCategoryModel, MealModel } from '../../home/models/meal-categories.model';
 import { MealsService } from '../../home/services/meals.service';
 import { SmartCoach } from '../../smart-coach/smart-coach';
+import { HttpErrorService } from '../../../core/http/http-error.service';
+import { LoadingService } from '../../../core/http/loading.service';
+import { withRequestState } from '../../../core/http/request-state';
+
+const CATEGORIES_REQUEST = 'healthy.categories';
+const MEALS_REQUEST = 'healthy.meals';
 
 @Component({
   selector: 'app-healthy-page',
@@ -32,6 +38,8 @@ export class HealthyPage {
   private readonly destroyRef = inject(DestroyRef);
   private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
+  private readonly loading = inject(LoadingService);
+  private readonly httpErrors = inject(HttpErrorService);
 
   private readonly mealsCache = new Map<string, MealModel[]>();
   private mealsRequest?: Subscription;
@@ -39,9 +47,11 @@ export class HealthyPage {
   readonly categories = signal<MealCategoryModel[]>([]);
   readonly meals = signal<MealModel[]>([]);
   readonly selectedCategory = signal<string | null>(null);
-  readonly isLoadingCategories = signal(true);
-  readonly isLoadingMeals = signal(false);
-  readonly errorMessage = signal<string | null>(null);
+  readonly isLoadingCategories = this.loading.isLoading(CATEGORIES_REQUEST);
+  readonly isLoadingMeals = this.loading.isLoading(MEALS_REQUEST);
+  private readonly categoriesError = this.httpErrors.error(CATEGORIES_REQUEST);
+  private readonly mealsError = this.httpErrors.error(MEALS_REQUEST);
+  readonly errorMessage = computed(() => this.categoriesError() ?? this.mealsError());
 
   readonly categoryTabs = computed<TabItem[]>(() =>
     this.categories().map((category) => ({
@@ -81,21 +91,14 @@ export class HealthyPage {
 
   constructor() {
     this.mealsService
-      .getCategories()
+      .getCategories(withRequestState(CATEGORIES_REQUEST, 'healthy.error'))
       .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe({
-        next: ({ categories }) => {
-          this.categories.set(categories);
-          this.isLoadingCategories.set(false);
-          const requested = this.route.snapshot.queryParamMap.get('category');
-          const initial =
-            categories.find((category) => category.strCategory === requested) ?? categories[0];
-          if (initial) this.selectCategory(initial.strCategory);
-        },
-        error: () => {
-          this.errorMessage.set('healthy.error');
-          this.isLoadingCategories.set(false);
-        },
+      .subscribe(({ categories }) => {
+        this.categories.set(categories);
+        const requested = this.route.snapshot.queryParamMap.get('category');
+        const initial =
+          categories.find((category) => category.strCategory === requested) ?? categories[0];
+        if (initial) this.selectCategory(initial.strCategory);
       });
   }
 
@@ -104,31 +107,22 @@ export class HealthyPage {
 
     this.mealsRequest?.unsubscribe();
     this.selectedCategory.set(category);
-    this.errorMessage.set(null);
+    this.httpErrors.clear(MEALS_REQUEST);
 
     const cached = this.mealsCache.get(category);
     if (cached) {
       this.meals.set(cached);
-      this.isLoadingMeals.set(false);
       return;
     }
 
-    this.isLoadingMeals.set(true);
     this.meals.set([]);
     this.mealsRequest = this.mealsService
-      .getMealsByCategory(category)
+      .getMealsByCategory(category, withRequestState(MEALS_REQUEST, 'healthy.mealsError'))
       .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe({
-        next: (response) => {
-          const meals = response.meals ?? [];
-          this.mealsCache.set(category, meals);
-          this.meals.set(meals);
-          this.isLoadingMeals.set(false);
-        },
-        error: () => {
-          this.errorMessage.set('healthy.mealsError');
-          this.isLoadingMeals.set(false);
-        },
+      .subscribe((response) => {
+        const meals = response.meals ?? [];
+        this.mealsCache.set(category, meals);
+        this.meals.set(meals);
       });
   }
 

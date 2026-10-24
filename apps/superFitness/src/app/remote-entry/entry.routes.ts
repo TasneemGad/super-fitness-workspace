@@ -1,10 +1,21 @@
 import { Route } from '@angular/router';
+import { provideHttpClient, withInterceptors, withRequestsMadeViaParent } from '@angular/common/http';
 import { MainLayout } from '../shared/components/main-layout/main-layout.component';
+import { errorInterceptor } from '../core/http/interceptors/error.interceptor';
+import { loadingInterceptor } from '../core/http/interceptors/loading.interceptor';
+import { MealsService } from '../features/home/services/meals.service';
 
 export const remoteRoutes: Route[] = [
   {
     path: '',
     component: MainLayout,
+    providers: [
+      provideHttpClient(
+        withInterceptors([loadingInterceptor, errorInterceptor]),
+        withRequestsMadeViaParent(),
+      ),
+      MealsService,
+    ],
     children: [
       {
         path: 'account',
