@@ -1,0 +1,70 @@
+<main
+  class="healthy-page relative flex min-h-screen w-full flex-col items-center overflow-hidden pt-[72px] pb-12">
+  <div class="pointer-events-none absolute inset-0 z-0 bg-[#FFFFFF99] dark:bg-[#242424CC] backdrop-blur-[43px]">
+  </div>
+
+  <section class="relative z-10 mx-auto w-[min(var(--page-width),calc(100%_-_var(--page-gutter)*2))]">
+    <div class="flex flex-col gap-4">
+      <lib-section-title [primaryText]="'healthy.title' | translate" [secondaryText]="'healthy.subtitle' | translate"
+        size="sm" [primaryTextFontSize]="64" labelAlign="center" />
+
+      <lib-paragraph-title [segments]="[
+        { text: 'healthy.descriptionPrefix' | translate },
+        { text: 'healthy.descriptionHighlight' | translate, highlight: true },
+        { text: 'healthy.descriptionSuffix' | translate }
+      ]" align="center" size="sm" class="block xl:px-80" />
+    </div>
+
+    @if (isLoadingCategories()) {
+    <p class="py-10 text-center text-[#242424] dark:text-[#f3f3f4]" role="status">
+      {{ 'healthy.loading' | translate }}
+    </p>
+    } @else if (categories().length === 0) {
+    <p class="py-10 text-center text-[#242424] dark:text-[#f3f3f4]" [attr.role]="errorMessage() ? 'alert' : null">
+      {{ (errorMessage() ?? 'healthy.empty') | translate }}
+    </p>
+    } @else {
+    <app-tabs-bar class="my-8 block" [tabs]="categoryTabs()" [selectedId]="selectedCategory()"
+      (tabSelected)="selectCategory($event)" widthClass="w-full lg:w-1/2" />
+
+    @if (isLoadingMeals()) {
+    <p class="py-10 text-center text-[#242424] dark:text-[#f3f3f4]" role="status">
+      {{ 'healthy.loadingMeals' | translate }}
+    </p>
+    } @else if (errorMessage()) {
+    <p class="py-10 text-center text-[#242424] dark:text-[#f3f3f4]" role="alert">
+      {{ errorMessage() | translate }}
+    </p>
+    } @else if (meals().length > 0) {
+    <div class="mx-auto mt-8 w-full max-w-[320px] min-[480px]:max-w-[1200px]">
+      @if (useCarousel()) {
+      <app-owl-carousel [items]="meals()" [options]="carouselOptions()" [itemId]="getMealId" [rows]="2"
+        [horizontalWheel]="true" [navOutside]="true">
+        <ng-template #slide let-meal>
+            <app-info-card [image]="meal.strMealThumb" [title]="meal.strMeal" buttonText="healthy.readMore"
+            (buttonClick)="openMeal(meal.idMeal)" />
+        </ng-template>
+      </app-owl-carousel>
+      } @else {
+      <div class="flex flex-wrap justify-center gap-4">
+        @for (meal of meals(); track meal.idMeal) {
+        <div
+          class="w-full min-[480px]:w-[calc(50%-0.5rem)] md:w-[calc(33.333%-0.75rem)] xl:w-[calc(25%-0.75rem)]">
+
+          <app-info-card [image]="meal.strMealThumb" [title]="meal.strMeal" buttonText="healthy.readMore"
+            (buttonClick)="openMeal(meal.idMeal)" />
+        </div>
+        }
+      </div>
+      }
+    </div>
+    } @else {
+    <p class="py-10 text-center text-[#242424] dark:text-[#f3f3f4]">
+      {{ 'healthy.emptyMeals' | translate }}
+    </p>
+    }
+    }
+  </section>
+
+  <app-smart-coach />
+</main>

@@ -8,3 +8,13 @@ export interface MealCategoryModel {
 export interface MealCategoriesResponseModel {
   categories: MealCategoryModel[];
 }
+
+export interface MealModel {
+  idMeal: string;
+  strMeal: string;
+  strMealThumb: string;
+}
+
+export interface MealsResponseModel {
+  meals: MealModel[] | null;
+}

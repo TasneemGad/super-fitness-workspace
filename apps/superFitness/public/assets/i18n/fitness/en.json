@@ -35,7 +35,24 @@
     "more": "More healthy categories",
     "backToHome": "Back to home",
     "error": "Unable to load meal categories. Please try again later.",
-    "empty": "No meal categories are available."
+    "empty": "No meal categories are available.",
+    "loadingMeals": "Loading meals...",
+    "mealsError": "Unable to load meals. Please try again later.",
+    "emptyMeals": "No meals found in this category.",
+    "details": {
+      "back": "Back to meals",
+      "loading": "Loading meal...",
+      "error": "Unable to load this meal. Please try again later.",
+      "notFound": "This meal could not be found.",
+      "itemDescription": "A healthy {{category}} recipe, tap to see the ingredients and steps.",
+      "category": "Category",
+      "area": "Cuisine",
+      "ingredientsCount": "Ingredients",
+      "steps": "Steps",
+      "ingredients": "Ingredients",
+      "instructions": "Instructions",
+      "watchVideo": "Watch video"
+    }
   },
   "landing": {
     "hero": {
