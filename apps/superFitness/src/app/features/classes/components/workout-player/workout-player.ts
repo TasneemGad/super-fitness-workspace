@@ -1,12 +1,11 @@
 import { Component, computed, effect, inject, input, signal } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { TranslatePipe } from '@ngx-translate/core';
 import { getYouTubeThumbnailUrl, getYouTubeVideoId } from '../../utils/youtube-video.utils';
 
 @Component({
   selector: 'app-workout-player',
   standalone: true,
-  imports: [TranslatePipe],
+  imports: [],
   templateUrl: './workout-player.html',
   styleUrl: './workout-player.scss',
 })
@@ -14,7 +13,6 @@ export class WorkoutPlayer {
 private readonly sanitizer = inject(DomSanitizer);
 
 readonly title = input.required<string>();
-readonly description = input<string>('');
 readonly videoUrl = input<string | null>(null);
 readonly level = input<string>('');
 readonly duration = input<string>('');

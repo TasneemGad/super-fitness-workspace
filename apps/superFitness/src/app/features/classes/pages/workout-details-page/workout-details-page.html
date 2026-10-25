@@ -23,23 +23,29 @@
     <app-tabs-bar class="my-8 block mx-auto" [tabs]="muscleGroupTabs()" [selectedId]="selectedGroupId()"
       (tabSelected)="selectGroup($event)" widthClass="w-full md:w-4/5 lg:w-1/2" />
     }
-    <!-- Muscles tabs bar -->
-    @if (isLoadingMuscles()) {
-    <p class="py-6 text-center text-[#242424] dark:text-[#f3f3f4]" role="status">
-      {{ 'workouts.loadingWorkouts' | translate }}
-    </p>
-    } @else if (musclesErrorMessage()) {
-    <p class="py-6 text-center text-[#242424] dark:text-[#f3f3f4]" role="alert">
-      {{ musclesErrorMessage() | translate }}
-    </p>
-    } @else if (muscles().length > 0) {
-    <app-tabs-bar class="my-6 block mx-auto" [tabs]="muscleTabs()" [selectedId]="selectedMuscleId()"
-      (tabSelected)="selectMuscle($event)" widthClass="w-full md:w-4/5 lg:w-1/2" />
-    }
+
     <div class="grid grid-cols-1 gap-6 lg:grid-cols-[clamp(260px,24vw,360px)_minmax(0,1fr)]">
       <aside
         class="order-2 min-w-0 flex flex-col gap-4 lg:col-start-1 lg:row-start-1 lg:row-span-2 lg:sticky lg:top-[72px] lg:self-start">
         <div class="flex min-h-0 flex-1 flex-col">
+          @if (muscles().length > 0) {
+    <div class="mb-3 flex flex-wrap gap-2" role="group" [attr.aria-label]="'workouts.muscle' | translate">
+      @for (m of muscles(); track m._id) {
+        <button type="button" (click)="selectMuscle(m._id)"
+          [attr.aria-pressed]="selectedMuscleId() === m._id"
+          class="rounded-full border border-[#24242433] px-3 py-1 text-xs font-medium
+                 text-[#242424] transition hover:border-[#FF4100]
+                 dark:border-[#F3F3F433] dark:text-[#F3F3F4]
+                 aria-pressed:border-[#FF4100] aria-pressed:bg-[#FF4100] aria-pressed:text-white">
+          {{ m.name }}
+        </button>
+      }
+    </div>
+  } @else if (isLoadingMuscles()) {
+    <p class="py-2 text-center text-sm" role="status">{{ 'workouts.loadingWorkouts' | translate }}</p>
+  } @else if (musclesErrorMessage()) {
+    <p class="py-2 text-center text-sm" role="alert">{{ musclesErrorMessage() | translate }}</p>
+  }
           <div
             class="flex max-h-[32rem] min-h-0 flex-1 flex-col rounded-[20px] border border-[#24242414] bg-[#FFFFFF80] px-3 pt-4 pb-2 lg:max-h-none dark:border-[#F3F3F414] dark:bg-[#24242480]">
             @if (exercisesErrorMessage()) {
@@ -87,7 +93,7 @@
       <div class="order-1 flex min-w-0 flex-col gap-6 lg:col-start-2 lg:row-start-1 pe-[clamp(1rem,5.56vw,5rem)]">
         <!-- workout-player -->
         @if (selectedExercise(); as exercise) {
-        <app-workout-player [title]="exercise.exercise" [description]="exercise.target_muscle_group"
+        <app-workout-player [title]="exercise.exercise" 
           [videoUrl]="exercise.short_youtube_demonstration_link" [level]="exercise.difficulty_level" />
         }
 
