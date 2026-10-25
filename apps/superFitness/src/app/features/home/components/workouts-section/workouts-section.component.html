@@ -44,7 +44,7 @@
       <div class="grid grid-cols-1 gap-4 md:hidden">
         @for (muscle of muscles().slice(0, 3); track muscle._id) {
         <div class="w-full">
-          <app-info-card [image]="muscle.image" [title]="muscle.name" />
+          <app-info-card (buttonClick)="navigateToWorkoutDetails(muscle._id)" [image]="muscle.image" [title]="muscle.name" />
         </div>
         }
       </div>
@@ -52,14 +52,14 @@
         @if (useCarousel()) {
         <app-owl-carousel [items]="muscles()" [options]="customOptions()" [itemId]="getMuscleId">
           <ng-template #slide let-muscle>
-            <app-info-card [image]="muscle.image" [title]="muscle.name" />
+            <app-info-card (buttonClick)="navigateToWorkoutDetails(muscle._id)" [image]="muscle.image" [title]="muscle.name" />
           </ng-template>
         </app-owl-carousel>
         } @else {
         <div class="flex flex-wrap justify-center gap-4">
           @for (muscle of muscles(); track muscle._id) {
           <div class="w-[calc(50%-0.5rem)] max-w-[480px] lg:w-[calc(33.333%-0.75rem)]">
-            <app-info-card [image]="muscle.image" [title]="muscle.name" />
+            <app-info-card (buttonClick)="navigateToWorkoutDetails(muscle._id)" [image]="muscle.image" [title]="muscle.name" />
           </div>
           }
         </div>

@@ -5,11 +5,12 @@ import { OwlOptions } from 'ngx-owl-carousel-o';
 import { TranslatePipe } from '@ngx-translate/core';
 import { LanguageService } from '@org/i18n';
 import { ParagraphTitle, SectionTitle } from '@org/ui';
-import { InfoCardComponent } from '../../../shared/components/info-card/info-card.component';
-import { OwlCarouselComponent } from '../../../shared/components/owl-carousel/owl-carousel.component';
-import { TabItem, TabsBarComponent,} from '../../../shared/components/tabs-bar/tabs-bar.component';
-import { MuscleGroupModel, MuscleModel,} from '../models/muscles.model';
-import { MusclesService } from '../services/muscles.service';
+import { InfoCardComponent } from '../../../../shared/components/info-card/info-card.component';
+import { OwlCarouselComponent } from '../../../../shared/components/owl-carousel/owl-carousel.component';
+import { TabItem, TabsBarComponent,} from '../../../../shared/components/tabs-bar/tabs-bar.component';
+import { MuscleGroupModel, MuscleModel,} from '../../models/muscles.model';
+import { MusclesService } from '../../services/muscles.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-classes-page',
@@ -28,7 +29,9 @@ import { MusclesService } from '../services/muscles.service';
 export class ClassesPage {
   private readonly _musclesService = inject(MusclesService);
   private readonly destroyRef = inject(DestroyRef);
-  private readonly languageService = inject(LanguageService);
+  private readonly _router = inject(Router);
+  private readonly _route = inject(ActivatedRoute);
+  private readonly _languageService = inject(LanguageService);
 
   private readonly groupDetails = new Map<string, MuscleModel[]>();
   private selectionRequest?: Subscription;
@@ -47,6 +50,12 @@ export class ClassesPage {
   readonly getMuscleId = (muscle: MuscleModel): string => muscle._id;
   readonly useCarousel = computed(() => this.muscles().length > 4);
 
+  navigateToWorkoutDetails(muscleId: string): void {
+     this._router.navigate(['workout-details', muscleId], {
+      relativeTo: this._route,
+    });
+  }
+
   readonly carouselOptions = computed<OwlOptions>(() => {
     const itemCount = this.muscles().length;
     return {
@@ -60,7 +69,7 @@ export class ClassesPage {
       margin: 16,
       autoWidth: false,
       autoHeight: false,
-      rtl: this.languageService.isRtl(),
+      rtl: this._languageService.isRtl(),
       responsive: {
         0: { items: 1, margin: 12, dots: itemCount > 2 },
         640: { items: 2, margin: 16, dots: itemCount > 4 },
@@ -72,7 +81,7 @@ export class ClassesPage {
 
 
   constructor() {
-    toObservable(this.languageService.currentLang)
+    toObservable(this._languageService.currentLang)
       .pipe(
         switchMap((language) => {
           this.selectionRequest?.unsubscribe();
@@ -119,10 +128,10 @@ export class ClassesPage {
         this.isLoadingGroups.set(false);
         const selected = groups.find((group) => group._id === this.selectedGroupId());
         const firstLoaded = groups.find((group) =>
-          this.groupDetails.has(this.languageService.currentLang() + ':' + group._id),
+          this.groupDetails.has(this._languageService.currentLang() + ':' + group._id),
         );
         const next = selected ?? firstLoaded ?? groups[0];
-        if (next && this.groupDetails.has(this.languageService.currentLang() + ':' + next._id)) {
+        if (next && this.groupDetails.has(this._languageService.currentLang() + ':' + next._id)) {
           this.selectGroup(next._id, true);
         } else {
           this.selectedGroupId.set(null);
@@ -140,7 +149,7 @@ export class ClassesPage {
     this.selectionRequest?.unsubscribe();
     this.selectedGroupId.set(id);
     this.errorMessage.set(null);
-    const key = this.languageService.currentLang() + ':' + id;
+    const key = this._languageService.currentLang() + ':' + id;
     const cached = this.groupDetails.get(key);
     if (cached !== undefined) {
       this.muscles.set(cached);
@@ -165,7 +174,7 @@ export class ClassesPage {
             this.muscles.set(response.muscles);
           }
           this.groupLoadError.set(this.muscleGroups().some((group) =>
-            !this.groupDetails.has(this.languageService.currentLang() + ':' + group._id),
+            !this.groupDetails.has(this._languageService.currentLang() + ':' + group._id),
           ));
         },
         error: () => {
