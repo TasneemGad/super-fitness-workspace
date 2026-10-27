@@ -9,6 +9,7 @@ import { SectionTitle, TabbedList, TabbedListItem, TabbedListTab } from '@org/ui
 import { WorkoutHighlights } from '../../components/workout-highlights/workout-highlights';
 import { WorkoutPlayer } from '../../components/workout-player/workout-player';
 import { InfoCardComponent } from '../../../../shared/components/info-card/info-card.component';
+import { SkeletonLoaderCardComponent } from '../../../../shared/components/skeleton-loader-card/skeleton-loader-card.component';
 import { OwlCarouselComponent } from '../../../../shared/components/owl-carousel/owl-carousel.component';
 import { TabItem,TabsBarComponent,} from '../../../../shared/components/tabs-bar/tabs-bar.component';
 import { MealCategoryModel } from '../../../home/models/meal-categories.model';
@@ -24,7 +25,7 @@ import { getYouTubeThumbnailUrl } from '../../utils/youtube-video.utils';
 @Component({
   selector: 'app-workout-details-page',
   standalone: true,
-  imports: [InfoCardComponent,OwlCarouselComponent,SectionTitle,TabbedList,TabsBarComponent,
+  imports: [InfoCardComponent,SkeletonLoaderCardComponent,OwlCarouselComponent,SectionTitle,TabbedList,TabsBarComponent,
     TranslatePipe,WorkoutPlayer,WorkoutHighlights,],
   templateUrl: './workout-details-page.html',
   styleUrl: './workout-details-page.scss',
@@ -80,6 +81,12 @@ export class WorkoutDetailsPage  {
       lines: [exercise.target_muscle_group],
       data: exercise,
     })),
+  );
+  readonly isExercisesViewLoading = computed(
+  () =>
+    this.isLoadingMuscles() ||
+    this.isLoadingDifficultyLevels() ||
+    this.isLoadingExercises(),
   );
   readonly getMealCategoryId = (category: MealCategoryModel): string =>
     category.idCategory;

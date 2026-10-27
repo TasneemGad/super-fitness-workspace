@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AboutUs } from '../../landing/ui/about-us/about-us';
+import { AboutUs } from '../../home/components/about-us/about-us';
 
 @Component({
   selector: 'app-about-page',

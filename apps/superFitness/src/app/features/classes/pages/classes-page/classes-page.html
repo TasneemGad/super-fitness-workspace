@@ -5,19 +5,26 @@
   <section class="relative z-10 mx-auto w-[min(var(--page-width),calc(100%_-_var(--page-gutter)*2))]">
     <div class="flex flex-col gap-4">
       <lib-section-title [primaryText]="'workouts.title' | translate" [secondaryText]="'workouts.subtitle' | translate"
-        size="sm" [primaryTextFontSize]="64" />
+         size="sm" [primaryTextFontSize]="94" [secondaryTextFontSize]="20" labelAlign="center"  />
 
       <lib-paragraph-title [segments]="[
     { text: ('workouts.descriptionPrefix' | translate) },
     { text: ('workouts.descriptionHighlight' | translate), highlight: true }
-   ]" align="center" />
+   ]"  align="center" size="sm" class="block xl:px-80"  />
     </div>
 
 
     @if (isLoadingGroups()) {
-    <p class="py-10 text-center text-[#242424] dark:text-[#f3f3f4]" role="status">
-      {{ 'workouts.loading' | translate }}
-    </p>
+     <div class="my-8 flex justify-center gap-3" role="status"
+     aria-label="Loading categories">
+    <span class="sr-only">{{ 'workouts.loading' | translate }}</span>
+
+    @for (tab of [1, 2, 3, 4]; track tab) {
+      <div
+        class="h-10 w-24 animate-pulse rounded-full bg-[#24242412] dark:bg-[#F3F3F412]"
+      ></div>
+      }
+    </div>
     } @else if (errorMessage() && muscleGroups().length === 0) {
     <p class="py-10 text-center text-[#242424] dark:text-[#f3f3f4]" role="alert">
       {{ errorMessage() | translate }}
@@ -36,9 +43,12 @@
       (tabSelected)="selectGroup($event)" widthClass="w-full md:w-4/5 lg:w-1/2" />
 
     @if (isLoadingMuscles()) {
-    <p class="py-10 text-center text-[#242424] dark:text-[#f3f3f4]" role="status">
-      {{ 'workouts.loadingWorkouts' | translate }}
-    </p>
+    <div class="mx-auto mt-8 grid w-full max-w-[1490px] grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3" role="status">
+      <span class="sr-only">{{ 'workouts.loadingWorkouts' | translate }}</span>
+      @for (card of [1, 2, 3]; track card) {
+      <app-skeleton-loader-card />
+      }
+    </div>
     } @else if (errorMessage()) {
     <p class="py-10 text-center text-[#242424] dark:text-[#f3f3f4]" role="alert">
       {{ errorMessage() | translate }}

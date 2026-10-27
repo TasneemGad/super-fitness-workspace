@@ -15,7 +15,11 @@
 
 <div class="tabbed-list-scroll min-h-0 flex-1 overflow-y-auto pe-1" role="tabpanel">
   @if (loading()) {
-  <p class="py-8 text-center text-sm text-[#242424] dark:text-[#F3F3F4]" role="status">{{ loadingText() }}</p>
+    <div
+    class="my-3 min-h-40 animate-pulse rounded-xl bg-[#2424240A] motion-reduce:animate-none dark:bg-[#F3F3F40A]"
+    role="status"
+    [attr.aria-label]="loadingText()">
+  </div>
   } @else if (items().length === 0) {
   <p class="py-8 text-center text-sm text-[#242424] dark:text-[#F3F3F4]">{{ emptyText() }}</p>
   } @else {

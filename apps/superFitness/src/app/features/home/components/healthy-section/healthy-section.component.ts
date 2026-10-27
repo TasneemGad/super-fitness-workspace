@@ -5,6 +5,7 @@ import { TranslatePipe } from '@ngx-translate/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ParagraphTitle, SectionTitle } from '@org/ui';
 import { InfoCardComponent } from '../../../../shared/components/info-card/info-card.component';
+import { SkeletonLoaderCardComponent } from '../../../../shared/components/skeleton-loader-card/skeleton-loader-card.component';
 import { OwlCarouselComponent } from '../../../../shared/components/owl-carousel/owl-carousel.component';
 import { MealCategoryModel } from '../../models/meal-categories.model';
 import { MealsService } from '../../services/meals.service';
@@ -16,6 +17,7 @@ import { LanguageService } from '@org/i18n';
   imports: [
     SectionTitle,
     InfoCardComponent,
+    SkeletonLoaderCardComponent,
     TranslatePipe,
     ParagraphTitle,
     OwlCarouselComponent,

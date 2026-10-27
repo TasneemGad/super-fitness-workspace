@@ -4,10 +4,10 @@ import { loadRemote } from '@module-federation/enhanced/runtime';
 
 export const appRoutes: Route[] = [
 
-  { path: '', pathMatch: 'full', redirectTo: 'auth' },
+  { path: '', pathMatch: 'full', redirectTo: 'superFitness' },
   {
     path: 'superFitness',
-    canActivate: [authGuard],
+    
     loadChildren: () =>
       loadRemote<typeof import('superFitness/Routes')>(
         'superFitness/Routes',
@@ -30,5 +30,5 @@ export const appRoutes: Route[] = [
         },
       ),
   },
-  { path: '**', redirectTo: 'auth' },
+  { path: '**', redirectTo: 'superFitness' },
 ];

@@ -6,6 +6,7 @@ import { TranslatePipe } from '@ngx-translate/core';
 import { LanguageService } from '@org/i18n';
 import { ParagraphTitle, SectionTitle } from '@org/ui';
 import { InfoCardComponent } from '../../../../shared/components/info-card/info-card.component';
+import { SkeletonLoaderCardComponent } from '../../../../shared/components/skeleton-loader-card/skeleton-loader-card.component';
 import { OwlCarouselComponent } from '../../../../shared/components/owl-carousel/owl-carousel.component';
 import { TabItem, TabsBarComponent,} from '../../../../shared/components/tabs-bar/tabs-bar.component';
 import { MuscleGroupModel, MuscleModel,} from '../../models/muscles.model';
@@ -17,6 +18,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   standalone: true,
   imports: [
     InfoCardComponent,
+    SkeletonLoaderCardComponent,
     OwlCarouselComponent,
     ParagraphTitle,
     SectionTitle,

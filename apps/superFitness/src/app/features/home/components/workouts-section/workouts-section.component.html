@@ -32,9 +32,12 @@
      widthClass="w-[80%]"/>
      
     @if (isLoadingMuscles()) {
-    <p class="py-8 text-center text-[#242424] dark:text-[#f3f3f4]" role="status">
-      {{ 'workouts.loadingWorkouts' | translate }}
-    </p>
+    <div class="grid grid-cols-1 gap-4 py-8 md:grid-cols-2 lg:grid-cols-3" role="status">
+      <span class="sr-only">{{ 'workouts.loadingWorkouts' | translate }}</span>
+      @for (card of [1, 2, 3]; track card) {
+      <app-skeleton-loader-card />
+      }
+    </div>
     } @else if (errorMessage()) {
     <p class="py-8 text-center text-[#242424] dark:text-[#f3f3f4]" role="alert">
       {{ errorMessage() | translate }}
