@@ -6,6 +6,7 @@ import { OwlOptions } from 'ngx-owl-carousel-o';
 import { TranslatePipe } from '@ngx-translate/core';
 import { ParagraphTitle, SectionTitle } from '@org/ui';
 import { InfoCardComponent } from '../../../shared/components/info-card/info-card.component';
+import { SkeletonLoaderCardComponent } from '../../../shared/components/skeleton-loader-card/skeleton-loader-card.component';
 import { OwlCarouselComponent } from '../../../shared/components/owl-carousel/owl-carousel.component';
 import { TabItem, TabsBarComponent } from '../../../shared/components/tabs-bar/tabs-bar.component';
 import { MealCategoryModel, MealModel } from '../../home/models/meal-categories.model';
@@ -22,6 +23,7 @@ const MEALS_REQUEST = 'healthy.meals';
   standalone: true,
   imports: [
     InfoCardComponent,
+    SkeletonLoaderCardComponent,
     OwlCarouselComponent,
     ParagraphTitle,
     SectionTitle,

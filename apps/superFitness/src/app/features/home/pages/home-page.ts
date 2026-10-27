@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { HealthySectionComponent } from '../components/healthy-section/healthy-section.component';
 import { WorkoutsSectionComponent } from '../components/workouts-section/workouts-section.component';
-import { FitnessMarquee } from '../../landing/ui/fitness-marquee/fitness-marquee';
-import { AboutUs } from '../../landing/ui/about-us/about-us';
-import { WhyUs } from '../../landing/ui/why-us/why-us';
+import { FitnessMarquee } from '../../../shared/components/fitness-marquee/fitness-marquee';
+import { AboutUs } from '../components/about-us/about-us';
+import { WhyUs } from '../components/why-us/why-us';
 import { HeroSection } from '../../hero-section/hero-section';
 
 @Component({

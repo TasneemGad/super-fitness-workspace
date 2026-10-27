@@ -8,9 +8,14 @@
 
     <!-- Groups tabs bar -->
     @if (isLoadingGroups()) {
-    <p class="py-10 text-center text-[#242424] dark:text-[#f3f3f4]" role="status">
-      {{ 'workouts.loading' | translate }}
-    </p>
+    <div class="my-8 flex flex-wrap justify-center gap-3" role="status">
+      <span class="sr-only">{{ 'workouts.loading' | translate }}</span>
+
+      @for (tab of [1, 2, 3, 4]; track tab) {
+      <div class="h-10 w-24 animate-pulse rounded-full bg-[#24242412] motion-reduce:animate-none dark:bg-[#F3F3F412]">
+      </div>
+      }
+    </div>
     } @else if (errorMessage()) {
     <p class="py-10 text-center text-[#242424] dark:text-[#f3f3f4]" role="alert">
       {{ errorMessage() | translate }}
@@ -29,23 +34,30 @@
         class="order-2 min-w-0 flex flex-col gap-4 lg:col-start-1 lg:row-start-1 lg:row-span-2 lg:sticky lg:top-[72px] lg:self-start">
         <div class="flex min-h-0 flex-1 flex-col">
           @if (muscles().length > 0) {
-    <div class="mb-3 flex flex-wrap gap-2" role="group" [attr.aria-label]="'workouts.muscle' | translate">
-      @for (m of muscles(); track m._id) {
-        <button type="button" (click)="selectMuscle(m._id)"
-          [attr.aria-pressed]="selectedMuscleId() === m._id"
-          class="rounded-full border border-[#24242433] px-3 py-1 text-xs font-medium
+          <div class="mb-3 flex flex-wrap gap-2" role="group" [attr.aria-label]="'workouts.muscle' | translate">
+            @for (m of muscles(); track m._id) {
+            <button type="button" (click)="selectMuscle(m._id)" [attr.aria-pressed]="selectedMuscleId() === m._id"
+              class="rounded-full border border-[#24242433] px-3 py-1 text-xs font-medium
                  text-[#242424] transition hover:border-[#FF4100]
                  dark:border-[#F3F3F433] dark:text-[#F3F3F4]
                  aria-pressed:border-[#FF4100] aria-pressed:bg-[#FF4100] aria-pressed:text-white">
-          {{ m.name }}
-        </button>
-      }
-    </div>
-  } @else if (isLoadingMuscles()) {
-    <p class="py-2 text-center text-sm" role="status">{{ 'workouts.loadingWorkouts' | translate }}</p>
-  } @else if (musclesErrorMessage()) {
-    <p class="py-2 text-center text-sm" role="alert">{{ musclesErrorMessage() | translate }}</p>
-  }
+              {{ m.name }}
+            </button>
+            }
+          </div>
+          } @else if (isLoadingMuscles()) {
+          <div class="mb-3 flex flex-wrap gap-2" role="status">
+            <span class="sr-only">{{ 'workouts.loadingWorkouts' | translate }}</span>
+
+            @for (muscle of [1, 2, 3, 4, 5]; track muscle) {
+            <div
+              class="h-7 w-20 animate-pulse rounded-full bg-[#24242412] motion-reduce:animate-none dark:bg-[#F3F3F412]">
+            </div>
+            }
+          </div>
+          } @else if (musclesErrorMessage()) {
+          <p class="py-2 text-center text-sm" role="alert">{{ musclesErrorMessage() | translate }}</p>
+          }
           <div
             class="flex max-h-[32rem] min-h-0 flex-1 flex-col rounded-[20px] border border-[#24242414] bg-[#FFFFFF80] px-3 pt-4 pb-2 lg:max-h-none dark:border-[#F3F3F414] dark:bg-[#24242480]">
             @if (exercisesErrorMessage()) {
@@ -53,7 +65,7 @@
               translate }}</p>
             } @else {
             <lib-tabbed-list class="flex-1" maxHeight="none" [tabs]="difficultyLevelTabs()"
-              [selectedTabId]="selectedDifficultyLevelId()" [items]="exerciseItems()" [loading]="isLoadingExercises()"
+              [selectedTabId]="selectedDifficultyLevelId()" [items]="exerciseItems()" [loading]="isExercisesViewLoading()"
               [loadingText]="'workouts.loadingExercises' | translate" [emptyText]="'workouts.noExercises' | translate"
               (tabSelected)="selectDifficultyLevel($event)">
               <ng-template #item let-item>
@@ -92,11 +104,21 @@
 
       <div class="order-1 flex min-w-0 flex-col gap-6 lg:col-start-2 lg:row-start-1 pe-[clamp(1rem,5.56vw,5rem)]">
         <!-- workout-player -->
-        @if (selectedExercise(); as exercise) {
-        <app-workout-player [title]="exercise.exercise" 
-          [videoUrl]="exercise.short_youtube_demonstration_link" [level]="exercise.difficulty_level" />
-        }
+        <div class="relative w-full min-w-0 aspect-video overflow-hidden rounded-[20px] bg-[#E5E5E7] dark:bg-[#303030]">
 
+          @if (selectedExercise(); as exercise) {
+          <app-workout-player class="block h-full w-full" [title]="exercise.exercise"
+            [videoUrl]="exercise.short_youtube_demonstration_link" [level]="exercise.difficulty_level" />
+          } @else {
+          <div class="absolute inset-0 animate-pulse bg-[#E5E5E7] motion-reduce:animate-none dark:bg-[#303030]"
+            role="status">
+            <span class="sr-only">
+              {{ 'workouts.loadingExercises' | translate }}
+            </span>
+          </div>
+          }
+
+        </div>
 
         <!-- Expertly designed workout. -->
         <div class="hidden md:block">
@@ -115,9 +137,12 @@
           </h2>
 
           @if (isLoadingRecommendations()) {
-          <p class="py-8 text-center text-[#242424] dark:text-[#f3f3f4]" role="status">
-            {{ 'healthy.loading' | translate }}
-          </p>
+          <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3" role="status">
+            <span class="sr-only">{{ 'healthy.loading' | translate }}</span>
+            @for (card of [1, 2, 3]; track card) {
+            <app-skeleton-loader-card />
+            }
+          </div>
           } @else if (recommendationsErrorMessage()) {
           <p class="py-8 text-center text-[#242424] dark:text-[#f3f3f4]" role="alert">
             {{ recommendationsErrorMessage() | translate }}
