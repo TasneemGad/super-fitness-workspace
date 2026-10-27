@@ -134,3 +134,27 @@ export const REGISTER_ACCOUNT_FIELDS: FieldConfig[] = [
   },
 ];
 
+export const CHANGE_PASSWORD_FIELDS: FieldConfig[] = [
+  {
+    key: 'password',
+    type: 'password',
+    label: 'auth.changePassword.currentPassword',
+    placeholder: 'auth.changePassword.currentPassword',
+    icon: 'lock',
+    autocomplete: 'current-password',
+    hideLabel: true,
+    required: true,
+  },
+  {
+    key: 'newPassword',
+    type: 'password',
+    label: 'auth.changePassword.newPassword',
+    placeholder: 'auth.changePassword.newPasswordPlaceholder',
+    icon: 'lock',
+    autocomplete: 'new-password',
+    hideLabel: true,
+    required: true,
+    validate: passwordRule,
+  },
+];
+

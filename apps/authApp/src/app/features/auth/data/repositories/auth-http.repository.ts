@@ -98,7 +98,7 @@ export class AuthHttpRepository extends AuthRepository {
 
   changePassword(request: ChangePasswordRequest): Observable<MessageResult> {
     const payload: ChangePasswordRequestDto = {
-      oldPassword: request.oldPassword,
+      password: request.password,
       newPassword: request.newPassword,
     };
 

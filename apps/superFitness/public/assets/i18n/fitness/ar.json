@@ -180,6 +180,16 @@
   },
   "account": {
     "title": "المقاييس الأساسية للحساب",
+    "settingsTitle": "إعدادات الحساب",
+    "settings": {
+      "changeLanguage": "تغيير اللغة",
+      "mode": "المظهر",
+      "password": "كلمة المرور",
+      "security": "الأمان",
+      "privacy": "الخصوصية",
+      "help": "المساعدة",
+      "logout": "تسجيل الخروج"
+    },
     "metrics": {
       "goal": "هدفك",
       "activityLevel": "المستوى",

@@ -36,6 +36,8 @@ describe('Account routing', () => {
     if (!host) throw new Error('Account route did not render');
     expect(host.querySelector('app-account-page')).not.toBeNull();
     expect(host.querySelectorAll('app-account-basic-metrics').length).toBe(1);
+    expect(host.querySelectorAll('app-account-settings-section').length).toBe(1);
+    expect(host.querySelectorAll('app-account-settings-card').length).toBe(7);
     expect(host.querySelectorAll('app-navbar').length).toBe(1);
     expect(host.querySelector<HTMLAnchorElement>('.actions a.btn')?.getAttribute('href')).toBe(path);
     expect(host.querySelectorAll('router-outlet').length).toBe(1);

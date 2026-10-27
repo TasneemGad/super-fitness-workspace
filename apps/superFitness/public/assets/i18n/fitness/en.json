@@ -180,6 +180,16 @@
   },
   "account": {
     "title": "Account basic metrics",
+    "settingsTitle": "Account Settings",
+    "settings": {
+      "changeLanguage": "Change Language",
+      "mode": "Mode",
+      "password": "Password",
+      "security": "Security",
+      "privacy": "Privacy",
+      "help": "Help",
+      "logout": "Log Out"
+    },
     "metrics": {
       "goal": "Your Goal",
       "activityLevel": "Level",
