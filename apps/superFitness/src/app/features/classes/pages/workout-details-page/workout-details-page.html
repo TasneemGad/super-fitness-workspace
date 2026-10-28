@@ -30,8 +30,11 @@
     }
 
     <div class="grid grid-cols-1 gap-6 lg:grid-cols-[clamp(260px,24vw,360px)_minmax(0,1fr)]">
-      <aside
-        class="order-2 min-w-0 flex flex-col gap-4 lg:col-start-1 lg:row-start-1 lg:row-span-2 lg:sticky lg:top-[72px] lg:self-start">
+      <aside class = "order-2 min-w-0 flex flex-col gap-4
+       lg:col-start-1 lg:row-start-1 lg:row-span-2
+       lg:sticky lg:top-[72px]
+       lg:h-[calc(100dvh-72px)]
+       lg:self-start">
         <div class="flex min-h-0 flex-1 flex-col">
           @if (muscles().length > 0) {
           <div class="mb-3 flex flex-wrap gap-2" role="group" [attr.aria-label]="'workouts.muscle' | translate">
@@ -108,7 +111,8 @@
 
           @if (selectedExercise(); as exercise) {
           <app-workout-player class="block h-full w-full" [title]="exercise.exercise"
-            [videoUrl]="exercise.short_youtube_demonstration_link" [level]="exercise.difficulty_level" />
+            [videoUrl]="'https://youtu.be/fAf6Z7wu7fM?si=6K5_014ZCoGfknf8'" [level]="exercise.difficulty_level"
+            [muscleImage]="selectedMuscleImage()" />
           } @else {
           <div class="absolute inset-0 animate-pulse bg-[#E5E5E7] motion-reduce:animate-none dark:bg-[#303030]"
             role="status">

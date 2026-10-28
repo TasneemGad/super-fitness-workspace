@@ -15,6 +15,8 @@ import {
 } from '../../../classes/models/muscles.model';
 import { MusclesService } from '../../../classes/services/muscles.service';
 import { LanguageService } from '@org/i18n';
+import { IntersectionObserverDirective } from '@org/util-directives';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-workouts-section',
@@ -28,11 +30,20 @@ import { LanguageService } from '@org/i18n';
     OwlCarouselComponent,
     TabsBarComponent,
     RouterLink,
+    IntersectionObserverDirective,CommonModule
   ],
   templateUrl: './workouts-section.component.html',
   styleUrl: './workouts-section.component.scss',
 })
 export class WorkoutsSectionComponent  {
+  isVisible =signal(false);
+
+  onSectionVisible(isVisable:boolean):void{
+    if(isVisable){
+      this.isVisible.set(true);
+    }
+  }
+
   private readonly _musclesService = inject(MusclesService);
   private readonly destroyRef = inject(DestroyRef);
   private readonly languageService = inject(LanguageService);

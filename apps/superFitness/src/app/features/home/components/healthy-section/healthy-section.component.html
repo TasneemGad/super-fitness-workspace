@@ -1,5 +1,13 @@
 <section
-  class="healthy-section relative flex min-h-[48rem] w-full flex-col items-center overflow-hidden bg-[#F3F3F4] px-[max(var(--page-gutter),calc((100%_-_var(--page-width))/2))]">
+  libIntersectionObserverDirective
+  [observeOnce]="true"
+  [rootMargin]="'0px 0px -50px 0px'"
+  (visibilityChange)="isVisible = $event.isIntersecting"
+  [class.opacity-100]="isVisible"
+  [class.opacity-0]="!isVisible"
+  [class.translate-y-0]="isVisible"
+  [class.translate-y-8]="!isVisible"
+  class="healthy-section relative flex min-h-[48rem] w-full flex-col items-center overflow-hidden bg-[#F3F3F4] px-[max(var(--page-gutter),calc((100%_-_var(--page-width))/2))] transition-[opacity,transform] duration-700 ease-out motion-reduce:transition-none">
   <!--  Overlay -->
   <div class="pointer-events-none absolute start-0 top-[57px] z-0 h-[414px] w-full bg-[#FFFFFF99] dark:bg-[#24242499] backdrop-blur-[43px]">
   </div>

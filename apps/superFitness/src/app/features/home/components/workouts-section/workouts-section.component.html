@@ -9,7 +9,18 @@
 
 
   <!-- Content -->
-  <div class="relative z-10 mx-auto w-full min-w-0">
+  <div
+  libIntersectionObserverDirective
+    [observeOnce]="true"
+    [rootMargin]="'0px 0px -80px 0px'"
+    (visibilityChange)="onSectionVisible($event.isIntersecting)"
+    [ngClass]="{
+      'opacity-100 translate-y-0': isVisible(),
+      'opacity-0 translate-y-8': !isVisible()
+    }"
+   class="relative z-10 mx-auto w-full min-w-0
+    transition-[opacity,transform] duration-700 ease-out
+      motion-reduce:transition-none">
 
     @if (isLoading()) {
     <p class="text-lg text-[#242424] dark:text-[#f3f3f4]">{{ 'workouts.loading' | translate }}</p>

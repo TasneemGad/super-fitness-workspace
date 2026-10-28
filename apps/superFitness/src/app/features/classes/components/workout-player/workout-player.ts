@@ -16,6 +16,7 @@ readonly title = input.required<string>();
 readonly videoUrl = input<string | null>(null);
 readonly level = input<string>('');
 readonly duration = input<string>('');
+readonly muscleImage = input<string | null>(null);
 
 readonly isPlaying = signal(false);
 
@@ -28,9 +29,12 @@ constructor() {
 
 private readonly videoId = computed(() => getYouTubeVideoId(this.videoUrl()));
 
-// Builds the YouTube thumbnail URL (img)for the current video.
 readonly poster = computed(() => {
-  return getYouTubeThumbnailUrl(this.videoUrl()) ?? '';
+  return (
+    this.muscleImage() ??
+    getYouTubeThumbnailUrl(this.videoUrl()) ??
+    ''
+  );
 });
 // Creates a trusted YouTube embed URL that starts playback automatically.
 readonly embedUrl = computed(() => {

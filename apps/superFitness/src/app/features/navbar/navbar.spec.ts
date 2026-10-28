@@ -3,6 +3,7 @@ import { provideRouter } from '@angular/router';
 import { provideTranslateService } from '@ngx-translate/core';
 import { By } from '@angular/platform-browser';
 import { FieldIcon } from '@org/ui';
+import { AuthSessionService } from '@super-fitness/auth';
 import { Navbar } from './navbar';
 
 describe('Navbar', () => {
@@ -10,7 +11,11 @@ describe('Navbar', () => {
     localStorage.removeItem('super-fitness.theme');
     await TestBed.configureTestingModule({
       imports: [Navbar],
-      providers: [provideRouter([]), provideTranslateService()],
+      providers: [
+        provideRouter([]),
+        provideTranslateService(),
+        { provide: AuthSessionService, useValue: { isAuthenticated: () => true } },
+      ],
     }).compileComponents();
   });
 
@@ -48,6 +53,15 @@ describe('Navbar', () => {
 
     const links = fixture.nativeElement.querySelectorAll('.links a');
     expect(links.length).toBe(4);
+  });
+
+  it('shows sign-in and sign-up buttons when the user is not authenticated', async () => {
+    vi.spyOn(TestBed.inject(AuthSessionService), 'isAuthenticated').mockReturnValue(false);
+    const fixture = TestBed.createComponent(Navbar);
+    await fixture.whenStable();
+
+    expect(fixture.nativeElement.querySelector('.actions a.btn')).toBeNull();
+    expect(fixture.nativeElement.querySelectorAll('.actions lib-site-button')).toHaveLength(2);
   });
 
   it('opens and closes the menu', async () => {

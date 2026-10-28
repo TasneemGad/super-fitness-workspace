@@ -5,8 +5,8 @@
     "classes": "Classes",
     "healthy": "Healthy",
     "account": "Account",
-    "login": "Login",
-    "register": "Register",
+    "login": "LOGIN",
+    "register": "SIGN UP",
     "openMenu": "Open menu",
     "closeMenu": "Close menu"
   },

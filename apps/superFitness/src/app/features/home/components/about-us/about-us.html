@@ -1,16 +1,57 @@
 <section class="mx-auto grid w-[min(var(--page-width),calc(100%_-_var(--page-gutter)*2))] grid-cols-[minmax(320px,0.92fr)_minmax(0,1.08fr)] items-center gap-[clamp(42px,6vw,86px)] py-[76px] pb-[84px] max-[800px]:grid-cols-1 max-[800px]:gap-9 max-[800px]:py-12" aria-labelledby="about-title">
-  <div class="relative min-h-[500px] max-[800px]:min-h-[min(115vw,480px)]" [attr.aria-label]="'landing.aboutUs.galleryLabel' | translate">
-    <img class="absolute start-0 top-0 bottom-[25%] block h-3/4 w-[62%] rounded-[13px] object-cover shadow-[0_18px_40px_rgb(24_31_35_/_10%)] dark:shadow-[0_18px_40px_rgb(0_0_0_/_45%)]" src="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?auto=format&fit=crop&w=900&q=85" [alt]="'landing.aboutUs.images.kettlebell' | translate" />
-    <img class="absolute end-0 top-[11%] block h-[28%] w-[40%] rounded-[13px] object-cover shadow-[0_18px_40px_rgb(24_31_35_/_10%)] dark:shadow-[0_18px_40px_rgb(0_0_0_/_45%)]" src="https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?auto=format&fit=crop&w=600&q=85" [alt]="'landing.aboutUs.images.strength' | translate" />
-    <img class="absolute start-[34%] end-0 bottom-0 block h-[61%] w-[63%] rounded-[13px] object-cover shadow-[0_18px_40px_rgb(24_31_35_/_10%)] dark:shadow-[0_18px_40px_rgb(0_0_0_/_45%)]" src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=800&q=85" [alt]="'landing.aboutUs.images.studio' | translate" />
+  <div
+    libIntersectionObserverDirective
+    [observeOnce]="true"
+    [rootMargin]="'0px 0px -50px 0px'"
+    (visibilityChange)="onGalleryVisible($event.isIntersecting)"
+    class="relative min-h-[500px] max-[800px]:min-h-[min(115vw,480px)]"
+    [attr.aria-label]="'landing.aboutUs.galleryLabel' | translate"
+  >
+    <img
+      [class.opacity-100]="galleryVisible()"
+      [class.opacity-0]="!galleryVisible()"
+      [class.translate-x-0]="galleryVisible()"
+      [class.-translate-x-8]="!galleryVisible()"
+      class="absolute start-0 top-0 bottom-[25%] block h-3/4 w-[62%] rounded-[13px] object-cover opacity-0 -translate-x-8 shadow-[0_18px_40px_rgb(24_31_35_/_10%)] transition-[opacity,transform] duration-700 ease-out motion-reduce:transition-none motion-reduce:transform-none motion-reduce:opacity-100 dark:shadow-[0_18px_40px_rgb(0_0_0_/_45%)]"
+      src="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?auto=format&fit=crop&w=900&q=85"
+      [alt]="'landing.aboutUs.images.kettlebell' | translate"
+    />
+    <img
+      [class.opacity-100]="galleryVisible()"
+      [class.opacity-0]="!galleryVisible()"
+      [class.translate-y-0]="galleryVisible()"
+      [class.translate-y-8]="!galleryVisible()"
+      class="absolute end-0 top-[11%] block h-[28%] w-[40%] rounded-[13px] object-cover opacity-0 translate-y-8 shadow-[0_18px_40px_rgb(24_31_35_/_10%)] transition-[opacity,transform] duration-700 delay-100 ease-out motion-reduce:transition-none motion-reduce:transform-none motion-reduce:opacity-100 dark:shadow-[0_18px_40px_rgb(0_0_0_/_45%)]"
+      src="https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?auto=format&fit=crop&w=600&q=85"
+      [alt]="'landing.aboutUs.images.strength' | translate"
+    />
+    <img
+      [class.opacity-100]="galleryVisible()"
+      [class.opacity-0]="!galleryVisible()"
+      [class.translate-x-0]="galleryVisible()"
+      [class.translate-x-8]="!galleryVisible()"
+      class="absolute start-[34%] end-0 bottom-0 block h-[61%] w-[63%] rounded-[13px] object-cover opacity-0 translate-x-8 shadow-[0_18px_40px_rgb(24_31_35_/_10%)] transition-[opacity,transform] duration-700 delay-200 ease-out motion-reduce:transition-none motion-reduce:transform-none motion-reduce:opacity-100 dark:shadow-[0_18px_40px_rgb(0_0_0_/_45%)]"
+      src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=800&q=85"
+      [alt]="'landing.aboutUs.images.studio' | translate"
+    />
   </div>
-  <div class="relative">
+  <div
+    libIntersectionObserverDirective
+    [observeOnce]="true"
+    [rootMargin]="'0px 0px -50px 0px'"
+    (visibilityChange)="onTextVisible($event.isIntersecting)"
+    class="relative"
+  >
     <lib-section-title
       [primaryText]="'landing.aboutUs.sectionPrimary' | translate"
       [secondaryText]="'landing.aboutUs.sectionSecondary' | translate"
       size="sm"
       padding="0"
-      class="w-fit"
+      [class.opacity-100]="textVisible()"
+      [class.opacity-0]="!textVisible()"
+      [class.translate-y-0]="textVisible()"
+      [class.translate-y-6]="!textVisible()"
+      class="w-fit opacity-0 translate-y-6 transition-[opacity,transform] duration-700 ease-out motion-reduce:transition-none motion-reduce:transform-none motion-reduce:opacity-100"
     />
     <lib-paragraph-title
       id="about-title"
@@ -19,7 +60,11 @@
         { text: 'landing.aboutUs.titleHighlight' | translate, highlight: true },
         { text: 'landing.aboutUs.titleSuffix' | translate }
       ]"
-      class="relative my-[28px] mb-[18px] block max-w-[610px] uppercase"
+      [class.opacity-100]="textVisible()"
+      [class.opacity-0]="!textVisible()"
+      [class.translate-y-0]="textVisible()"
+      [class.translate-y-6]="!textVisible()"
+      class="relative my-[28px] mb-[18px] block max-w-[610px] uppercase opacity-0 translate-y-6 transition-[opacity,transform] duration-700 delay-150 ease-out motion-reduce:transition-none motion-reduce:transform-none motion-reduce:opacity-100"
     />
     <lib-paragraph-description
       [text]="'landing.aboutUs.description' | translate"
