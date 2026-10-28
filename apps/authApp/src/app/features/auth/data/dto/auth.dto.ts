@@ -33,7 +33,7 @@ export interface ResetPasswordRequestDto {
 }
 
 export interface ChangePasswordRequestDto {
-  oldPassword: string;
+  password: string;
   newPassword: string;
 }
 

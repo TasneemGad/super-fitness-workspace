@@ -23,7 +23,10 @@ export type FieldIconName =
   | 'sun'
   | 'moon'
   | 'globe'
-  | 'refresh';
+  | 'refresh'
+  | 'shield' 
+  | 'help' 
+  | 'logout';
 
 export type FormMode = 'create' | 'update';
 

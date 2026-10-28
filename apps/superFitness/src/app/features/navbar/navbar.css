@@ -76,7 +76,13 @@ ul {
 /* Buttons */
 .actions {
   display: flex;
+  align-items: center;
   gap: 12px;
+}
+
+.actions > lib-language-switcher,
+.actions > lib-theme-toggle {
+  display: none;
 }
 
 .btn {
@@ -176,6 +182,11 @@ ul {
 
   .menu-btn {
     display: none;
+  }
+
+  .actions > lib-language-switcher,
+  .actions > lib-theme-toggle {
+    display: inline-flex;
   }
 
   .drawer,
