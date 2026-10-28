@@ -10,6 +10,7 @@ import { OwlCarouselComponent } from '../../../../shared/components/owl-carousel
 import { MealCategoryModel } from '../../models/meal-categories.model';
 import { MealsService } from '../../services/meals.service';
 import { LanguageService } from '@org/i18n';
+import { IntersectionObserverDirective } from '@org/util-directives';
 
 @Component({
   selector: 'app-healthy-section',
@@ -21,12 +22,15 @@ import { LanguageService } from '@org/i18n';
     TranslatePipe,
     ParagraphTitle,
     OwlCarouselComponent,
-    RouterLink
+    RouterLink,
+    IntersectionObserverDirective,
   ],
   templateUrl: './healthy-section.component.html',
   styleUrl: './healthy-section.component.scss',
 })
 export class HealthySectionComponent implements OnInit {
+  isVisible = false;
+
   private readonly mealsService = inject(MealsService);
   private readonly destroyRef = inject(DestroyRef);
   private readonly languageService = inject(LanguageService);

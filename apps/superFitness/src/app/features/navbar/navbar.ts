@@ -1,8 +1,9 @@
-import { Component, HostListener, signal } from '@angular/core';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { Component, HostListener, inject, signal } from '@angular/core';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 import { LanguageSwitcher } from '@org/i18n';
-import { FieldIcon, ThemeToggle } from '@org/ui';
+import { FieldIcon, SiteButton, ThemeToggle } from '@org/ui';
+import { AuthSessionService } from '@super-fitness/auth';
 
 type NavbarLink = {
   label: string;
@@ -14,11 +15,22 @@ type NavbarLink = {
 
 @Component({
   selector: 'app-navbar',
-  imports: [RouterLink, RouterLinkActive, FieldIcon, TranslatePipe, ThemeToggle, LanguageSwitcher],
+  imports: [
+    RouterLink,
+    RouterLinkActive,
+    FieldIcon,
+    SiteButton,
+    TranslatePipe,
+    ThemeToggle,
+    LanguageSwitcher,
+  ],
   templateUrl: './navbar.html',
   styleUrl: './navbar.css',
 })
 export class Navbar {
+  private readonly authSession = inject(AuthSessionService);
+  private readonly router = inject(Router);
+
   links = signal<NavbarLink[]>([
     { label: 'navbar.home', route: '/superFitness', exact: true },
     { label: 'navbar.about', route: 'about' },
@@ -28,6 +40,21 @@ export class Navbar {
 
   menuOpen = signal(false);
   scrolled = signal(false);
+
+  protected readonly loginAction = (): void => this.navigateToLogin();
+  protected readonly registerAction = (): void => this.navigateToRegister();
+
+  get isAuthenticated(): boolean {
+    return this.authSession.isAuthenticated();
+  }
+
+  navigateToLogin(): void {
+    void this.router.navigateByUrl('/auth/login');
+  }
+
+  navigateToRegister(): void {
+    void this.router.navigateByUrl('/auth/register');
+  }
 
   toggleMenu() {
     this.menuOpen.set(!this.menuOpen());

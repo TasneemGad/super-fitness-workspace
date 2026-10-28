@@ -77,7 +77,7 @@ export class WorkoutDetailsPage  {
     this.exercises().map((exercise) => ({
       id: exercise._id,
       title: exercise.exercise,
-      image: getYouTubeThumbnailUrl(exercise.short_youtube_demonstration_link) ?? undefined,
+      image: this.selectedMuscleImage() ?? undefined,
       lines: [exercise.target_muscle_group],
       data: exercise,
     })),
@@ -88,6 +88,13 @@ export class WorkoutDetailsPage  {
     this.isLoadingDifficultyLevels() ||
     this.isLoadingExercises(),
   );
+  readonly selectedMuscleImage = computed(() => {
+  const selectedId = this.selectedMuscleId();
+
+  return (
+    this.muscles().find((muscle) => muscle._id === selectedId)?.image ?? null
+  );
+});
   readonly getMealCategoryId = (category: MealCategoryModel): string =>
     category.idCategory;
   
